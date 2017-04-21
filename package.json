@@ -33,7 +33,4 @@
   "engines": {
     "node": ">=7.x"
   },
-  "scripts": {
-  "postinstall": "npm rebuild"
-  } 
 }
