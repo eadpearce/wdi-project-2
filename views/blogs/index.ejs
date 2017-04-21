@@ -1,0 +1,14 @@
+<h1>Blogs</h1>
+<section>
+  <% blogs.forEach(blog => { %>
+    <h2 class="dib"><%= blog.title %></h2>
+    <h4 class="pl2 dib">by <%= blog.author %></h4>
+    <p><%= blog.body %><p>
+    <ul>
+    <% for (let i = 0; i < blog.comments.length; i++) { %>
+      <b><%= blog.comments[i].author %></b>
+      <p><%= blog.comments[i].body %></p>
+    <% } %>
+    </ul>
+  <% }); %>
+</section>

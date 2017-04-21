@@ -13,12 +13,14 @@
     "express": "^4.15.2",
     "express-ejs-layouts": "^2.3.0",
     "forever": "^0.15.3",
+    "materialize-css": "^0.98.2",
     "method-override": "^2.3.8",
     "mongoose": "^4.9.4",
     "morgan": "^1.8.1",
     "nodemon": "^1.11.0"
   },
   "devDependencies": {
+    "babel-preset-es2015": "^6.18.0",
     "browser-sync": "^2.18.8",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
@@ -26,9 +28,8 @@
     "gulp-nodemon": "^2.2.1",
     "gulp-plumber": "^1.1.0",
     "gulp-sass": "^3.1.0",
-    "gulp-uglify": "^2.1.2",
-    "babel-preset-es2015": "^6.18.0"
-  }, 
+    "gulp-uglify": "^2.1.2"
+  },
   "engines": {
     "node": ">=7.x"
   }

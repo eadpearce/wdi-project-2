@@ -3,7 +3,10 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
-  <title>WDI Project 2</title>
+  <title>FFXIV Blogs</title>
+  <%# <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">%>
+  <%# <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>%>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4.7.0/css/tachyons.min.css"/>
   <link rel="stylesheet" href="/css/main.css">
   <script
   src="https://code.jquery.com/jquery-3.2.1.min.js"
@@ -12,7 +15,16 @@
   <script src="/js/client.js" charset="utf-8"></script>
 </head>
 <body>
-  <main>
+  <nav class="pa2 bg-light-gray">
+    <a href="/">FFXIV Blogs</a>
+    <ul class="dib fr mv0">
+      <li class="dib pl1"><a href="/blogs">All Blogs</a></li>
+      <li class="dib pl1"><a href="/login">Log In</a></li>
+      <li class="dib pl1"><a href="/register">Register</a></li>
+      <li class="dib pl1"><a href="#">My Profile</a></li>
+    </ul>
+  </nav>
+  <main class="ph2 ph3-m ph5-l">
     <%- body %>
   </main>
 </body>
