@@ -22,13 +22,37 @@ function init() {
         `).appendTo('.info');
       Object.values(char.data.classjobs).forEach(classjob => {
         if (classjob.level === 60) {
-          $(`<li>${classjob.name}</li>`).appendTo('.classes');
-          console.log(classjob.name);
+          if (classjob.name === 'Gladiator' && char.data.classjobs['6'].level >= 15) {
+            $(`<li>Paladin</li>`).appendTo('.classes');
+            console.log(classjob.name);
+          } else if (classjob.name === 'Pugilist' && char.data.classjobs['4'].level >= 15) {
+            $(`<li>Monk</li>`).appendTo('.classes');
+            console.log(classjob.name);
+          } else if (classjob.name === 'Marauder' && char.data.classjobs['2'].level >= 15) {
+            $(`<li>Warrior</li>`).appendTo('.classes');
+            console.log(classjob.name);
+          } else if (classjob.name === 'Lancer' && char.data.classjobs['3'].level >= 15) {
+            $(`<li>Dragoon</li>`).appendTo('.classes');
+            console.log(classjob.name);
+          } else if (classjob.name === 'Archer' && char.data.classjobs['2'].level >= 15) {
+            $(`<li>Bard</li>`).appendTo('.classes');
+            console.log(classjob.name);
+          } else if (classjob.name === 'Conjurer' && char.data.classjobs['26'].level >= 15) {
+            $(`<li>White Mage</li>`).appendTo('.classes');
+            console.log(classjob.name);
+          } else if (classjob.name === 'Thaumaturge' && char.data.classjobs['5'].level >= 15) {
+            $(`<li>Black Mage</li>`).appendTo('.classes');
+            console.log(classjob.name);
+          } else if (classjob.name === 'Arcanist' && char.data.classjobs['6'].level >= 15) {
+            $(`<li>Scholar</li>`).appendTo('.classes');
+            console.log(classjob.name);
+          } else if (classjob.name === 'Arcanist' && char.data.classjobs['7'].level >= 15) {
+            $(`<li>Summoner</li>`).appendTo('.classes');
+            console.log(classjob.name);
+          } else if (classjob.name === 'Astrologian' || classjob.name === 'Machinist' || classjob.name === 'Dark Knight') {
+            $(`<li>${classjob.name}</li>`).appendTo('.classes');
+          }
         }
       });
-        // $(`<p>${field}</p>`).appendTo('.info');
-        // console.log(field.name);
-
-
     });
 }
