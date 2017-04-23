@@ -1,0 +1,21 @@
+<h1 class="f2">Edit your profile</h1>
+
+<form action="/profiles/<%= locals.user.id %>" method="post">
+
+  <div class="pb2">
+    <label class="b f4 db" for="about">About: </label>
+    <input class="w-100 ba pa1 b--gray" type="text" name="about">
+  </div>
+
+  <div class="pb2">
+    <label class="b f4 db" for="age">Age: </label>
+    <input class="w-100 ba pa1 b--gray" type="number" name="age">
+  </div>
+
+  <div class="pb2">
+    <label class="b f4 db" for="main">Lodestone link for main character: </label>
+    <input class="w-100 ba pa1 b--gray" type="text" name="main">
+  </div>
+
+  <input class="pa2 ba bw1 bg-white ba b--blue blue" type="submit" value="Update">
+</form>

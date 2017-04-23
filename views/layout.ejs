@@ -8,10 +8,7 @@
   <%# <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>%>
   <link rel="stylesheet" href="https://unpkg.com/tachyons@4.7.0/css/tachyons.min.css"/>
   <link rel="stylesheet" href="/css/main.css">
-  <script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"
-  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="/js/client.js" charset="utf-8"></script>
 </head>
 <body>
@@ -19,12 +16,18 @@
     <a href="/">FFXIV Blogs</a>
     <ul class="dib fr mv0">
       <li class="dib pl1"><a href="/blogs">All Blogs</a></li>
-      <li class="dib pl1"><a href="/login">Log In</a></li>
-      <li class="dib pl1"><a href="/register">Register</a></li>
-      <li class="dib pl1"><a href="#">My Profile</a></li>
+      <% if (locals.isLoggedIn) { %>
+        <span class="dib pl1 mt0">Logged in as <%= locals.user.username %></span>
+        <li class="dib pl1"><a href="/profiles/<%= locals.user.id %>">My Profile</a></li>
+        <li class="dib pl1"><a href="/logout">Log Out</a></li>
+      <% } else { %>
+        <li class="dib pl1"><a href="/login">Log In</a></li>
+        <li class="dib pl1"><a href="/register">Register</a></li>
+      <% } %>
     </ul>
   </nav>
   <main class="ph2 ph3-m ph5-l">
+    <p><%= locals.user %></p>
     <%- body %>
   </main>
 </body>

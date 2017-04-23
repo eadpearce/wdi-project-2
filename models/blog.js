@@ -1,13 +1,8 @@
 const mongoose = require('mongoose');
 
 const blogSchema = new mongoose.Schema({
-  title: { type: String, required: true, unique: true },
-  body: { type: String, required: true, unique: true },
-  author: { type: String },
-  comments: [{
-    body: { type: String },
-    author: { type: String }
-  }]
-});
+  owner: { type: mongoose.Schema.ObjectId, ref: 'User' },
+  posts: [ { type: mongoose.Schema.ObjectId, ref: 'Post', default: null } ]
+}, { timestamps: true });
 
 module.exports = mongoose.model('Blog', blogSchema);

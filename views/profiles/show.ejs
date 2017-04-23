@@ -1,0 +1,6 @@
+<h1><%= user.username %>'s profile</h1>
+<%= user %>
+<p> Profile about -> <%= user.profile %> < - </p>
+<form class="pa2" action="/users/<%= locals.user.id %>" method="post">
+    <a class="b pa2 ba bw1 bg-white" href="/users/<%= locals.user.id %>/edit">Edit your profile</a>
+  </form>

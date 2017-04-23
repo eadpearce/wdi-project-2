@@ -1,0 +1,10 @@
+<h1>User profiles</h1>
+<%= profiles %>
+<% profiles.forEach(profile => { %>
+  <ul>
+    <li>
+    <h2><%= profile.owner.username %></h2>
+    <p><%= profile.owner.email %></p>
+    </li>
+  </ul>
+<% }) %>
