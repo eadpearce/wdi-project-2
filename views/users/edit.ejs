@@ -1,0 +1,24 @@
+<h1>Hello <%= locals.user.username %></h1>
+<p><%= user.profile %></p>
+
+<form action="/account/<% user.profile.id %>" method="post">
+  <input type="hidden" name="_method" value="PUT">
+  <input type="hidden" name="userProfile" value="<%= user.profile.id %>">
+
+  <div class="pb2">
+    <label class="b f4 db" for="about">About: </label>
+    <textarea class="w-100 ba pa1 b--gray" type="text" name="about"><%= user.profile.about %></textarea>
+  </div>
+
+  <div class="pb2">
+    <label class="b f4 db" for="age">Age: </label>
+    <input class="w-100 ba pa1 b--gray" type="number" name="age" value="<%= user.profile.age %>">
+  </div>
+
+  <div class="pb2">
+    <label class="b f4 db" for="main">Lodestone link for main character: </label>
+    <input class="w-100 ba pa1 b--gray" type="text" name="main" value="<%= user.profile.main %>">
+  </div>
+
+  <input class="pa2 ba bw1 bg-white ba b--blue blue" type="submit" value="Update">
+</form>

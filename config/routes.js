@@ -4,6 +4,7 @@ const blogsController = require('../controllers/blogs');
 const sessionsController = require('../controllers/sessions');
 const registrationsController = require('../controllers/registrations');
 const profilesController = require('../controllers/profiles');
+const usersController = require('../controllers/users');
 
 function secureRoute(req, res, next) {
   if (!req.session.userId) {
@@ -24,6 +25,10 @@ router.route('/blogs')
 
 router.route('/profiles')
   .get(profilesController.index);
+
+router.route('/account')
+  .get(secureRoute, usersController.edit)
+  .put(secureRoute, profilesController.update);
 
 router.route('/profiles/:id')
   .post(secureRoute, profilesController.update)

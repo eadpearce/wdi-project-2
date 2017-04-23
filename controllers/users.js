@@ -24,10 +24,11 @@ function usersShow(req, res) {
       res.status(500).render('error', { error: err });
     });
 }
+
 function usersEdit(req, res) {
   User
-    .findById(req.params.id)
-    .exec()
+    .findById(req.session.userId)
+    .populate('profile')
     .then(user => {
       if (!user) return res.status(404).render('error', { error: 'ERROR'});
       res.render('users/edit', { user });
@@ -36,6 +37,7 @@ function usersEdit(req, res) {
       res.status(500).render('error', { error: err });
     });
 }
+
 function usersUpdate(req, res) {
   User
     .findById(req.params.id)

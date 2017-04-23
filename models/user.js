@@ -5,6 +5,7 @@ const Blog = require('../models/blog');
 
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
+  blah: { type: String },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   profile: { type: mongoose.Schema.ObjectId, ref: 'Profile' },
@@ -28,20 +29,22 @@ userSchema.pre('save', function hashPassword(next) {
   if(this.isModified('password')) {
     this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(8));
   }
-
   Profile
     .create({ owner: this.id })
     .then(profile => {
       this.profile = profile.id;
-    });
-
-  Blog
-    .create({ owner: this.id })
-    .then(blog => {
-      this.blog = blog.id;
-    });
-
-  next();
+      console.log('PROFILE', profile);
+    })
+    .then(
+      Blog
+        .create({ owner: this.id })
+        .then(blog => {
+          this.blog = blog.id;
+          console.log('BLOG', blog);
+          console.log('USER', this);
+          next();
+        })
+    );
 });
 
 userSchema.methods.validatePassword = function validatePassword(password) {

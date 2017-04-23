@@ -11,13 +11,13 @@ const Profile = require('../models/profile');
 Blog.collection.drop();
 User.collection.drop();
 Profile.collection.drop();
-//
-// User
-//   .create({
-//     username: 'klyn',
-//     email: 'klynthota.drysfalkwyn@eorzea.com',
-//     password: '$2a$08$Hvs1CMI.VeGo9GCUoGuepON/JJPwn32jaeyCI4gDWfEhNKym2ZVnq'
-//   });
+
+User
+  .create({
+    username: 'klyn',
+    email: 'klynthota.drysfalkwyn@eorzea.com',
+    password: '$2a$08$Hvs1CMI.VeGo9GCUoGuepON/JJPwn32jaeyCI4gDWfEhNKym2ZVnq'
+  })
 //
 // Blog
 //   .create([{
@@ -47,12 +47,12 @@ Profile.collection.drop();
 //     }]
 //   }
 //   ])
-//   .then((blogs) => {
-//     console.log(`${blogs.length} blogs created!`);
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   })
-//   .finally(() => {
-//     mongoose.connection.close();
-//   });
+  .then((blogs) => {
+    console.log(`${blogs.length} blogs created!`);
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+  .finally(() => {
+    mongoose.connection.close();
+  });

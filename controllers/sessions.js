@@ -10,11 +10,11 @@ function sessionsCreate(req, res, next) {
     .then((user) => {
       // console.log(user);
       if(!user || !user.validatePassword(req.body.password)) {
-        req.flash('danger', 'Invalid login details.');
+        req.flash('red', 'Invalid login details.');
         return res.redirect('/login');
       }
       req.session.userId = user._id;
-      req.flash('info', `Welcome back, ${user.username}.`);
+      req.flash('blue', `Welcome back, ${user.username}.`);
       res.redirect('/');
     })
     .catch(next);
