@@ -19,6 +19,8 @@
       <% if (locals.isLoggedIn) { %>
         <span class="dib pl1 mt0">Logged in as <%= locals.user.username %></span>
         <li class="dib pl1"><a href="/account">My Account</a></li>
+        <li class="dib pl1"><a href="/blogs/<%= locals.user.blog %>">My Blog</a></li>
+        <li class="dib pl1"><a href="/posts/new">New Blog Post</a></li>
         <li class="dib pl1"><a href="/logout">Log Out</a></li>
       <% } else { %>
         <li class="dib pl1"><a href="/login">Log In</a></li>
@@ -26,7 +28,10 @@
       <% } %>
     </ul>
   </nav>
-  <main class="ph2 ph3-m ph5-l">
+  <main class="ph2 ph3-m ph5-l pb5">
+    <% for (const type in messages) { %>
+      <p class="pa2 b ba bg-white <%= type %>"><%= messages[type] %></p>
+      <% } %>
     <p><%= locals.user %></p>
     <%- body %>
   </main>

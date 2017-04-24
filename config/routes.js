@@ -1,6 +1,7 @@
 const express = require('express');
 const router  = express.Router();
 const blogsController = require('../controllers/blogs');
+const postsController = require('../controllers/posts');
 const sessionsController = require('../controllers/sessions');
 const registrationsController = require('../controllers/registrations');
 const profilesController = require('../controllers/profiles');
@@ -22,6 +23,14 @@ router.get('/', (req, res) => {
 
 router.route('/blogs')
   .get(blogsController.index);
+
+router.route('/posts')
+  .post(postsController.create);
+router.route('/posts/new')
+  .get(secureRoute, postsController.new);
+
+router.route('/blogs/:id')
+  .get(blogsController.show);
 
 router.route('/profiles')
   .get(profilesController.index);

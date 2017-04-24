@@ -37,16 +37,31 @@ function profilesEdit(req, res) {
 }
 function profilesUpdate(req, res) {
   console.log('BODY', req.body);
-  console.log('USER PROFILE', req.body.userProfile);
   Profile
     .findById(req.body.userProfile)
     .exec()
     .then(profile => {
-      console.log(profile);
       if (!profile) return res.status(404).render('error', { error: 'No profile found :('});
       for (const field in req.body) {
-        profile[field] = req.body[field];
+        // delete alts
+        for (let i = 0; i < profile.alts.length; i++) {
+          if (profile.alts[i] === field) {
+            profile.alts.splice(i, 1);
+          }
+        }
+        // add alts
+        if (field === 'alts' && req.body.alts) {
+          // don't add if character is already added
+          if (profile.alts.indexOf(req.body.alts) !== -1) {
+            req.flash('danger', 'Character already added, kupo!');
+          } else profile.alts.push(req.body.alts);
+          // update everything else
+        } else if (req.body[field]) {
+          profile[field] = req.body[field];
+        }
       }
+      req.flash('info', 'Profile updated, kupo!');
+      console.log('UPDATED PROFILE', profile);
       return profile.save();
     })
     .then(() => {
@@ -57,7 +72,6 @@ function profilesUpdate(req, res) {
       res.status(500).render('error', { error: err });
     });
 }
-
 module.exports = {
   index: profilesIndex,
   show: profilesShow,

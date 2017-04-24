@@ -1,0 +1,16 @@
+<h1>New Blog Post</h1>
+
+<p><b>Posting as: </b><%= locals.user.username %></p>
+<form action="/posts" method="post">
+<select class="mb2" name="author">
+  <% for (let i = 0; i < user.profile.alts.length; i++) { %>
+    <img width="50" class="alt<%=i%>-avatar" src="">
+    <option
+    id="<%= user.profile.alts[i].split('character/')[1].split('/')[0] %>">
+    <%= user.profile.alts[i] %></a>
+  <% } %>
+</select>
+<input class="w-100 ba pa1 b--gray mb2" type="text" name="title" placeholder="Title">
+<textarea name="body" class="w-100" rows="10"></textarea>
+<input class="ba bw1 bg-white b--blue blue" type="submit" value="Post">
+</form>

@@ -12,7 +12,19 @@ function blogsIndex(req,res) {
       res.status(500).render('error', { error: err });
     });
 }
-
+function blogsShow(req, res) {
+  Blog
+    .findById(req.params.id)
+    .exec()
+    .then(blog => {
+      if (!blog) return res.status(404).render('error', { error: 'Not found'});
+      res.render('blogs/show', { blog });
+    })
+    .catch(err => {
+      res.status(500).render('error', { error: err });
+    });
+}
 module.exports = {
-  index: blogsIndex
+  index: blogsIndex,
+  show: blogsShow
 };
