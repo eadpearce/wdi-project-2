@@ -1,8 +1,18 @@
-body {
-  font-family: Georgia, serif;
-}
+@import 'helpers/variables';
+@import 'helpers/mixins';
+@import 'helpers/normalize';
+
+@import 'partials/body';
+@import 'partials/header';
+@import 'partials/main';
+@import 'partials/footer';
+@import 'partials/typography';
+@import 'partials/buttons';
+
 input, button, textarea {
   font-family: inherit;
+  color: inherit;
+  background-color: inherit;
 }
 .danger {
   color: red;
@@ -10,11 +20,14 @@ input, button, textarea {
 .info {
   color: blue;
 }
-ul, li {
+h1, ul, li {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 .circle {
   border-radius: 50%;
+}
+footer {
+  bottom: 0;
 }

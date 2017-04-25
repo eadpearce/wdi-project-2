@@ -1,0 +1,17 @@
+<h1 class="f2">Edit this post</h1>
+<p><b>Posting as: </b><%= locals.user.username %></p>
+<form action="/blogs/<%= post.blog %>/posts/<%= post.id %>" method="post">
+  <input type="hidden" name="_method" value="PUT">
+  <input class="w-100 ba pa1 b--gray mb2" type="text" name="title" value="<%= post.title %>">
+  <textarea name="body" class="w-100" rows="10"><%= post.body %></textarea>
+  <input type="hidden" name="owner" value="<%= locals.user.id %>">
+  <input type="hidden" name="profile" value="<%= locals.user.profile %>">
+  <input type="hidden" name="blog" value="<%= post.blog %>">
+  <input class="ba bw1 bg-white b--blue blue" type="submit" value="Update">
+</form>
+
+  <form class="pt2" action="/blogs/<%= post.blog %>/posts/<%= post.id %>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <button class="ba bw1 bg-white red b--red">Delete</button>
+  </form>
+  <a class="fr pa1 ba bw1 bg-white b--blue blue" href="/blogs/<%= post.blog %>/posts/<%= post.id %>">Cancel</a>

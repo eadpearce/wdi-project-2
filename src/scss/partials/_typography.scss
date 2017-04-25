@@ -1,0 +1,24 @@
+body, p {
+  font-family: $body-font;
+}
+ h1, h2 {
+  font-family: $title-font;
+  font-weight: bold;
+}
+header, h3, h4 {
+  font-family: $emphasis-font;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+a {
+  text-decoration: none;
+  color: $link-color;
+}
+a:hover {
+  color: lighten($link-color, 20);
+  @include transition(color, .3s ease);
+}
+.logo:hover {
+  color: lighten($logo-color, 20);
+  @include transition(color, .3s ease);
+}

@@ -2,6 +2,7 @@ const express = require('express');
 const router  = express.Router();
 const blogsController = require('../controllers/blogs');
 const postsController = require('../controllers/posts');
+const commentsController = require('../controllers/comments');
 const sessionsController = require('../controllers/sessions');
 const registrationsController = require('../controllers/registrations');
 const profilesController = require('../controllers/profiles');
@@ -36,7 +37,31 @@ router.route('/blogs/:id/posts')
   .post(secureRoute, postsController.create);
 
 router.route('/blogs/:blogID/posts/:id')
+  .delete(secureRoute, postsController.delete)
+  .put(secureRoute, postsController.update)
   .get(postsController.show);
+
+router.route('/blogs/:blogID/posts/:id/edit')
+  .delete(secureRoute, postsController.delete)
+  .get(secureRoute, postsController.edit);
+
+router.route('/blogs/:blogID/posts/:postID/comments/new')
+  .get(secureRoute, commentsController.new);
+
+router.route('/blogs/:blogID/posts/:postID/comments')
+  .post(secureRoute, commentsController.create);
+
+router.route('/blogs/:blogID/posts/:postID/comments/:commentID')
+  .put(commentsController.update)
+  .post(commentsController.createThread)
+  .delete(commentsController.delete)
+  .get(commentsController.show);
+
+router.route('/blogs/:blogID/posts/:postID/comments/:commentID/new')
+  .get(secureRoute, commentsController.newThread);
+
+router.route('/blogs/:blogID/posts/:postID/comments/:commentID/edit')
+  .get(secureRoute, commentsController.edit);
 
 router.route('/profiles')
   .get(profilesController.index);

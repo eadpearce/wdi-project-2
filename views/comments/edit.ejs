@@ -1,0 +1,15 @@
+<h1 class="f2">Edit this comment</h1>
+<p><b>Posting as: </b><%= locals.user.username %></p>
+<form action="/blogs/<%= comment.parentBlog %>/posts/<%= comment.parentPost %>/comments/<%= comment.id %>" method="post">
+  <input type="hidden" name="_method" value="PUT">
+  <textarea name="body" class="w-100" rows="10"><%= comment.body %></textarea>
+  <input type="hidden" name="author" value="<%= comment.author %>">
+  <input type="hidden" name="parentPost" value="<%= comment.parentPost %>">
+  <input type="hidden" name="parentBlog" value="<%= comment.parentBlog %>">
+  <input class="edit ba bw1" type="submit" value="Update">
+</form>
+  <form class="pt2" action="/blogs/<%= comment.parentBlog %>/posts/<%= comment.parentPost %>/comments/<%= comment.id %>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <button class="ba bw1 bg-white red b--red">Delete</button>
+  </form>
+  <a class="fr pa1 ba bw1 bg-white b--blue blue" href="/blogs/<%= comment.parentBlog %>/posts/<%= comment.parentPost %>/comments/<%= comment.id %>">Cancel</a>

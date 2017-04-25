@@ -1,3 +1,30 @@
 <h1><%= post.title %></h1>
-<h2>At <%= post.createdAt.toLocaleString() %> <a href="/blogs/<%= blog.id %>/posts"><%= blog.owner.username %></a> wrote:</h2>
-<p><%= post.body %></p>
+<h2>At <%= post.createdAt.toLocaleString() %> <a href="/profiles/<%= blog.owner.profile %>"><%= blog.owner.username %></a> wrote:</h2>
+<p  class="body"><%= post.body %></p>
+<% if (locals.isLoggedIn && locals.user.username === blog.owner.username) { %>
+  <a class="pa1 warning none ba bg-white red b--red" href="/blogs/<%= blog.id %>/posts/<%= post.id %>/edit">Edit this post</a>
+<% } %>
+
+<a href="/blogs/<%= blog.id %>/posts/<%= post.id %>/comments/new">Add a comment</a>
+
+<% if (!comments[0]) { %>
+  <p>No comments yet.</p>
+<% } else if (comments[0]) { %>
+  <% comments.forEach(comment => { %>
+    <% if (comment.replyLevel > 0) { %>
+      <% for (let i = 1; i <= comment.replyLevel; i++) { %>
+        <blockquote>
+      <% } %>
+    <% } %>
+
+    <h3><a href="/profiles/<%= comment.author.profile %>"><%= comment.author.username %></a> at
+    <a href="/blogs/<%= blog.id %>/posts/<%= post.id %>/comments/<%= comment.id %>"><%= comment.createdAt.toLocaleString() %></a> said:</h3>
+    <p class="body"><%= comment.body %></p>
+
+    <% if (comment.replyLevel > 0) { %>
+      <% for (let i = 1; i <= comment.replyLevel; i++) { %>
+        </blockquote>
+      <% } %>
+    <% } %>
+  <% }) %>
+<% }%>

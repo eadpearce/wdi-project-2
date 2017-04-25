@@ -6,34 +6,36 @@
   <title>FFXIV Blogs</title>
   <%# <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">%>
   <%# <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>%>
+  <link href="https://fonts.googleapis.com/css?family=Cinzel:400,700,900|Play:400,700" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/tachyons@4.7.0/css/tachyons.min.css"/>
   <link rel="stylesheet" href="/css/main.css">
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="/js/client.js" charset="utf-8"></script>
 </head>
-<body>
-  <nav class="pa2 bg-light-gray">
-    <a href="/">FFXIV Blogs</a>
-    <ul class="dib fr mv0">
-      <li class="dib pl1"><a href="/blogs">All Blogs</a></li>
-      <% if (locals.isLoggedIn) { %>
-        <span class="dib pl1 mt0">Logged in as <%= locals.user.username %></span>
-        <li class="dib pl1"><a href="/profiles/<%= locals.user.profile %>">My Profile</a></li>
-        <li class="dib pl1"><a href="/blogs/<%= locals.user.blog %>">My Blog</a></li>
-        <li class="dib pl1"><a href="/blogs/<%= locals.user.blog %>/posts/new">New Blog Post</a></li>
-        <li class="dib pl1"><a href="/logout">Log Out</a></li>
-      <% } else { %>
-        <li class="dib pl1"><a href="/login">Log In</a></li>
-        <li class="dib pl1"><a href="/register">Register</a></li>
-      <% } %>
-    </ul>
-  </nav>
-  <main class="ph2 ph3-m ph5-l pb5">
-    <% for (const type in messages) { %>
-      <p class="pa2 b ba bg-white <%= type %>"><%= messages[type] %></p>
-      <% } %>
-    <p><%= locals.user %></p>
-    <%- body %>
-  </main>
-</body>
-</html>
+<body class="vh-100">
+  <header>
+    <nav class="pa2">
+      <a class="logo" href="/">FFXIV Blogs</a>
+      <ul class="dib fr mv0">
+        <li class="dib pl1"><a href="/blogs">All Blogs</a></li>
+        <% if (locals.isLoggedIn) { %>
+          <span class="dib pl1 mt0">Logged in as <%= locals.user.username %></span>
+          <li class="dib pl1"><a href="/profiles/<%= locals.user.profile %>">My Profile</a></li>
+          <li class="dib pl1"><a href="/blogs/<%= locals.user.blog %>">My Blog</a></li>
+          <li class="dib pl1"><a href="/logout">Log Out</a></li>
+          <% } else { %>
+            <li class="dib pl1"><a href="/login">Log In</a></li>
+            <li class="dib pl1"><a href="/register">Register</a></li>
+            <% } %>
+          </ul>
+        </nav>
+      </header>
+      <main class="ph2 pv4 ph3-m ph5-l">
+        <% for (const type in messages) { %>
+          <p class="pa2 b ba bg-white <%= type %>"><%= messages[type] %></p>
+          <% } %>
+            <%- body %>
+        </main>
+        <footer class="w-100 tc pa2">This is a footer</footer>
+      </body>
+      </html>

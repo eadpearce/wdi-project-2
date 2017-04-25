@@ -1,0 +1,29 @@
+.edit-btn {
+  	color: #ffffff;
+  	background: -moz-linear-gradient(
+  		top,
+  		#e5f2ff 0%,
+  		#02071f 25%,
+  		#1e6194);
+  	background: -webkit-gradient(
+  		linear, left top, left bottom,
+  		from(#e5f2ff),
+  		color-stop(0.25, #02071f),
+  		to(#1e6194));
+  	-moz-border-radius: 6px;
+  	-webkit-border-radius: 6px;
+  	border-radius: 6px;
+  	border: 1px solid #000000;
+  	-moz-box-shadow:
+  		0px 1px 3px rgba(0,0,0,0.5),
+  		inset 0px -1px 0px rgba(255,255,255,0.7);
+  	-webkit-box-shadow:
+  		0px 1px 3px rgba(0,0,0,0.5),
+  		inset 0px -1px 0px rgba(255,255,255,0.7);
+  	box-shadow:
+  		0px 1px 3px rgba(0,0,0,0.5),
+  		inset 0px -1px 0px rgba(255,255,255,0.7);
+  	text-shadow:
+  		0px 0px 16px rgba(97,181,255,1),
+  		0px 1px 0px rgba(0,0,0,1);
+  }

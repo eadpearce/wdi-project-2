@@ -1,0 +1,12 @@
+<h1>Add a comment</h1>
+<%= post %>
+<p><b>Posting as: </b><%= locals.user.username %></p>
+<form action="/blogs/<%= post.blog %>/posts/<%= post.id %>/comments" method="post">
+<textarea name="body" class="w-100" rows="10"></textarea>
+
+<input type="hidden" name="author" value="<%= locals.user.id %>">
+<input type="hidden" name="parentPost" value="<%= post.id %>">
+<input type="hidden" name="parentBlog" value="<%= post.blog %>">
+<input type="hidden" name="replyLevel" value="<%= 0 %>">
+<input class="ba bw1 bg-white b--blue blue" type="submit" value="Post">
+</form>

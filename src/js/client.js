@@ -8,7 +8,13 @@ function init() {
   if ($mainID) {
     $mainID = $mainID.split('character/')[1].split('/')[0];
   }
-
+  $.each($('.body'), function(index) {
+    const parsed = $.parseHTML($(this).text());
+    $(this).html(parsed);
+  });
+  $('.warning').click(e => {
+    console.log('delete', e);
+  });
   const $alts = $('.alts');
   const alts = [];
   $alts.each(function(i) {
@@ -35,12 +41,13 @@ function init() {
       } else $(`.${type}-name`).html(char.name);
       $(`.${type}-title`).html(char.data.title);
       $(`.${type}-avatar`).attr({ src: char.avatar });
+      $(`.${type}-server`).html(char.server);
 
       $(`
         <p><b>Current Class:</b> ${char.data.active_class.role.abbr}</p>
         <p><b>Hometown:</b> ${char.data.city.name}</p>
         <p><b>Race:</b> ${char.data.clan} ${char.data.race} </p>
-        <p><b>Server:</b> ${char.server} </p>
+
         <p><b>Nameday:</b> ${char.data.nameday} </p>
         `).appendTo(`.${type}-info`);
         Object.values(char.data.classjobs).forEach(classjob => {
