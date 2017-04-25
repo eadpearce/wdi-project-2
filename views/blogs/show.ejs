@@ -1,12 +1,2 @@
-<h1><%= blog.owner.username %>'s Blog</h1>
-<ul>
-<% for (i = blog.posts.length-1; i >= 0; i--) { %>
-  <% if (blog.posts.length === 0) { %>
-    <p>No posts yet...</p>
-  <% } %>
-  <li>
-    <h3><a href="/blogs/<%= blog.id %>/posts/<%= blog.posts[i].id %>"><%= blog.posts[i].title %></a></h3>
-    <p><%= blog.posts[i].body %></p>
-  <% } %>
-  </li>
-</ul>
+<h1><%= blog.owner.username %>'s blog</h1>
+<p><a href="/blogs/<%= blog.id %>/posts">View my posts</a></p>

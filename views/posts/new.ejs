@@ -1,7 +1,7 @@
 <h1>New Blog Post</h1>
-
-<p><b>Posting as: </b><%= locals.user.username %></p>
-<form action="/posts" method="post">
+<%= user %>
+<p><b>Posting as: </b><%= user.username %></p>
+<form action="/blogs/<%= user.blog.id %>/posts" method="post">
 <select class="mb2" name="author">
 
   <% for (let i = 0; i < user.profile.alts.length; i++) { %>
@@ -11,6 +11,7 @@
 <input class="w-100 ba pa1 b--gray mb2" type="text" name="title" placeholder="Title">
 <textarea name="body" class="w-100" rows="10"></textarea>
 <input type="hidden" name="owner" value="<%= user.id %>">
-<input type="hidden" name="blog" value="<%= user.blog %>">
+<input type="hidden" name="blog" value="<%= user.blog.id %>">
+<input type="hidden" name="profile" value="<%= user.profile.id %>">
 <input class="ba bw1 bg-white b--blue blue" type="submit" value="Post">
 </form>

@@ -1,4 +1,5 @@
 const Blog = require('../models/blog');
+const Post = require('../models/post');
 
 function blogsIndex(req,res) {
   Blog
@@ -14,13 +15,27 @@ function blogsIndex(req,res) {
     });
 }
 function blogsShow(req, res) {
+  let foundBlog;
   Blog
     .findById(req.params.id)
     .populate('owner profile')
     .exec()
     .then(blog => {
-      if (!blog) return res.status(404).render('error', { error: 'Not found'});
-      res.render('blogs/show', { blog });
+      foundBlog = blog;
+      Post
+        .findOne({ blog: req.params.id }, {}, { sort: { 'created_at': -1 } }, function(err, post) {
+          console.log(post);
+          if (!foundBlog) return res.status(404).render('error', { error: 'Blog not found'});
+          res.render('blogs/show', { blog: foundBlog, post: post });
+        });
+      // Post
+      //   .findOne({ blog: req.params.id })
+      //   .exec()
+      //   .then(posts => {
+      //     console.log(posts);
+      //     if (!foundBlog) return res.status(404).render('error', { error: 'Blog not found'});
+      //     res.render('blogs/show', { blog: foundBlog, posts: posts });
+      //   });
     })
     .catch(err => {
       res.status(500).render('error', { error: err });
@@ -33,7 +48,7 @@ function blogsEdit(req, res) {
     .populate('owner profile')
     .then(blog => {
       if (!blog) return res.status(404).render('error', { error: 'ERROR'});
-      console.log('PROFILE', blog.profile);
+      // console.log('PROFILE', blog.profile);
       res.render('blogs/edit', { blog });
     })
     .catch(err => {

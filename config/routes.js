@@ -28,8 +28,12 @@ router.route('/blogs/:id')
   .post(blogsController.update)
   .get(blogsController.show);
 
-router.route('/blogs/:id/edit')
-  .get(blogsController.edit);
+router.route('/blogs/:id/posts/new')
+  .get(secureRoute, postsController.new);
+
+router.route('/blogs/:id/posts')
+  .get(postsController.index)
+  .post(secureRoute, postsController.create);
 
 router.route('/blogs/:blogID/posts/:id')
   .get(postsController.show);
@@ -37,16 +41,12 @@ router.route('/blogs/:blogID/posts/:id')
 router.route('/profiles')
   .get(profilesController.index);
 
-router.route('/account')
-  .get(secureRoute, usersController.edit)
-  .put(secureRoute, profilesController.update);
-
 router.route('/profiles/:id')
-  .post(secureRoute, profilesController.update)
+  .put(secureRoute, profilesController.update)
   .get(profilesController.show);
 
 router.route('/profiles/:id/edit')
-  .get(profilesController.edit);
+  .get(secureRoute, profilesController.edit);
 
 router.route('/login')
   .get(sessionsController.new)

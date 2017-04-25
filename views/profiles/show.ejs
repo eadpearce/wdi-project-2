@@ -1,6 +1,50 @@
-<h1><%= user.username %>'s profile</h1>
-<%= user %>
-<p> Profile about -> <%= user.profile %> < - </p>
-<form class="pa2" action="/users/<%= locals.user.id %>" method="post">
-    <a class="b pa2 ba bw1 bg-white" href="/users/<%= locals.user.id %>/edit">Edit your profile</a>
-  </form>
+<h1><%= profile.owner.username %>'s profile</h1>
+
+
+  <div class="pb2">
+    <label class="b f4 db" for="about">About: </label>
+    <p class="w-100" type="text" name="about"><%= profile.about %></p>
+    
+    <p><b>Age: </b>
+    <% if (!profile.age) { %>
+      <%= 'Not specified' %>
+    <% } else { %>
+    <%= profile.age %>
+    <% } %></p>
+
+    <% let mainID; %>
+    <% if (!profile.main) { %>
+      <% mainID = ''; %>
+      <% }  %>
+    <h3>Main character: </h3>
+    <p>
+      <% if (profile.main) { %>
+        <img width="50" class="circle main-avatar" src=""><a class="main-name" href="<%= profile.main %>"></a>
+      <% } else { %>
+        Main not yet added.
+      <% } %>
+      </p>
+
+    <h3>Alt characters: </h3>
+    <% if (profile.alts.length === 0) { %>
+      <p>No alts.</p>
+    <% } %>
+    <ul class="pb4">
+    <% for (let i = 0; i < profile.alts.length; i++) { %>
+      <% if (profile.alts[i]) { %>
+      <li>
+      <img width="50" class="circle alt<%=i%>-avatar" src="">
+      <a class="alts alt<%=i%>-name"
+      id="<%= profile.alts[i].split('character/')[1].split('/')[0] %>"
+      href="<%= profile.alts[i] %>">
+      <%= profile.alts[i] %></a>
+      </li>
+      <% } %>
+    <% } %>
+  </ul>
+  </div>
+
+
+<form action="/profiles/<%= profile.owner.id %>" method="post">
+  <a class="b pa2 ba bw1 bg-white" href="/profiles/<%= profile.id %>/edit">Edit your profile</a>
+</form>

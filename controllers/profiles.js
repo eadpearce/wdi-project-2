@@ -36,9 +36,9 @@ function profilesEdit(req, res) {
     });
 }
 function profilesUpdate(req, res) {
-  console.log('BODY', req.body);
+  console.log('PARAMS', req.params);
   Profile
-    .findById(req.body.userProfile)
+    .findById(req.params.id)
     .exec()
     .then(profile => {
       if (!profile) return res.status(404).render('error', { error: 'No profile found :('});
@@ -65,7 +65,7 @@ function profilesUpdate(req, res) {
       return profile.save();
     })
     .then(() => {
-      res.redirect(`/account`); // then redirect back to the page after upodating
+      res.redirect(`/profiles/${req.params.id}`); // then redirect back to the page after upodating
     })
     .catch(err => {
       console.log(err);

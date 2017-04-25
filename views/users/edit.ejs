@@ -1,57 +1,8 @@
-<h1>Hello <%= locals.user.username %></h1>
-<p><%= user.profile %></p>
+<h1>Hello <%= user.username %></h1>
+<p><%= user %></p>
 
 <form action="/account/<% user.profile.id %>" method="post">
   <input type="hidden" name="_method" value="PUT">
-  <input type="hidden" name="userProfile" value="<%= user.profile.id %>">
-
-  <div class="pb2">
-    <label class="b f4 db" for="about">About: </label>
-    <textarea class="w-100 ba pa1 b--gray" type="text" name="about"><%= user.profile.about %></textarea>
-  </div>
-
-  <div class="pb2">
-    <p><b>Age: </b>
-    <% if (!user.profile.age) { %>
-      <%= 'Not specified' %>
-    <% } else { %>
-    <%= user.profile.age %>
-    <% } %></p>
-    <label class="b f4 db" for="age">Edit age: </label>
-    <input class="w-100 ba pa1 b--gray" type="number" name="age">
-  </div>
-
-  <div class="pb2">
-    <% let mainID; %>
-    <% if (!user.profile.main) { %>
-      <% mainID = ''; %>
-      <% }  %>
-    <h3>Main character: </h3>
-    <p><img width="50" class="main-avatar" src=""><a class="main-name" href="<%= user.profile.main %>"></a></p>
-    <label class="b f4 db" for="main">Edit main: </label>
-    <input class="w-100 ba pa1 b--gray" type="text" name="main">
-
-    <h3>Alt characters: </h3>
-    <ul>
-    <% for (let i = 0; i < user.profile.alts.length; i++) { %>
-      <% if (user.profile.alts[i]) { %>
-      <li>
-      <img width="50" class="alt<%=i%>-avatar" src="">
-      <a class="alts alt<%=i%>-name"
-      id="<%= user.profile.alts[i].split('character/')[1].split('/')[0] %>"
-      href="<%= user.profile.alts[i] %>">
-      <%= user.profile.alts[i] %></a>
-      <label class="b" for="<%= user.profile.alts[i] %>">Delete: </label>
-      <input type="checkbox" name="<%= user.profile.alts[i] %>">
-      </li>
-      <% } %>
-    <% } %>
-  </ul>
-  </div>
-  <div class="pb2">
-    <label class="b f4 db" for="alts">Add an alt: </label>
-    <input class="w-100 ba pa1 b--gray" type="text" name="alts">
-  </div>
 
   <input class="pa2 ba bw1 bg-white ba b--blue blue" type="submit" value="Update">
 </form>

@@ -1,4 +1,3 @@
-<h1><%= blog.posts[0].title %></h1>
-<% const datePosted = blog.posts[0].createdAt; %>
-<p class="f4">At <%= datePosted.toLocaleString() %> <%= blog.owner.username %> wrote:</p>
-<p><%= blog.posts[0].body %></p>
+<h1><%= post.title %></h1>
+<h2>At <%= post.createdAt.toLocaleString() %> <a href="/blogs/<%= blog.id %>/posts"><%= blog.owner.username %></a> wrote:</h2>
+<p><%= post.body %></p>

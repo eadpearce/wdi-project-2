@@ -1,10 +1,10 @@
 <h1>User profiles</h1>
-<%= profiles %>
 <% profiles.forEach(profile => { %>
   <ul>
     <li>
-    <h2><%= profile.owner.username %></h2>
-    <p><%= profile.owner.email %></p>
+    <h2><a href="/profiles/<%= profile.id %>"><%= profile.owner.username %></a></h2>
+    <p><%= profile.about %></p>
+    <p><a href="/blogs/<%= profile.owner.blog %>">View <%= profile.owner.username %>'s blog</a></p>
     </li>
   </ul>
 <% }) %>
