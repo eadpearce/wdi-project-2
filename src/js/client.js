@@ -30,7 +30,8 @@ function init() {
       console.log(char);
 
       if ($(`.${type}-name`).is('option')) {
-        $(`.${type}-name`).attr({ value: char.name });
+        console.log(char.name);
+        $(`.${type}-name`).attr('value', char.name);
       } else $(`.${type}-name`).html(char.name);
       $(`.${type}-title`).html(char.data.title);
       $(`.${type}-avatar`).attr({ src: char.avatar });

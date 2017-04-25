@@ -3,14 +3,14 @@
 <p><b>Posting as: </b><%= locals.user.username %></p>
 <form action="/posts" method="post">
 <select class="mb2" name="author">
+
   <% for (let i = 0; i < user.profile.alts.length; i++) { %>
-    <img width="50" class="alt<%=i%>-avatar" src="">
-    <option
-    id="<%= user.profile.alts[i].split('character/')[1].split('/')[0] %>">
-    <%= user.profile.alts[i] %></a>
+    <option class="alts alt<%=i%>-name" id="<%= user.profile.alts[i].split('character/')[1].split('/')[0] %>">
   <% } %>
 </select>
 <input class="w-100 ba pa1 b--gray mb2" type="text" name="title" placeholder="Title">
 <textarea name="body" class="w-100" rows="10"></textarea>
+<input type="hidden" name="owner" value="<%= user.id %>">
+<input type="hidden" name="blog" value="<%= user.blog %>">
 <input class="ba bw1 bg-white b--blue blue" type="submit" value="Post">
 </form>

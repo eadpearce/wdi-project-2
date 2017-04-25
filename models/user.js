@@ -35,16 +35,16 @@ userSchema.pre('save', function hashPassword(next) {
       this.profile = profile.id;
       console.log('PROFILE', profile);
     })
-    .then(
+    .then(() => {
       Blog
-        .create({ owner: this.id })
+        .create({ owner: this.id, profile: this.profile })
         .then(blog => {
           this.blog = blog.id;
           console.log('BLOG', blog);
           console.log('USER', this);
           next();
-        })
-    );
+        });
+    });
 });
 
 userSchema.methods.validatePassword = function validatePassword(password) {

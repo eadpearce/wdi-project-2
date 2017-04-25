@@ -1,0 +1,14 @@
+<h1>Add a new entry</h1>
+<p>USER <%= blog.owner %></p>
+<p>PROFILE<%= blog.profile %></p>
+<p>BLOG <%= blog.posts %></p>
+<p><b>Posting as: </b><%= blog.owner.username %></p>
+<form action="/blogs/<%= blog.owner.id %>" method="post">
+<input class="w-100 ba pa1 b--gray mb2" type="text" name="title" placeholder="Title">
+<textarea name="body" class="w-100" rows="10"></textarea>
+<input type="hidden" name="owner" value="<%= blog.owner.id %>">
+<input type="hidden" name="username" value="<%= blog.owner.username %>">
+<input type="hidden" name="blog" value="<%= blog.id %>">
+<input type="hidden" name="profile" value="<%= blog.profile.id %>">
+<input class="ba bw1 bg-white b--blue blue" type="submit" value="Post">
+</form>

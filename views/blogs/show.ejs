@@ -1,6 +1,12 @@
-<h1>Blog</h1>
+<h1><%= blog.owner.username %>'s Blog</h1>
 <ul>
-<% for (let i = 0; i < blog.posts.length; i++) { %>
-  <li><%= blog.posts[i] %></li>
-<% } %>
+<% for (i = blog.posts.length-1; i >= 0; i--) { %>
+  <% if (blog.posts.length === 0) { %>
+    <p>No posts yet...</p>
+  <% } %>
+  <li>
+    <h3><a href="/blogs/<%= blog.id %>/posts/<%= blog.posts[i].id %>"><%= blog.posts[i].title %></a></h3>
+    <p><%= blog.posts[i].body %></p>
+  <% } %>
+  </li>
 </ul>

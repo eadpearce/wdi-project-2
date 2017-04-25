@@ -20,7 +20,7 @@
         <span class="dib pl1 mt0">Logged in as <%= locals.user.username %></span>
         <li class="dib pl1"><a href="/account">My Account</a></li>
         <li class="dib pl1"><a href="/blogs/<%= locals.user.blog %>">My Blog</a></li>
-        <li class="dib pl1"><a href="/posts/new">New Blog Post</a></li>
+        <li class="dib pl1"><a href="/blogs/<%= locals.user.blog %>/edit">New Blog Post</a></li>
         <li class="dib pl1"><a href="/logout">Log Out</a></li>
       <% } else { %>
         <li class="dib pl1"><a href="/login">Log In</a></li>

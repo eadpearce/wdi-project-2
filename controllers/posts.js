@@ -1,26 +1,9 @@
-const Post = require('../models/post');
-const User = require('../models/user');
-
-function postsCreate(req, res) {
-  Post
-  .create(req.body)
-  .then(() => {
-    res.redirect('/posts');
-  });
-}
-
-function postsNew(req, res) {
-  User // make user and profile data available when making a new post 
-    .findById(req.session.userId)
-    .populate('profile')
-    .then(user => {
-      res.render('posts/new', { user });
-    });
-}
+const Blog = require('../models/blog');
 
 function postsIndex(req,res) {
-  Post
+  Blog
     .find()
+    .populate('owner profile')
     .exec()
     .then(posts => {
       console.log({ posts });
@@ -30,23 +13,56 @@ function postsIndex(req,res) {
       res.status(500).render('error', { error: err });
     });
 }
-
 function postsShow(req, res) {
-  Post
-    .findById(req.params.id)
+  Blog
+    .findById(req.params.blogID)
+    .populate('owner profile')
     .exec()
-    .then(post => {
-      if (!post) return res.status(404).render('error', { error: 'Not found'});
-      res.render('posts/show', { post });
+    .then(blog => {
+      if (!blog) return res.status(404).render('error', { error: 'Not found'});
+      res.render('posts/show', { blog });
     })
     .catch(err => {
       res.status(500).render('error', { error: err });
     });
 }
 
+function postsEdit(req, res) {
+  Post
+    .findById(req.params.id)
+    .populate('owner profile')
+    .then(post => {
+      if (!post) return res.status(404).render('error', { error: 'ERROR'});
+      console.log('PROFILE', post.profile);
+      res.render('posts/edit', { post });
+    })
+    .catch(err => {
+      res.status(500).render('error', { error: err });
+    });
+}
+function postsUpdate(req, res) {
+  console.log('BODY', req.body);
+  Post
+    .findByIdAndUpdate(
+      req.body.post, { $push: {'posts': {
+        title: req.body.title,
+        body: req.body.body,
+        owner: req.body.owner,
+        profile: req.body.profile,
+        author: req.body.username }
+      }})
+    .exec()
+    .then(() => {
+      res.redirect(`/posts/${req.body.post}`); // then redirect back to the page after upodating
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).render('error', { error: err });
+    });
+}
 module.exports = {
   index: postsIndex,
   show: postsShow,
-  new: postsNew,
-  create: postsCreate
+  update: postsUpdate,
+  edit: postsEdit
 };

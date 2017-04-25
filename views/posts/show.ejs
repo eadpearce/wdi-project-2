@@ -1,0 +1,4 @@
+<h1><%= blog.posts[0].title %></h1>
+<% const datePosted = blog.posts[0].createdAt; %>
+<p class="f4">At <%= datePosted.toLocaleString() %> <%= blog.owner.username %> wrote:</p>
+<p><%= blog.posts[0].body %></p>

@@ -1,0 +1,6 @@
+<h1>My posts</h1>
+<% posts.forEach(post => { %>
+  <h2><a href="/posts/<%= post.id %>"><%= post.title %></a></h2>
+  <p class="f4"><%= post.createdAt %></p>
+  <p><%= post.body %></p>
+<% }) %>

@@ -24,13 +24,15 @@ router.get('/', (req, res) => {
 router.route('/blogs')
   .get(blogsController.index);
 
-router.route('/posts')
-  .post(postsController.create);
-router.route('/posts/new')
-  .get(secureRoute, postsController.new);
-
 router.route('/blogs/:id')
+  .post(blogsController.update)
   .get(blogsController.show);
+
+router.route('/blogs/:id/edit')
+  .get(blogsController.edit);
+
+router.route('/blogs/:blogID/posts/:id')
+  .get(postsController.show);
 
 router.route('/profiles')
   .get(profilesController.index);
