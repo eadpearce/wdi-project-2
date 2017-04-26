@@ -11,7 +11,7 @@ const usersController = require('../controllers/users');
 function secureRoute(req, res, next) {
   if (!req.session.userId) {
     return req.session.regenerate(() => {
-      req.flash('danger', 'You must be logged in to do that...');
+      req.flash('danger', 'You must be logged in to do that, kupo!');
       res.redirect('/login');
     });
   }
@@ -19,7 +19,9 @@ function secureRoute(req, res, next) {
 }
 
 router.get('/', (req, res) => {
-  res.render('statics/home', { layout: 'home' });
+  if (!req.session.userId) {
+    res.render('statics/home', { layout: 'homelayout' });
+  } else res.render('statics/home');
 });
 
 router.route('/blogs')

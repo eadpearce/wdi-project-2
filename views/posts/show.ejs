@@ -1,13 +1,13 @@
 <h1 class="glow"><%= post.title %></h1>
-<h3 class="grd">by <a class="grd" href="/profiles/<%= blog.owner.profile %>"><%= blog.owner.username %></a>
-  <a class="grd fr" href="/blogs/<%= blog.id %>/posts">Back to posts</a></h3>
+<h3 class="grd">by <a class="grd main-author" href="/profiles/<%= post.profile %>"><%= post.author %></a>
+  <a class="grd fr" href="/blogs/<%= post.blog %>/posts">Back to posts</a></h3>
 <h3 class="grd">At <%= post.createdAt.toLocaleString() %>  wrote:</h3>
 <p class="blog-post"><%= post.body %></p>
-<% if (locals.isLoggedIn && locals.user.username === blog.owner.username) { %>
+<% if (locals.isLoggedIn && locals.user.username === post.owner.username) { %>
   <a class="big btn blue-btn db fr" href="/blogs/<%= blog.id %>/posts/<%= post.id %>/edit">Edit this post</a>
 <% } %>
 
-<a class="big btn green-btn db mv2" href="/blogs/<%= blog.id %>/posts/<%= post.id %>/comments/new">Add a comment</a>
+<a class="big btn green-btn db mv2" href="/blogs/<%= post.parentBlog %>/posts/<%= post.id %>/comments/new">Add a comment</a>
 
 <% if (!comments[0]) { %>
   <p>No comments yet.</p>

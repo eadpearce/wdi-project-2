@@ -20,7 +20,7 @@ function postsCreate(req, res) {
 function postsNew(req, res) {
   User
     .findById(req.session.userId)
-    .populate('blog profile')
+    .populate('profile')
     .then(user => res.render('posts/new', { user }));
 }
 function postsIndex(req,res) {
@@ -45,35 +45,26 @@ function postsIndex(req,res) {
     });
 }
 function postsShow(req, res) {
-  let foundBlog;
   let foundPost;
-  Blog
-    .findById(req.params.blogID)
-    // .populate('owner profile')
-    .exec()
-    .then(blog => {
-      foundBlog = blog;
-      if (!blog) return res.status(404).render('error', { error: 'Blog not found'});
-      Post
-        .findById(req.params.id)
+  Post
+    .findById(req.params.id)
+    .then(post => {
+      if (!post) return res.status(404).render('error', { error: 'Post not found'});
+      foundPost = post;
+      console.log('POST', foundPost);
+      Comment
+        .find({ parentPost: req.params.id })
+        .populate('author')
         .exec()
-        .then(post => {
-          foundPost = post;
-          if (!post) return res.status(404).render('error', { error: 'Post not found'});
-          Comment
-            .find({ parentPost: foundPost.id })
-            .populate('author')
-            .exec()
-            .then(comments => {
-              console.log('ID', foundPost.id);
-              // console.log('POST', foundPost);
-              // console.log('COMMENTS', comments);
-              res.render('posts/show', { blog: foundBlog, post: post, comments: comments });
-            });
+        .then(comments => {
+          // console.log('ID', foundPost.id);
+          // console.log('POST', foundPost);
+          // console.log('COMMENTS', comments);
+          res.render('posts/show', { post: foundPost, comments: comments });
+        })
+        .catch(err => {
+          res.status(500).render('error', { error: err });
         });
-    })
-    .catch(err => {
-      res.status(500).render('error', { error: err });
     });
 }
 

@@ -53,7 +53,7 @@ function init() {
   const $jobIcon1 = $('.job-icon1');
   $(`<img src="${icons1[mainJob]}" height="32">`).appendTo($jobIcon1);
   const $jobIcon2 = $('.job-icon2');
-  $(`<img src="${icons2[mainJob]}" height="28">`).appendTo($jobIcon2);
+  $(`<img src="${icons2[mainJob]}">`).appendTo($jobIcon2);
 
   // warning before delete ???
   // $('.warning').click(e => {
@@ -68,7 +68,11 @@ function init() {
   });
   // console.log('ALTS ARRAY', alts);
 
+  const $authorID = $('.main-author').text();
+  console.log('AUTHOR ID', $authorID);
+
   getCharacterInfo($mainID, 'main');
+  getCharacterInfo($authorID, 'main');
 
   $.get('https://api.xivdb.com/data/classjobs')
   .done(jobs => console.log(jobs));
@@ -82,10 +86,8 @@ function init() {
     .done(char => {
       console.log(char);
 
-      if ($(`.${type}-name`).is('option')) {
-        console.log(char.name);
-        $(`.${type}-name`).attr('value', char.name);
-      } else $(`.${type}-name`).html(char.name);
+      $(`.${type}-author`).html(char.name);
+      $(`.${type}-name`).html(char.name);
       $(`.${type}-title`).html(char.data.title);
       $(`.${type}-avatar`).attr({ src: char.avatar });
       $(`.${type}-server`).html(char.server);
@@ -97,31 +99,31 @@ function init() {
 
         <p><b>Nameday:</b> ${char.data.nameday} </p>
         `).appendTo(`.${type}-info`);
-        Object.values(char.data.classjobs).forEach(classjob => {
-          if (classjob.level === 60) {
-            if (classjob.name === 'Gladiator' && char.data.classjobs['6'].level >= 15) {
-              $(`<li><img src="${icons2['PLD']}">PLD</li>`).appendTo(`.${type}-jobs`);
-            } else if (classjob.name === 'Pugilist' && char.data.classjobs['4'].level >= 15) {
-              $(`<li><img src="${icons2['MNK']}">MNK</li>`).appendTo(`.${type}-jobs`);
-            } else if (classjob.name === 'Marauder' && char.data.classjobs['2'].level >= 15) {
-              $(`<li><img src="${icons2['WAR']}">WAR</li>`).appendTo(`.${type}-jobs`);
-            } else if (classjob.name === 'Lancer' && char.data.classjobs['3'].level >= 15) {
-              $(`<li><img src="${icons2['DRG']}">DRG</li>`).appendTo(`.${type}-jobs`);
-            } else if (classjob.name === 'Archer' && char.data.classjobs['2'].level >= 15) {
-              $(`<li><img src="${icons2['BRD']}">BRD</li>`).appendTo(`.${type}-jobs`);
-            } else if (classjob.name === 'Conjurer' && char.data.classjobs['26'].level >= 15) {
-              $(`<li><img src="${icons2['WHM']}">WHM</li>`).appendTo(`.${type}-jobs`);
-            } else if (classjob.name === 'Thaumaturge' && char.data.classjobs['5'].level >= 15) {
-              $(`<li><img src="${icons2['BLM']}">BLM</li>`).appendTo(`.${type}-jobs`);
-            } else if (classjob.name === 'Arcanist' && char.data.classjobs['6'].level >= 15) {
-              $(`<li><img src="${icons2['SCH']}">SCH</li>`).appendTo(`.${type}-jobs`);
-            } else if (classjob.name === 'Arcanist' && char.data.classjobs['7'].level >= 15) {
-              $(`<li><img src="${icons2['SMN']}">SMN</li>`).appendTo(`.${type}-jobs`);
-            } else if (classjob.name === 'Astrologian' || classjob.name === 'Machinist' || classjob.name === 'Dark Knight') {
-              $(`<li><img src="${icons2[classjob.data.abbr]}">${classjob.data.abbr}</li>`).appendTo(`.${type}-jobs`);
-            }
+      Object.values(char.data.classjobs).forEach(classjob => {
+        if (classjob.level === 60) {
+          if (classjob.name === 'Gladiator' && char.data.classjobs['6'].level >= 15) {
+            $(`<li><div><img src="${icons2['PLD']}"></div>PLD</li>`).appendTo(`.${type}-jobs`);
+          } else if (classjob.name === 'Pugilist' && char.data.classjobs['4'].level >= 15) {
+            $(`<li><div><img src="${icons2['MNK']}"></div>MNK</li>`).appendTo(`.${type}-jobs`);
+          } else if (classjob.name === 'Marauder' && char.data.classjobs['2'].level >= 15) {
+            $(`<li><div><img src="${icons2['WAR']}"></div>WAR</li>`).appendTo(`.${type}-jobs`);
+          } else if (classjob.name === 'Lancer' && char.data.classjobs['3'].level >= 15) {
+            $(`<li><div><img src="${icons2['DRG']}"></div>DRG</li>`).appendTo(`.${type}-jobs`);
+          } else if (classjob.name === 'Archer' && char.data.classjobs['2'].level >= 15) {
+            $(`<li><div><img src="${icons2['BRD']}"></div>BRD</li>`).appendTo(`.${type}-jobs`);
+          } else if (classjob.name === 'Conjurer' && char.data.classjobs['26'].level >= 15) {
+            $(`<li><div><img src="${icons2['WHM']}"></div>WHM</li>`).appendTo(`.${type}-jobs`);
+          } else if (classjob.name === 'Thaumaturge' && char.data.classjobs['5'].level >= 15) {
+            $(`<li><div><img src="${icons2['BLM']}"></div>BLM</li>`).appendTo(`.${type}-jobs`);
+          } else if (classjob.name === 'Arcanist' && char.data.classjobs['6'].level >= 15) {
+            $(`<li><div><img src="${icons2['SCH']}"></div>SCH</li>`).appendTo(`.${type}-jobs`);
+          } else if (classjob.name === 'Arcanist' && char.data.classjobs['7'].level >= 15) {
+            $(`<li><div><img src="${icons2['SMN']}"></div>SMN</li>`).appendTo(`.${type}-jobs`);
+          } else if (classjob.name === 'Astrologian' || classjob.name === 'Machinist' || classjob.name === 'Dark Knight') {
+            $(`<li><div><img src="${icons2[classjob.data.abbr]}"></div>${classjob.data.abbr}</li>`).appendTo(`.${type}-jobs`);
           }
-        });
+        }
+      });
     });
 
   }
