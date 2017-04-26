@@ -2,11 +2,14 @@
 <%= post %>
 <p><b>Posting as: </b><%= locals.user.username %></p>
 <form action="/blogs/<%= post.blog %>/posts/<%= post.id %>/comments" method="post">
-<textarea name="body" class="w-100" rows="10"></textarea>
+<textarea name="body" class="w-100 mb2" rows="10"></textarea>
 
 <input type="hidden" name="author" value="<%= locals.user.id %>">
 <input type="hidden" name="parentPost" value="<%= post.id %>">
 <input type="hidden" name="parentBlog" value="<%= post.blog %>">
 <input type="hidden" name="replyLevel" value="<%= 0 %>">
-<input class="ba bw1 bg-white b--blue blue" type="submit" value="Post">
+<input class="btn green-btn" type="submit" value="Post">
 </form>
+<div class="red-cancel fr">
+<a class="db btn red-btn" href="/blogs/<%= post.blog %>/posts/<%= post.id %>">Cancel</a>
+</div>

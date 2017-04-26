@@ -5,7 +5,7 @@ body, p {
   font-family: $title-font;
   font-weight: bold;
 }
-header, h3, h4 {
+label, header, h3, h4 {
   font-family: $emphasis-font;
   font-weight: bold;
   text-transform: uppercase;
@@ -16,9 +16,13 @@ a {
 }
 a:hover {
   color: lighten($link-color, 20);
-  @include transition(color, .3s ease);
+  @include transition(color, .2s ease);
 }
 .logo:hover {
   color: lighten($logo-color, 20);
-  @include transition(color, .3s ease);
+  @include transition(color, .2s ease);
+}
+main {
+  max-width: 960px;
+  margin: 0 auto;
 }

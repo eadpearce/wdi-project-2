@@ -7,7 +7,7 @@
     <p class="f4"><%= post.createdAt.toLocaleString() %></p>
     <p class="body"><%= post.body %></p>
     <% if (locals.isLoggedIn && locals.user.username === blog.owner.username) { %>
-      <a class="pa1 warning none ba bg-white red b--red" href="/blogs/<%= blog.id %>/posts/<%= post.id %>/edit">Edit this post</a>
+      <a class="mt2 db big btn blue-btn" href="/blogs/<%= blog.id %>/posts/<%= post.id %>/edit">Edit this post</a>
     <% } %>
 
   <% }) %>

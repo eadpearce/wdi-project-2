@@ -1,50 +1,53 @@
-<h1><%= profile.owner.username %>'s profile</h1>
+<h1 class="glow-title"><%= profile.owner.username %>'s profile</h1>
 <h2><a href="/blogs/<%= profile.owner.blog %>">View blog</a></h2>
+
   <div class="pb2">
     <label class="b f4 db" for="about">About: </label>
     <p class="w-100" type="text" name="about"><%= profile.about %></p>
 
+    <div class="pb2">
     <p><b>Age: </b>
     <% if (!profile.age) { %>
       <%= 'Not specified' %>
     <% } else { %>
     <%= profile.age %>
     <% } %></p>
-
+  </div>
+  <div class="pb2">
     <% let mainID; %>
     <% if (!profile.main) { %>
       <% mainID = ''; %>
       <% }  %>
     <h3>Main character: </h3>
-    <p>
       <% if (profile.main) { %>
+        <div class="charlist mb2">
         <img width="50" class="circle main-avatar" src=""><a class="main-name" href="<%= profile.main %>"></a> on <span class="main-server"></span>
+        </div>
       <% } else { %>
-        Main not yet added.
+        <p>Main not yet added.</p>
       <% } %>
-      </p>
-
+    </div>
+    <div class="pb2">
     <h3>Alt characters: </h3>
     <% if (profile.alts.length === 0) { %>
       <p>No alts.</p>
     <% } %>
-    <ul class="pb4">
     <% for (let i = 0; i < profile.alts.length; i++) { %>
       <% if (profile.alts[i]) { %>
-      <li>
+      <div class="charlist mb2">
       <img width="50" class="circle alt<%=i%>-avatar" src="">
       <a class="alts alt<%=i%>-name"
       id="<%= profile.alts[i].split('character/')[1].split('/')[0] %>"
       href="<%= profile.alts[i] %>">
       </a> on <span class="alt<%=i%>-server"></span>
-      </li>
+      </div>
       <% } %>
     <% } %>
-  </ul>
+  </div>
   </div>
 
 <% if (locals.user && locals.user.id === profile.owner.id) { %>
   <form action="/profiles/<%= profile.owner.id %>" method="post">
-    <a class="edit-btn pa2" href="/profiles/<%= profile.id %>/edit">Edit your profile</a>
+    <a class="big btn blue-btn pa2" href="/profiles/<%= profile.id %>/edit">Edit your profile</a>
   </form>
 <% } %>

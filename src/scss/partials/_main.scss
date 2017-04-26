@@ -1,4 +1,11 @@
+$glow-color: #7dacd2;
+$blur: 40px;
+$spread: 10px;
+
 main {
   color: $main-color;
   background-color: $bg-main;
+  -webkit-box-shadow: 0px 0px $blur $spread $glow-color;
+  -moz-box-shadow: 0px 0px $blur $spread $glow-color;
+  box-shadow: 0px 0px $blur $spread $glow-color;
 }

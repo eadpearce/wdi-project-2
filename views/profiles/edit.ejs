@@ -1,10 +1,10 @@
-<h1>Hello <%= locals.user.username %></h1>
+<h1 class="pb3">Hello <%= locals.user.username %></h1>
 
 <form action="/profiles/<%= profile.id %>" method="post">
   <input type="hidden" name="_method" value="PUT">
 
   <div class="pb2">
-    <label class="b f4 db" for="about">About: </label>
+    <label class="pb2 b f4 db" for="about">About: </label>
     <textarea class="w-100 ba pa1 b--gray" type="text" name="about"><%= profile.about %></textarea>
   </div>
 
@@ -15,7 +15,7 @@
     <% } else { %>
     <%= profile.age %>
     <% } %></p>
-    <label class="b f4 db" for="age">Edit age: </label>
+    <label class="pb2 b f4 db" for="age">Edit age: </label>
     <input class="w-100 ba pa1 b--gray" type="number" name="age">
   </div>
 
@@ -25,40 +25,41 @@
       <% mainID = ''; %>
       <% }  %>
     <h3>Main character: </h3>
-    <p>
-      <% if (profile.main) { %>
-        <img width="50" class="circle main-avatar" src=""><a class="main-name" href="<%= profile.main %>"></a> on <span class="main-server"></span>
-      <% } else { %>
-        Main not yet added.
-      <% } %>
-      </p>
-    <label class="b f4 db" for="main">Edit main: </label>
-    <input class="w-100 ba pa1 b--gray" type="text" name="main">
 
+      <% if (profile.main) { %>
+        <div class="charlist mb2">
+          <img width="50" class="circle main-avatar" src=""><a class="main-name" href="<%= profile.main %>"></a> on <span class="main-server"></span>
+          </div>
+      <% } else { %>
+        <p>Main not yet added.</p>
+      <% } %>
+    <label class="pb2 b f4 db" for="main">Edit main: </label>
+    <input class="w-100 ba pa1 b--gray" type="text" name="main">
+  </div>
+
+  <div class="pb2">
     <h3>Alt characters: </h3>
     <% if (profile.alts.length === 0) { %>
       <p>No alts.</p>
     <% } %>
-    <ul>
     <% for (let i = 0; i < profile.alts.length; i++) { %>
       <% if (profile.alts[i]) { %>
-      <li>
+      <div class="charlist">
       <img width="50" class="circle alt<%=i%>-avatar" src="">
       <a class="alts alt<%=i%>-name"
       id="<%= profile.alts[i].split('character/')[1].split('/')[0] %>"
       href="<%= profile.alts[i] %>">
       </a> on <span class="alt<%=i%>-server"></span>
-      <label class="b" for="<%= profile.alts[i] %>">Delete: </label>
-      <input type="checkbox" name="<%= profile.alts[i] %>">
-      </li>
+      <label class="dib b danger" for="<%= profile.alts[i] %>">Delete: </label>
+      <input class="dib" type="checkbox" name="<%= profile.alts[i] %>">
+      </div>
       <% } %>
     <% } %>
-  </ul>
   </div>
   <div class="pb2">
-    <label class="b f4 db" for="alts">Add an alt: </label>
-    <input class="w-100 ba pa1 b--gray" type="text" name="alts">
+    <label class="pb2 b f4 db" for="alts">Add an alt: </label>
+    <input class=" w-100 ba pa1 b--gray" type="text" name="alts">
   </div>
 
-  <input class="edit-btn pa2" type="submit" value="Update">
+  <input class="edit-btn pa2 mt3" type="submit" value="Update">
 </form>

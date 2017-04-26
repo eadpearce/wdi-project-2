@@ -5,29 +5,40 @@
 @import 'partials/body';
 @import 'partials/header';
 @import 'partials/main';
+@import 'partials/effects';
 @import 'partials/footer';
 @import 'partials/typography';
 @import 'partials/buttons';
 
 input, button, textarea {
   font-family: inherit;
+  font-size: inherit;
   color: inherit;
   background-color: inherit;
 }
-.danger {
-  color: red;
+.red-cancel {
+  margin-top: -40px;
 }
-.info {
-  color: blue;
-}
-h1, ul, li {
-  margin: 0;
-  padding: 0;
+ul {
   list-style: none;
+}
+ul {
+  padding-left: 0;
 }
 .circle {
   border-radius: 50%;
 }
 footer {
   bottom: 0;
+}
+.charlist {
+  height: 60px;
+  line-height: 60px;
+  display: block;
+  img {
+    vertical-align: middle;
+  }
+  a {
+    padding-left: 5px;
+  }
 }

@@ -1,29 +1,51 @@
-.edit-btn {
-  	color: #ffffff;
-  	background: -moz-linear-gradient(
-  		top,
-  		#e5f2ff 0%,
-  		#02071f 25%,
-  		#1e6194);
-  	background: -webkit-gradient(
-  		linear, left top, left bottom,
-  		from(#e5f2ff),
-  		color-stop(0.25, #02071f),
-  		to(#1e6194));
-  	-moz-border-radius: 6px;
-  	-webkit-border-radius: 6px;
-  	border-radius: 6px;
-  	border: 1px solid #000000;
-  	-moz-box-shadow:
-  		0px 1px 3px rgba(0,0,0,0.5),
-  		inset 0px -1px 0px rgba(255,255,255,0.7);
-  	-webkit-box-shadow:
-  		0px 1px 3px rgba(0,0,0,0.5),
-  		inset 0px -1px 0px rgba(255,255,255,0.7);
-  	box-shadow:
-  		0px 1px 3px rgba(0,0,0,0.5),
-  		inset 0px -1px 0px rgba(255,255,255,0.7);
-  	text-shadow:
-  		0px 0px 16px rgba(97,181,255,1),
-  		0px 1px 0px rgba(0,0,0,1);
-  }
+@import 'helpers/mixins';
+$blue-btn-color1: #e5f2ff;
+$blue-btn-color2: #1e6194;
+$blue-btn-color3: #02071f;
+$blue-btn-color1-light: lighten($blue-btn-color1, 10);
+$blue-btn-color2-light: lighten($blue-btn-color2, 10);
+$blue-btn-color3-light: lighten($blue-btn-color3, 10);
+$btn-padding: 10px;
+.btn {
+  width: 100px;
+  text-align: center;
+  padding: $btn-padding;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  border: 1px solid #000000;
+  @include transition(color, .2s ease);
+}
+.big {
+  width: 200px;
+}
+.blue-btn {
+  @include btn($blue-btn-color1, $blue-btn-color2, $blue-btn-color3)
+}
+.blue-btn:hover {
+  @include btn($blue-btn-color1-light, $blue-btn-color2-light, $blue-btn-color3-light)
+}
+$red-btn-color1: #fff;
+$red-btn-color2: #8d0000;
+$red-btn-color3: #2f0000;
+$red-btn-color1-light: lighten($red-btn-color1, 10);
+$red-btn-color2-light: lighten($red-btn-color2, 10);
+$red-btn-color3-light: lighten($red-btn-color3, 10);
+.red-btn {
+  @include btn($red-btn-color1, $red-btn-color2, $red-btn-color3)
+}
+.red-btn:hover {
+  @include btn($red-btn-color1-light, $red-btn-color2-light, $red-btn-color3-light)
+}
+$green-btn-color1: #fff;
+$green-btn-color2: #689500;
+$green-btn-color3: #104d00;
+$green-btn-color1-light: lighten($green-btn-color1, 10);
+$green-btn-color2-light: lighten($green-btn-color2, 10);
+$green-btn-color3-light: lighten($green-btn-color3, 10);
+.green-btn {
+  @include btn($green-btn-color1, $green-btn-color2, $green-btn-color3)
+}
+.green-btn:hover {
+  @include btn($green-btn-color1-light, $green-btn-color2-light, $green-btn-color3-light)
+}

@@ -5,3 +5,11 @@
   -o-transition: $args;
   transition: $args;
 }
+@mixin btn($color1, $color2, $color3) {
+  color: #fff;
+  background: -moz-linear-gradient(top, $color1 0%, $color3 25%, $color2);
+  background: -webkit-gradient(linear, left top, left bottom,
+  from($color1),
+  color-stop(0.25, $color3),
+  to($color2));
+}

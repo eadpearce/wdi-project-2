@@ -13,9 +13,9 @@
   <script src="/js/client.js" charset="utf-8"></script>
 </head>
 <body class="vh-100">
-  <header>
+  <header class="absolute w-100">
     <nav class="pa2">
-      <a class="logo" href="/">FFXIV Blogs</a>
+      <a class="logo" href="/">XIVB</a>
       <ul class="dib fr mv0">
         <li class="dib pl1"><a href="/blogs">All Blogs</a></li>
         <% if (locals.isLoggedIn) { %>
@@ -30,7 +30,7 @@
           </ul>
         </nav>
       </header>
-      <main class="ph2 pv4 ph3-m ph5-l">
+      <main class="ph2 pt4 pb4 ph4 ph5-l">
         <% for (const type in messages) { %>
           <p class="pa2 b ba bg-white <%= type %>"><%= messages[type] %></p>
           <% } %>
