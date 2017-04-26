@@ -43,7 +43,7 @@ function usersUpdate(req, res) {
     .findById(req.params.id)
     .exec()
     .then(user => {
-      console.log(user);
+      console.log('UPDATE USER', user);
       console.log(req.body);
       if (!user) return res.status(404).render('error', { error: 'No user found :('});
       user.profile.about = req.body.about;

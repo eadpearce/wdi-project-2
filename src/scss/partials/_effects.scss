@@ -1,3 +1,15 @@
+@import 'helpers/variables';
+// flashes
+.info {
+  color: $link-color;
+  background-color: lighten($logo-color, 30);
+  border-radius: 6px;
+  border: 1px solid #000000;
+}
+.danger {
+
+}
+
 $glow: #ffc107;
 .glow {
   color: #fff;
@@ -13,6 +25,9 @@ a.grd:hover {
   background: lighten($logo-color, 30);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+a.glow:hover {
+  color: $glow;
 }
 .danger {
   background: -webkit-linear-gradient(#ff7668, red);

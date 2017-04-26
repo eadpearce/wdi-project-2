@@ -19,8 +19,8 @@
       <% } %>
     <% } %>
 
-    <h3><a href="/profiles/<%= comment.author.profile %>"><%= comment.author.username %></a> at
-    <a href="/blogs/<%= blog.id %>/posts/<%= post.id %>/comments/<%= comment.id %>"><%= comment.createdAt.toLocaleString() %></a> said:</h3>
+    <h3 class="grd"><a class="grd" href="/profiles/<%= comment.author.profile %>"><%= comment.author.username %></a> at
+    <a class="grd" href="/blogs/<%= blog.id %>/posts/<%= post.id %>/comments/<%= comment.id %>"><%= comment.createdAt.toLocaleString() %></a> said:</h3>
     <p class="body"><%= comment.body %></p>
 
     <% if (comment.replyLevel > 0) { %>

@@ -1,13 +1,12 @@
-<h1>Add a comment</h1>
-<%= parentComment %>
-<p><b>Posting as: </b><%= user.username %></p>
+<h1 class="glow">Add a comment</h1>
+<h3 class="grd">Posting as: <%= user.username %></h3>
 <form action="/blogs/<%= parentComment.parentBlog %>/posts/<%= parentComment.parentPost %>/comments" method="post">
-<textarea name="body" class="w-100" rows="10"></textarea>
+<textarea name="body" class="w-100 mb2" rows="10"></textarea>
 
 <input type="hidden" name="author" value="<%= user.id %>">
 <input type="hidden" name="parentPost" value="<%= parentComment.parentPost %>">
 <input type="hidden" name="parentBlog" value="<%= parentComment.parentBlog %>">
 <input type="hidden" name="parentComment" value="<%= parentComment.id %>">
 <input type="hidden" name="replyLevel" value="<%= parentComment.replyLevel + 1 %>">
-<input class="ba bw1 bg-white b--blue blue" type="submit" value="Post">
+<input class="btn green-btn" type="submit" value="Post">
 </form>

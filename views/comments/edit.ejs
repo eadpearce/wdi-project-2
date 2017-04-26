@@ -1,5 +1,5 @@
-<h1 class="f2">Edit this comment</h1>
-<p><b>Posting as: </b><%= locals.user.username %></p>
+<h1 class="glow">Edit this comment</h1>
+<h3 class="grd">Posting as: <%= locals.user.username %></h3>
 <form action="/blogs/<%= comment.parentBlog %>/posts/<%= comment.parentPost %>/comments/<%= comment.id %>" method="post">
   <input type="hidden" name="_method" value="PUT">
   <textarea name="body" class="w-100" rows="10"><%= comment.body %></textarea>

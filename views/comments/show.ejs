@@ -1,14 +1,14 @@
-<h1>Comment on <a href="/blogs/<%= blog.id %>/posts/<%= post.id %>"><%= post.title %></a></h1>
+<h1 class="glow">Comment on <a class="glow" href="/blogs/<%= blog.id %>/posts/<%= post.id %>"><%= post.title %></a></h1>
 <% if (comment.parentComment) { %>
-  <h2><a href="/blogs/<%= blog.id %>/posts/<%= post.id %>/comments/<%= comment.parentComment %>">Parent comment</a></h2>
+  <h3 class="grd"><a class="grd" href="/blogs/<%= blog.id %>/posts/<%= post.id %>/comments/<%= comment.parentComment %>">Parent comment</a></h2>
 <% } else { %>
-  <h2><a href="/blogs/<%= blog.id %>/posts/<%= post.id %>%>">Parent post</a></h2>
+  <h3 class="grd"><a class="grd" href="/blogs/<%= blog.id %>/posts/<%= post.id %>%>">Parent post</a></h2>
   <% } %>
-<h3>At <a href="/blogs/<%= blog.id %>/posts/<%= post.id %>/comments/<%= comment.id %>">
+<h3 class="grd">At <a class="grd" href="/blogs/<%= blog.id %>/posts/<%= post.id %>/comments/<%= comment.id %>">
 <%= comment.createdAt.toLocaleString() %></a>
-<a href="/profiles/<%= comment.author.profile %>"><%= comment.author.username %></a> said:</h3>
-<p><%= comment.body %></p>
-<a href="/blogs/<%= blog.id %>/posts/<%= post.id %>/comments/<%= comment.id %>/new">Reply to this comment</a>
+<a class="grd" href="/profiles/<%= comment.author.profile %>"><%= comment.author.username %></a> said:</h3>
+<p class="pb3"><%= comment.body %></p>
+<a class="btn big green-btn db" href="/blogs/<%= blog.id %>/posts/<%= post.id %>/comments/<%= comment.id %>/new">Reply to this comment</a>
 <% if (locals.isLoggedIn && locals.user.id === comment.author.id) { %>
-  <a class="pa1 warning ba bg-white red b--red" href="/blogs/<%= blog.id %>/posts/<%= post.id %>/comments/<%= comment.id %>/edit">Edit/delete this comment</a>
+  <a class="btn big red-cancel red-btn fr dib" href="/blogs/<%= blog.id %>/posts/<%= post.id %>/comments/<%= comment.id %>/edit">Edit/delete this comment</a>
 <% } %>
