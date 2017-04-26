@@ -19,7 +19,7 @@ function secureRoute(req, res, next) {
 }
 
 router.get('/', (req, res) => {
-  res.render('statics/home');
+  res.render('statics/home', { layout: 'home' });
 });
 
 router.route('/blogs')

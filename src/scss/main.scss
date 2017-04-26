@@ -9,6 +9,7 @@
 @import 'partials/footer';
 @import 'partials/typography';
 @import 'partials/buttons';
+@import 'partials/homepage';
 
 // .menu {
 //   // display: none;
@@ -67,6 +68,12 @@ ul {
   border: 3px solid lighten($logo-color, 30);
 }
 footer {
+  color: $link-color;
+  font-family: $emphasis-font;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: right;
+  position: fixed;
   bottom: 0;
 }
 .charlist {

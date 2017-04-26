@@ -1,1 +1,16 @@
-<h1 class="glow">Home</h1>
+<section class="ph2 pt5 pb4 ph4 ph5-l homepage">
+<% if (!locals.user) { %>
+  <h1 class="f2 f1-m f1-l glow">Welcome to XIV Blogs</h1>
+
+  <div class="home-img overflow-hidden">
+  <a class="register-btn db big btn green-btn fixed" href="/register">Register</a>
+  </div>
+<% } %>
+</section>
+<!-- show user dashboard if logged in -->
+<% if (locals.user && locals.user.isLoggedIn) { %>
+    <h3 class="grd"><a class="grd" href="/blogs/<%= locals.user.blog %>/posts">View my posts</a></h3>
+<h3 class="grd"><a class="grd" href="/profiles/<%= user.locals.profile %>">View my
+  profile</a></h3>
+  <a href="/blogs/<%= blog.id %>/posts/new">Make a new post</a>
+<% } %>

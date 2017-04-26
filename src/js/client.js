@@ -61,7 +61,6 @@ function init() {
   // });
 
   const $alts = $('.alts');
-  const alts = [];
   $alts.each(function(i) {
     const id = $(this).attr('id');
     const type = `alt${i}`;
