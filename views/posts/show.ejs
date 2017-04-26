@@ -1,7 +1,8 @@
-<h1 class="glow-title"><%= post.title %></h1>
-<h2><a href="/profiles/<%= blog.owner.profile %>"><%= blog.owner.username %></a></h2>
-<h3>At <%= post.createdAt.toLocaleString() %>  wrote:</h3>
-<p  class="body"><%= post.body %></p>
+<h1 class="glow"><%= post.title %></h1>
+<h3 class="grd">by <a class="grd" href="/profiles/<%= blog.owner.profile %>"><%= blog.owner.username %></a>
+  <a class="grd fr" href="/blogs/<%= blog.id %>/posts">Back to posts</a></h3>
+<h3 class="grd">At <%= post.createdAt.toLocaleString() %>  wrote:</h3>
+<p class="blog-post"><%= post.body %></p>
 <% if (locals.isLoggedIn && locals.user.username === blog.owner.username) { %>
   <a class="big btn blue-btn db fr" href="/blogs/<%= blog.id %>/posts/<%= post.id %>/edit">Edit this post</a>
 <% } %>

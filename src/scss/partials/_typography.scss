@@ -10,6 +10,9 @@ label, header, h3, h4 {
   font-weight: bold;
   text-transform: uppercase;
 }
+h4 {
+  font-size: 18px;
+}
 a {
   text-decoration: none;
   color: $link-color;
@@ -25,4 +28,8 @@ a:hover {
 main {
   max-width: 960px;
   margin: 0 auto;
+}
+.blog-title {
+  font-family: $emphasis-font;
+  text-transform: uppercase;
 }

@@ -1,24 +1,23 @@
-<h1 class="glow-title"><%= profile.owner.username %>'s profile</h1>
+<h1 class="glow"><%= profile.owner.username %>'s profile</h1>
 <h2><a href="/blogs/<%= profile.owner.blog %>">View blog</a></h2>
 
   <div class="pb2">
-    <label class="b f4 db" for="about">About: </label>
+    <label class="grd b f4 db" for="about">About: </label>
     <p class="w-100" type="text" name="about"><%= profile.about %></p>
 
     <div class="pb2">
-    <p><b>Age: </b>
+    <h3 class="grd">Age: &nbsp;
     <% if (!profile.age) { %>
       <%= 'Not specified' %>
     <% } else { %>
     <%= profile.age %>
-    <% } %></p>
-  </div>
-  <div class="pb2">
+    <% } %></h3>
+
     <% let mainID; %>
     <% if (!profile.main) { %>
       <% mainID = ''; %>
       <% }  %>
-    <h3>Main character: </h3>
+    <h3 class="grd">Main character: </h3>
       <% if (profile.main) { %>
         <div class="charlist mb2">
         <img width="50" class="circle main-avatar" src=""><a class="main-name" href="<%= profile.main %>"></a> on <span class="main-server"></span>
@@ -28,7 +27,7 @@
       <% } %>
     </div>
     <div class="pb2">
-    <h3>Alt characters: </h3>
+    <h3 class="grd">Alt characters: </h3>
     <% if (profile.alts.length === 0) { %>
       <p>No alts.</p>
     <% } %>

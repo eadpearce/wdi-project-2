@@ -1,4 +1,4 @@
-<h1><%= blog.owner.username %>'s blog</h1>
+<h1 class="glow"><%= blog.owner.username %>'s blog</h1>
 <p><a href="/blogs/<%= blog.id %>/posts">View
   <% if (locals.user && blog.owner.id === locals.user.id) { %>
     my

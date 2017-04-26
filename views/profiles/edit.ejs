@@ -1,21 +1,21 @@
-<h1 class="pb3">Hello <%= locals.user.username %></h1>
+<h1 class="pb3 glow">Hello <%= locals.user.username %></h1>
 
 <form action="/profiles/<%= profile.id %>" method="post">
   <input type="hidden" name="_method" value="PUT">
 
   <div class="pb2">
-    <label class="pb2 b f4 db" for="about">About: </label>
+    <label class="grd pb2 b f4 db" for="about">About: </label>
     <textarea class="w-100 ba pa1 b--gray" type="text" name="about"><%= profile.about %></textarea>
   </div>
 
   <div class="pb2">
-    <p><b>Age: </b>
+    <h3 class="grd">Age: &nbsp;
     <% if (!profile.age) { %>
       <%= 'Not specified' %>
     <% } else { %>
     <%= profile.age %>
-    <% } %></p>
-    <label class="pb2 b f4 db" for="age">Edit age: </label>
+    <% } %></h3>
+    <label class="grd pb2 b f4 db" for="age">Edit age: </label>
     <input class="w-100 ba pa1 b--gray" type="number" name="age">
   </div>
 
@@ -24,7 +24,7 @@
     <% if (!profile.main) { %>
       <% mainID = ''; %>
       <% }  %>
-    <h3>Main character: </h3>
+    <h3 class="grd">Main character: </h3>
 
       <% if (profile.main) { %>
         <div class="charlist mb2">
@@ -33,12 +33,12 @@
       <% } else { %>
         <p>Main not yet added.</p>
       <% } %>
-    <label class="pb2 b f4 db" for="main">Edit main: </label>
+    <label class="grd pb2 b f4 db" for="main">Edit main: </label>
     <input class="w-100 ba pa1 b--gray" type="text" name="main">
   </div>
 
   <div class="pb2">
-    <h3>Alt characters: </h3>
+    <h3 class="grd">Alt characters: </h3>
     <% if (profile.alts.length === 0) { %>
       <p>No alts.</p>
     <% } %>
@@ -57,9 +57,9 @@
     <% } %>
   </div>
   <div class="pb2">
-    <label class="pb2 b f4 db" for="alts">Add an alt: </label>
+    <label class="grd pb2 b f4 db" for="alts">Add an alt: </label>
     <input class=" w-100 ba pa1 b--gray" type="text" name="alts">
   </div>
 
-  <input class="edit-btn pa2 mt3" type="submit" value="Update">
+  <input class="big btn blue-btn pa2 mt3" type="submit" value="Update">
 </form>

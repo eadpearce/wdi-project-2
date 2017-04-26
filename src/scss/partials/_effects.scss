@@ -1,5 +1,21 @@
 $glow: #ffc107;
-.glow-title {
+.glow {
   color: #fff;
   text-shadow: 0px 0px 20px $glow;
+}
+.grd {
+  background: -webkit-linear-gradient(lighten($logo-color, 30), darken($logo-color, 20));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+a.grd:hover {
+  color: lighten($logo-color, 30);
+  background: lighten($logo-color, 30);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.danger {
+  background: -webkit-linear-gradient(#ff7668, red);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

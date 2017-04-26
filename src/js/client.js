@@ -1,20 +1,27 @@
 $(init);
 
-// NOTE TO SELF: JQUERY DOESN'T LIEK ARROW FUNCTIONS
+// NOTE TO SELF: JQUERY DOESN'T LIKE ARROW FUNCTIONS
 
 function init() {
+  // markdown converter for posts
+  const converter = new showdown.Converter();
+  const $blogPost = $('.blog-post');
+  $.each($blogPost, function() {
+    const converted = converter.makeHtml($(this).text());
+    // console.log(converted);
+    $(this).html(converted);
+  });
 
   let $mainID = $('.main-name').attr('href');
   if ($mainID) {
     $mainID = $mainID.split('character/')[1].split('/')[0];
   }
-  $.each($('.body'), function(index) {
-    const parsed = $.parseHTML($(this).text());
-    $(this).html(parsed);
-  });
-  $('.warning').click(e => {
-    console.log('delete', e);
-  });
+
+  // warning before delete ???
+  // $('.warning').click(e => {
+  //   console.log('delete', e);
+  // });
+
   const $alts = $('.alts');
   const alts = [];
   $alts.each(function(i) {

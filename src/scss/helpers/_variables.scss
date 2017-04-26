@@ -11,3 +11,24 @@ $footer-bg: #000;
 $title-font: 'Cinzel', serif;
 $emphasis-font: 'Play', Impact, sans-serif;
 $body-font: 'Helevetica Neue', Arial, sans-serif;
+
+$blue-btn-color1: #e5f2ff;
+$blue-btn-color2: #1e6194;
+$blue-btn-color3: #02071f;
+$blue-btn-color1-light: lighten($blue-btn-color1, 10);
+$blue-btn-color2-light: lighten($blue-btn-color2, 10);
+$blue-btn-color3-light: lighten($blue-btn-color3, 10);
+
+$red-btn-color1: #fff;
+$red-btn-color2: #8d0000;
+$red-btn-color3: #2f0000;
+$red-btn-color1-light: lighten($red-btn-color1, 10);
+$red-btn-color2-light: lighten($red-btn-color2, 10);
+$red-btn-color3-light: lighten($red-btn-color3, 10);
+
+$green-btn-color1: #fff;
+$green-btn-color2: #689500;
+$green-btn-color3: #104d00;
+$green-btn-color1-light: lighten($green-btn-color1, 10);
+$green-btn-color2-light: lighten($green-btn-color2, 10);
+$green-btn-color3-light: lighten($green-btn-color3, 10);
