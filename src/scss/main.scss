@@ -10,14 +10,18 @@
 @import 'partials/typography';
 @import 'partials/buttons';
 
-.hidden {
-  display: none;
-}
-nav:after {
-  color: white;
-  float: right;
-  content: '\2630'
-}
+// .menu {
+//   // display: none;
+// }
+// .menu .clicked {
+//   display: block;
+// }
+// nav ul li:last-child a:before {
+//   font-size: 20px;
+//   color: white;
+//   float: right;
+//   content: '\2630'
+// }
 input, button, textarea {
   font-family: inherit;
   font-size: inherit;

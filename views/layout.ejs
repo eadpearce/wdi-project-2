@@ -17,7 +17,8 @@
   <header class="absolute w-100">
     <nav class="pa2">
       <a class="logo" href="/">XIVB</a>
-      <ul class="hidden dib fr mv0">
+
+      <ul class="menu clicked fr mv0">
         <li class="dib pl1"><a href="/blogs">All Users</a></li>
         <% if (locals.isLoggedIn) { %>
           <span class="dib pl1 mt0">Logged in as <%= locals.user.username %></span>
@@ -28,7 +29,9 @@
             <li class="dib pl1"><a href="/login">Log In</a></li>
             <li class="dib pl1"><a href="/register">Register</a></li>
             <% } %>
+            <li><a href="#"></a></li>
           </ul>
+
         </nav>
       </header>
       <main class="ph2 pt4 pb4 ph4 ph5-l">
