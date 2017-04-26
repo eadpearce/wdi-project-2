@@ -17,8 +17,8 @@
   <header class="absolute w-100">
     <nav class="pa2">
       <a class="logo" href="/">XIVB</a>
-      <ul class="dib fr mv0">
-        <li class="dib pl1"><a href="/blogs">All Blogs</a></li>
+      <ul class="hidden dib fr mv0">
+        <li class="dib pl1"><a href="/blogs">All Users</a></li>
         <% if (locals.isLoggedIn) { %>
           <span class="dib pl1 mt0">Logged in as <%= locals.user.username %></span>
           <li class="dib pl1"><a href="/profiles/<%= locals.user.profile %>">My Profile</a></li>
@@ -33,7 +33,10 @@
       </header>
       <main class="ph2 pt4 pb4 ph4 ph5-l">
         <% for (const type in messages) { %>
-          <p class="pa2 dib mt3 mb0 <%= type %>"><%= messages[type] %></p>
+          <div class="mt3 msg-container">
+          <img class="msg-img" src="/images/moogle.png" height="100">
+          <p class="pa2 dib mt3 ml3 mb0 msg <%= type %>"><%= messages[type] %></p>
+          </div>
           <% } %>
             <%- body %>
         </main>

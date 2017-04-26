@@ -1,14 +1,14 @@
-<h1 class="glow"><%= blog.owner.username %>'s blog</h1>
-<p><a href="/blogs/<%= blog.id %>/posts">View
+<h1 class="glow"><%= blog.owner.username %></h1>
+<h3 class="grd"><a class="grd" href="/blogs/<%= blog.id %>/posts">View
   <% if (locals.user && blog.owner.id === locals.user.id) { %>
     my
   <% } %>
-  posts</a></p>
-<p><a href="/profiles/<%= blog.profile.id %>">View
+  posts</a></h3>
+<h3 class="grd"><a class="grd" href="/profiles/<%= blog.profile.id %>">View
   <% if (locals.user && blog.owner.id === locals.user.id) { %>
     my
   <% } %>
-  profile</a></p>
+  profile</a></h3>
 <% if (locals.user && blog.owner.id === locals.user.id) { %>
   <a href="/blogs/<%= blog.id %>/posts/new">Make a new post</a>
 <% } %>

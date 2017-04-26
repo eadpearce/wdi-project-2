@@ -10,11 +10,40 @@
 @import 'partials/typography';
 @import 'partials/buttons';
 
+.hidden {
+  display: none;
+}
+nav:after {
+  color: white;
+  float: right;
+  content: '\2630'
+}
 input, button, textarea {
   font-family: inherit;
   font-size: inherit;
   color: inherit;
   background-color: inherit;
+}
+.profile-title {
+  height: 32px;
+  img {
+    vertical-align: middle;
+    padding-right: 5px;
+  }
+}
+.main-job img {
+  vertical-align: middle;
+  padding-right: 5px;
+}
+.main-jobs li {
+  height: 28px;
+  line-height: 28px;
+  img {
+    vertical-align: middle;
+  }
+}
+li {
+  list-style: none;
 }
 .red-cancel {
   margin-top: -40px;
@@ -27,6 +56,11 @@ ul {
 }
 .circle {
   border-radius: 50%;
+  border: 3px solid $logo-color;
+}
+.circle:hover {
+  border-radius: 50%;
+  border: 3px solid lighten($logo-color, 30);
 }
 footer {
   bottom: 0;

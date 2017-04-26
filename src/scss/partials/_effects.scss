@@ -1,13 +1,20 @@
 @import 'helpers/variables';
 // flashes
-.info {
-  color: $link-color;
+.msg {
   background-color: lighten($logo-color, 30);
   border-radius: 6px;
   border: 1px solid #000000;
 }
+.msg-img {
+  vertical-align: top;
+}
+.info {
+  color: $link-color;
+  border-color: $link-color;
+}
 .danger {
-
+  color: lighten($red-btn-color2, 10);
+  border-color: lighten($red-btn-color2, 10);
 }
 
 $glow: #ffc107;
@@ -28,9 +35,4 @@ a.grd:hover {
 }
 a.glow:hover {
   color: $glow;
-}
-.danger {
-  background: -webkit-linear-gradient(#ff7668, red);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }

@@ -49,7 +49,7 @@ function postsShow(req, res) {
   let foundPost;
   Blog
     .findById(req.params.blogID)
-    .populate('owner profile')
+    // .populate('owner profile')
     .exec()
     .then(blog => {
       foundBlog = blog;
@@ -59,11 +59,14 @@ function postsShow(req, res) {
         .exec()
         .then(post => {
           foundPost = post;
+          if (!post) return res.status(404).render('error', { error: 'Post not found'});
           Comment
             .find({ parentPost: foundPost.id })
             .populate('author')
             .exec()
             .then(comments => {
+              console.log('ID', foundPost.id);
+              // console.log('POST', foundPost);
               // console.log('COMMENTS', comments);
               res.render('posts/show', { blog: foundBlog, post: post, comments: comments });
             });
