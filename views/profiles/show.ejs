@@ -1,70 +1,78 @@
-<h1 class="glow profile-title">
+<h1 class="f2-ns glow profile-title">
   <% if (profile.mainJob) { %>
     <div class="job-icon1 di"></div>
   <% } %>
   <%= profile.owner.username %>'s profile</h1>
-<h3><a class="grd" href="/blogs/<%= profile.owner.blog %>">View blog</a></h2>
+<h3><a class="grd-gold" href="/blogs/<%= profile.owner.blog %>">View blog</a></h2>
 
-  <div class="pb2 w-50 ba fl b--red">
-    <h3 class="grd mv0" for="about">About: </h3>
+  <div class="pb2">
+    <h3 class="grd-silver mv0" for="about">About: </h3>
     <p class="w-100"><%= profile.about %></p>
+  </div>
 
-
-    <h3 class="grd">Age: &nbsp;
+<div class="w-100 w-50-ns ba fl b--red">
+    <h3 class="grd-silver mt0">Age: &nbsp;
     <% if (!profile.age) { %>
       <%= 'Not specified' %>
     <% } else { %>
     <%= profile.age %>
     <% } %></h3>
 
-      <h3 class="grd di">Main job: &nbsp;</h3>
+      <h3 class="grd-silver di">Main job: &nbsp;</h3>
         <% if (!profile.mainJob) { %>
           <%= 'Not specified' %>
         <% } else { %>
-        <h3 class="di main-job job-icon2"></h3><h3 class="di grd main-job"><%= profile.mainJob %></h3>
+        <h3 class="di main-job job-icon2"></h3><h3 class="di grd-silver main-job"><%= profile.mainJob %></h3>
         <% } %></h3>
     </div>
 
-    <div class="pb2 w-50 fl ba b--red"> <!-- API shit goes here -->
-      <h3 class="grd mv0">Jobs at 60 on main</h3>
+    <div class="pb2 h4 w-100 w-50-ns fl ba b--red"> <!-- API shit goes here -->
+      <h3 class="grd-silver mv0">Jobs at 60 on main</h3>
       <ul class="mt1 mb0 main-jobs">
       </ul>
     </div>
 
-    <div class="cb">
+    <div class="pb2 cb">
     <% let mainID; %>
     <% if (!profile.main) { %>
       <% mainID = ''; %>
       <% }  %>
-    <h3 class="grd">Main character: </h3>
+    <h3 class="grd-silver">Main character: </h3>
       <% if (profile.main) { %>
-        <div class="charlist mb2">
-        <a href="<%= profile.main %>"><img width="50" class="circle main-avatar" src=""></a>
-        <a class="main-name" href="<%= profile.main %>"></a> on <span class="main-server"></span>
+        <div class="charlist">
+        <a class="dib" href="<%= profile.main %>"><img width="50" class="circle main-avatar" src=""></a>
+        <p class="dib mv0">
+        <a class="db main-name" href="<%= profile.main %>" id="<%= profile.main %>"></a> on <span class="main-server"></span>
+        </p>
         </div>
       <% } else { %>
         <p>Main not yet added.</p>
       <% } %>
-
-    <h3 class="grd">Alt characters: </h3>
+    </div>
+      <div class="pb2">
+    <h3 class="grd-silver">Alt characters: </h3>
     <% if (profile.alts.length === 0) { %>
       <p class="mb3">No alts.</p>
     <% } %>
     <% for (let i = 0; i < profile.alts.length; i++) { %>
       <% if (profile.alts[i]) { %>
-      <div class="charlist mb3">
-      <a href="<%= profile.alts[i] %>"><img width="50" class="circle alt<%=i%>-avatar" src=""></a>
-      <a class="alts alt<%=i%>-name"
+      <div class="charlist pb2 w-100 w-50-m w-third-l dib fl">
+      <a href="<%= profile.alts[i] %>">
+      <img width="50" class="circle alt<%=i%>-avatar" id="<%= profile.alts[i].split('character/')[1].split('/')[0] %>" src=""></a>
+      <p class="dib mv0">
+      <a class="db alts alt<%=i%>-name"
       id="<%= profile.alts[i].split('character/')[1].split('/')[0] %>"
       href="<%= profile.alts[i] %>">
       </a> on <span class="alt<%=i%>-server"></span>
+      </p>
       </div>
       <% } %>
     <% } %>
   </div>
 
 <% if (locals.user && locals.user.id === profile.owner.id) { %>
-  <form action="/profiles/<%= profile.owner.id %>" method="post">
+  <form action="/profiles/<%= profile.owner.id %>" method="post"
+  class="cb pt4">
     <a class="db big btn blue-btn pa2" href="/profiles/<%= profile.id %>/edit">Edit your profile</a>
   </form>
 <% } %>

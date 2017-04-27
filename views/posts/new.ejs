@@ -28,7 +28,8 @@
     name="author" type="radio" >
 
     <label
-    class="dib alts alt<%=i%>-name" for="author"><%= user.profile.alts[i].split('character/')[1].split('/')[0] %></label>
+    class="dib alts alt<%=i%>-name" for="author"
+    id ="<%= user.profile.alts[i].split('character/')[1].split('/')[0] %>"></label>
     </div>
 
     <% } %>
@@ -40,4 +41,5 @@
 <input type="hidden" name="blog" value="<%= user.blog %>">
 <input type="hidden" name="profile" value="<%= user.profile.id %>">
 <input class="mt2 big btn green-btn" type="submit" value="Post">
+<a class="dib btn red-btn" href="/blogs/<%= post.blog %>">Cancel</a>
 </form>

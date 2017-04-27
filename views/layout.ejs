@@ -21,14 +21,23 @@
       <ul class="menu clicked fr mv0">
         <li class="dib pl1"><a href="/blogs">All Users</a></li>
         <% if (locals.isLoggedIn) { %>
-          <span class="dib pl1 mt0">Logged in as <%= locals.user.username %></span>
-          <li class="dib pl1"><a href="/profiles/<%= locals.user.profile %>">My Profile</a></li>
-          <li class="dib pl1"><a href="/blogs/<%= locals.user.blog %>">My Blog</a></li>
-          <li class="dib pl1"><a href="/logout">Log Out</a></li>
+
+          <% if (!locals.user.profile.main) { %>
+            <span class="dib pl1 mt0">Logged in as <%= locals.user.username %></span>
+            <li class="dib pl1"><a href="/profiles/<%= locals.user.profile %>">My Profile</a></li>
+            <li class="dib pl1"><a href="/blogs/<%= locals.user.blog %>">My Blog</a></li>
+            <li class="dib pl1"><a href="/logout">Log Out</a></li>
           <% } else { %>
-            <li class="dib pl1"><a href="/login">Log In</a></li>
-            <li class="dib pl1"><a href="/register">Register</a></li>
+            <span class="dib pl1 mt0">Logged in as <%= locals.user.username %></span>
+            <li class="dib pl1"><a href="/profiles/<%= locals.user.profile.id %>">My Profile</a></li>
+            <li class="dib pl1"><a href="/blogs/<%= locals.user.blog.id %>">My Blog</a></li>
+            <li class="dib pl1"><a href="/logout">Log Out</a></li>
             <% } %>
+
+        <% } else { %>
+              <li class="dib pl1"><a href="/login">Log In</a></li>
+              <li class="dib pl1"><a href="/register">Register</a></li>
+        <% } %>
             <li><a href="#"></a></li>
           </ul>
 

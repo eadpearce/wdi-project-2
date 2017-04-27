@@ -1,11 +1,11 @@
 <h1 class="glow"><%= blog.owner.username %>'s blog</h1>
-<h3><a class="grd fr" href="/blogs/<%= blog.id %>">Back to user</a></h3>
+<h3><a class="grd-gold fr" href="/blogs/<%= blog.id %>">Back to user</a></h3>
 <% if (!posts[0]) { %>
   <p>No posts yet.</p>
 <% } else if (posts[0]) { %>
   <% posts.forEach(post => { %>
-    <h2><a class="blog-title grd" href="/blogs/<%= blog.id %>/posts/<%= post.id %>"><%= post.title %></a></h2>
-    <h4 class="grd"><%= post.createdAt.toLocaleString() %></h4>
+    <h2><a class="blog-title grd-gold" href="/blogs/<%= blog.id %>/posts/<%= post.id %>"><%= post.title %></a></h2>
+    <h4 class="grd-silver"><%= post.createdAt.toLocaleString() %></h4>
     <p class="blog-post"><%= post.body %></p>
     <% if (locals.isLoggedIn && locals.user.username === blog.owner.username) { %>
       <a class="mt2 db big btn blue-btn" href="/blogs/<%= blog.id %>/posts/<%= post.id %>/edit">Edit this post</a>

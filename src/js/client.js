@@ -47,11 +47,6 @@ function init() {
     });
   }
 
-  let $mainID = $('.main-name').attr('id');
-  if ($mainID && $mainID && $mainID.length > 55) {
-    $mainID = $mainID.split('character/')[1].split('/')[0];
-  } else $mainID = '';
-
   const mainJob = $('.main-job').text();
   // console.log(mainJob);
   const $jobIcon1 = $('.job-icon1');
@@ -69,20 +64,24 @@ function init() {
 
   const $alts = $('.alts');
   $alts.each(function(i) {
-    const id = $(this).text();
+    const id = $(this).attr('id');
     const type = `alt${i}`;
+    // console.log($alts);
     getCharacterInfo(id, type);
   });
-  // console.log('ALTS ARRAY', alts);
-
   const $authorID = $('.main-author').text();
   // console.log('AUTHOR ID', $authorID);
+
+  let $mainID = $('.main-name').attr('id');
+  if ($mainID && $mainID.length > 55) {
+    $mainID = $mainID.split('character/')[1].split('/')[0];
+  } else $mainID = '';
 
   getCharacterInfo($mainID, 'main');
   getCharacterInfo($authorID, 'main');
 
-  $.get('https://api.xivdb.com/data/classjobs')
-  .done(jobs => console.log(jobs));
+  // $.get('https://api.xivdb.com/data/classjobs')
+  // .done(jobs => console.log(jobs));
 
   function getCharacterInfo(characterID, type) {
     if (!characterID) {
@@ -91,7 +90,7 @@ function init() {
     $
     .get(`https://api.xivdb.com/character/${characterID}`)
     .done(char => {
-      console.log(char);
+      // console.log(char);
 
       $(`.${type}-author`).html(char.name);
       $(`.${type}-name`).html(char.name);
@@ -109,25 +108,25 @@ function init() {
       Object.values(char.data.classjobs).forEach(classjob => {
         if (classjob.level === 60) {
           if (classjob.name === 'Gladiator' && char.data.classjobs['6'].level >= 15) {
-            $(`<li><div><img src="${icons2['PLD']}"></div>PLD</li>`).appendTo(`.${type}-jobs`);
+            $(`<li class="w-third"><div><img src="${icons2['PLD']}"></div>PLD</li>`).appendTo(`.${type}-jobs`);
           } else if (classjob.name === 'Pugilist' && char.data.classjobs['4'].level >= 15) {
-            $(`<li><div><img src="${icons2['MNK']}"></div>MNK</li>`).appendTo(`.${type}-jobs`);
+            $(`<li class="w-third"><div><img src="${icons2['MNK']}"></div>MNK</li>`).appendTo(`.${type}-jobs`);
           } else if (classjob.name === 'Marauder' && char.data.classjobs['2'].level >= 15) {
-            $(`<li><div><img src="${icons2['WAR']}"></div>WAR</li>`).appendTo(`.${type}-jobs`);
+            $(`<li class="w-third"><div><img src="${icons2['WAR']}"></div>WAR</li>`).appendTo(`.${type}-jobs`);
           } else if (classjob.name === 'Lancer' && char.data.classjobs['3'].level >= 15) {
-            $(`<li><div><img src="${icons2['DRG']}"></div>DRG</li>`).appendTo(`.${type}-jobs`);
+            $(`<li class="w-third"><div><img src="${icons2['DRG']}"></div>DRG</li>`).appendTo(`.${type}-jobs`);
           } else if (classjob.name === 'Archer' && char.data.classjobs['2'].level >= 15) {
-            $(`<li><div><img src="${icons2['BRD']}"></div>BRD</li>`).appendTo(`.${type}-jobs`);
+            $(`<li class="w-third"><div><img src="${icons2['BRD']}"></div>BRD</li>`).appendTo(`.${type}-jobs`);
           } else if (classjob.name === 'Conjurer' && char.data.classjobs['26'].level >= 15) {
-            $(`<li><div><img src="${icons2['WHM']}"></div>WHM</li>`).appendTo(`.${type}-jobs`);
+            $(`<li class="w-third"><div><img src="${icons2['WHM']}"></div>WHM</li>`).appendTo(`.${type}-jobs`);
           } else if (classjob.name === 'Thaumaturge' && char.data.classjobs['5'].level >= 15) {
-            $(`<li><div><img src="${icons2['BLM']}"></div>BLM</li>`).appendTo(`.${type}-jobs`);
+            $(`<li class="w-third"><div><img src="${icons2['BLM']}"></div>BLM</li>`).appendTo(`.${type}-jobs`);
           } else if (classjob.name === 'Arcanist' && char.data.classjobs['6'].level >= 15) {
-            $(`<li><div><img src="${icons2['SCH']}"></div>SCH</li>`).appendTo(`.${type}-jobs`);
+            $(`<li class="w-third"><div><img src="${icons2['SCH']}"></div>SCH</li>`).appendTo(`.${type}-jobs`);
           } else if (classjob.name === 'Arcanist' && char.data.classjobs['7'].level >= 15) {
-            $(`<li><div><img src="${icons2['SMN']}"></div>SMN</li>`).appendTo(`.${type}-jobs`);
+            $(`<li class="w-third"><div><img src="${icons2['SMN']}"></div>SMN</li>`).appendTo(`.${type}-jobs`);
           } else if (classjob.name === 'Astrologian' || classjob.name === 'Machinist' || classjob.name === 'Dark Knight') {
-            $(`<li><div><img src="${icons2[classjob.data.abbr]}"></div>${classjob.data.abbr}</li>`).appendTo(`.${type}-jobs`);
+            $(`<li class="w-third"><div><img src="${icons2[classjob.data.abbr]}"></div>${classjob.data.abbr}</li>`).appendTo(`.${type}-jobs`);
           }
         }
       });

@@ -22,17 +22,18 @@ $glow: #ffc107;
   color: #fff;
   text-shadow: 0px 0px 20px $glow;
 }
-.grd {
-  background: -webkit-linear-gradient(lighten($logo-color, 30), darken($logo-color, 20));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.grd-gold {
+  @include grd($logo-color);
 }
-a.grd:hover {
-  color: lighten($logo-color, 30);
-  background: lighten($logo-color, 30);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+a.grd-gold:hover {
+  @include grd(lighten($logo-color, 30));
 }
 a.glow:hover {
   color: $glow;
+}
+.grd-silver {
+  @include grd($silver);
+}
+a.grd-silver:hover {
+  @include grd(lighten($silver, 30));
 }

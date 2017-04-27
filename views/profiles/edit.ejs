@@ -1,76 +1,80 @@
-<h1 class="pb3 glow">Hello <%= locals.user.username %></h1>
+<h1 class="f2-ns pb3 glow">Edit profile</h1>
 
 <form action="/profiles/<%= profile.id %>" method="post">
   <input type="hidden" name="_method" value="PUT">
 
   <div class="pb2">
-    <label class="grd pb2 b f4 db" for="about">About: </label>
+    <label class="grd-gold pb2 b f4 db" for="about">About: </label>
     <textarea class="w-100 ba pa1 b--gray" type="text" name="about"><%= profile.about %></textarea>
   </div>
 
-  <div class="pb2">
-    <h3 class="grd">Age: &nbsp;
+  <div class="pb2 w-100 w-50-ns fl pr2-ns">
+    <h3 class="grd-gold">Age: &nbsp;
     <% if (!profile.age) { %>
       <%= 'Not specified' %>
     <% } else { %>
     <%= profile.age %>
     <% } %></h3>
-    <label class="grd pb2 b f4 db" for="age">Edit age: </label>
+    <label class="grd-gold pb2 b f4 db" for="age">Edit age: </label>
     <input class="w-100 ba pa1 b--gray" type="number" name="age">
   </div>
-  <div class="pb2">
-    <h3 class="grd">Main job: &nbsp;
+  <div class="pb2 w-100 w-50-ns fl">
+    <h3 class="grd-gold">Main job: &nbsp;
       <% if (!profile.mainJob) { %>
         <%= 'Not specified' %>
       <% } else { %>
       <%= profile.mainJob %>
       <% } %></h3>
-      <label class="grd pb2 b f4 db" for="mainJob">Edit main job: </label>
+      <label class="grd-gold pb2 b f4 db" for="mainJob">Edit main job: </label>
       <input class="w-100 ba pa1 b--gray" type="text" name="mainJob">
   </div>
 
-  <div class="pb2">
     <% let mainID; %>
     <% if (!profile.main) { %>
       <% mainID = ''; %>
       <% }  %>
-    <h3 class="grd">Main character: </h3>
-
+    <div class="charlist w-100 w-50-ns dib fl mb2">
+      <h3 class="grd-gold mt0">Main character: </h3>
 
       <% if (profile.main) { %>
-        <div class="charlist mb2">
-          <img width="50" class="circle main-avatar" src=""><a class="main-name" href="<%= profile.main %>"></a> on <span class="main-server"></span>
-          </div>
+        <a href="<%= profile.main %>"><img width="50" class="circle main-avatar" src=""></a>
+        <p class="dib"><a class="main-name" id="<%= profile.main %>"></a></p>
+        </div>
       <% } else { %>
         <p>Main not yet added.</p>
       <% } %>
-    <label class="grd pb2 b f4 db" for="main">Edit main: </label>
-    <input class="w-100 ba pa1 b--gray" type="text" name="main">
+    <div class="w-100 w-50-ns fl">
+      <label class="grd-gold pb2 b f4 db" for="main">Edit main character: </label>
+      <input class="w-100 ba pa1 b--gray" type="text" name="main">
+    </div>
   </div>
 
-  <div class="pb2">
-    <h3 class="grd">Alt characters: </h3>
+  <div class="pb2 cb">
+    <h3 class="grd-gold">Alt characters: </h3>
     <% if (profile.alts.length === 0) { %>
       <p>No alts.</p>
     <% } %>
     <% for (let i = 0; i < profile.alts.length; i++) { %>
       <% if (profile.alts[i]) { %>
-      <div class="charlist">
+      <div class="charlist w-100 w-50-m w-third-l dib fl">
       <img width="50" class="circle alt<%=i%>-avatar" src="">
-      <a class="alts alt<%=i%>-name"
+      <p class="dib"><a class="alts alt<%=i%>-name"
       id="<%= profile.alts[i].split('character/')[1].split('/')[0] %>"
       href="<%= profile.alts[i] %>">
-      </a> on <span class="alt<%=i%>-server"></span>
+      </a></p>
+      <div class="pv2">
       <label class="dib b danger" for="<%= profile.alts[i] %>">Delete: </label>
       <input class="dib" type="checkbox" name="<%= profile.alts[i] %>">
+      </div>
       </div>
       <% } %>
     <% } %>
   </div>
-  <div class="pb2">
-    <label class="grd pb2 b f4 db" for="alts">Add an alt: </label>
+  <div class="pb3">
+    <label class="grd-gold b f4 db cb" for="alts">Add an alt: </label>
     <input class=" w-100 ba pa1 b--gray" type="text" name="alts">
   </div>
 
-  <input class="big btn blue-btn pa2 mt3" type="submit" value="Update">
+  <input class="btn blue-btn pa2" type="submit" value="Update">
+  <a class="btn red-btn fr" href="/blogs/<%= locals.user.id %>">Cancel</a>
 </form>

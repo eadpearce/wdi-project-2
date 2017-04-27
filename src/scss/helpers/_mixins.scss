@@ -13,3 +13,8 @@
   color-stop(0.25, $color3),
   to($color2));
 }
+@mixin grd($grd-color) {
+  background: -webkit-linear-gradient(lighten($grd-color, 30), darken($grd-color, 20));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

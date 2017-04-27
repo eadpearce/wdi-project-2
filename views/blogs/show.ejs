@@ -1,14 +1,14 @@
 <h1 class="glow"><%= blog.owner.username %></h1>
-<h3 class="grd"><a class="grd" href="/blogs/<%= blog.id %>/posts">View
+<h3 class="grd-gold"><a class="grd-gold" href="/blogs/<%= blog.id %>/posts">View
   <% if (locals.user && blog.owner.id === locals.user.id) { %>
     my
   <% } %>
   posts</a></h3>
-<h3 class="grd"><a class="grd" href="/profiles/<%= blog.profile.id %>">View
+<h3 class="grd-gold"><a class="grd-gold" href="/profiles/<%= blog.profile.id %>">View
   <% if (locals.user && blog.owner.id === locals.user.id) { %>
     my
   <% } %>
   profile</a></h3>
 <% if (locals.user && blog.owner.id === locals.user.id) { %>
-  <a href="/blogs/<%= blog.id %>/posts/new">Make a new post</a>
+  <a class="db big btn green-btn" href="/blogs/<%= blog.id %>/posts/new">Make a new post</a>
 <% } %>
