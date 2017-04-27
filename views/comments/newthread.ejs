@@ -1,9 +1,44 @@
 <h1 class="glow">Add a comment</h1>
-<h3 class="grd">Posting as: <%= user.username %></h3>
 <form action="/blogs/<%= parentComment.parentBlog %>/posts/<%= parentComment.parentPost %>/comments" method="post">
+  <h3 class="grd-gold">Posting as player: </h3>
+  <form action="/blogs/<%= user.blog %>/posts" method="post">
+    <div class="db pb3">
+      <div>
+      <input class="dib" value="<%= user.username %>"
+      name="author" type="radio" >
+
+      <label class="grd-silver dib" for="author"><%= user.username %></label>
+    </div>
+
+  <h3 class="grd-gold">Posting as character: </h3>
+      <div>
+      <input class="dib" value="<%= user.profile.main.split('character/')[1].split('/')[0] %>"
+      name="author" type="radio" >
+      <label class="grd-silver dib main-author"
+      id="<%= user.profile.main.split('character/')[1].split('/')[0] %>"
+      for="author"><%= user.profile.main.split('character/')[1].split('/')[0] %></label>
+    </div>
+
+    <% if (user.profile.alts[0]) { %>
+      <% for (let i = 0; i < user.profile.alts.length; i++) { %>
+
+      <div>
+      <input
+      class="dib"
+      value="<%= user.profile.alts[i].split('character/')[1].split('/')[0] %>"
+      name="author" type="radio" >
+
+      <label
+      class="grd-silver dib alts alt<%=i%>-name" for="author"
+      id ="<%= user.profile.alts[i].split('character/')[1].split('/')[0] %>"></label>
+      </div>
+
+      <% } %>
+    <% } %>
+    </div>
 <textarea name="body" class="w-100 mb2" rows="10"></textarea>
 
-<input type="hidden" name="author" value="<%= user.id %>">
+<input type="hidden" name="owner" value="<%= user.id %>">
 <input type="hidden" name="parentPost" value="<%= parentComment.parentPost %>">
 <input type="hidden" name="parentBlog" value="<%= parentComment.parentBlog %>">
 <input type="hidden" name="parentComment" value="<%= parentComment.id %>">

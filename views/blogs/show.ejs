@@ -1,14 +1,14 @@
 <h1 class="glow"><%= blog.owner.username %></h1>
-<h3 class="grd-gold"><a class="grd-gold" href="/blogs/<%= blog.id %>/posts">View
-  <% if (locals.user && blog.owner.id === locals.user.id) { %>
-    my
-  <% } %>
-  posts</a></h3>
-<h3 class="grd-gold"><a class="grd-gold" href="/profiles/<%= blog.profile.id %>">View
-  <% if (locals.user && blog.owner.id === locals.user.id) { %>
-    my
-  <% } %>
-  profile</a></h3>
+<div>
+  <img class="vm" src="https://ffxiv.gamerescape.com/w/images/8/86/Main_Command_26_Icon.png">
+<h3 class="dib pl2 grd-gold"><a class="grd-gold" href="/blogs/<%= blog.id %>/posts">View posts</a></h3>
+</div>
+<div>
+  <img class="vm" src="https://ffxiv.gamerescape.com/w/images/7/71/Main_Command_3_Icon.png">
+<h3 class="dib pl2 grd-gold">
+  <a class="grd-gold" href="/profiles/<%= blog.profile.id %>">View profile</a></h3>
+</div>
+
 <% if (locals.user && blog.owner.id === locals.user.id) { %>
   <a class="db big btn green-btn" href="/blogs/<%= blog.id %>/posts/new">Make a new post</a>
 <% } %>

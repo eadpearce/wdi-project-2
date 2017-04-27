@@ -1,17 +1,21 @@
 <h1 class="glow"><%= blog.owner.username %>'s blog</h1>
 <% if (!locals.isLoggedIn) { %>
-  <h3><a class="grd-gold fr" href="/blogs/<%= blog.id %>">Back to user</a></h3>
+  <h3 class="fr"><a class="grd-gold" href="/blogs/<%= blog.id %>">Back</a></h3>
 <% } else { %>
-  <h3><a class="grd-gold fr" href="/">Back to dashboard</a></h3>
+  <h3 class="fr"><a class="grd-gold" href="/">Back</a></h3>
 <% } %>
-
 <% if (!posts[0]) { %>
   <p>No posts yet.</p>
 <% } else if (posts[0]) { %>
+
   <% posts.forEach(post => { %>
-    <h2><a class="blog-title grd-gold" href="/blogs/<%= blog.id %>/posts/<%= post.id %>"><%= post.title %></a></h2>
-    <h4 class="grd-silver"><%= post.createdAt.toLocaleString() %></h4>
-    <p class="blog-post"><%= post %></p>
+    <div class="fl">
+    <img class="vm" height="32" src="https://ffxiv.gamerescape.com/w/images/b/b2/Sidequest1_Icon.png">
+    <h2 class="dib"><a class="blog-title grd-gold" href="/blogs/<%= blog.id %>/posts/<%= post.id %>"><%= post.title %></a></h2>
+    </div>
+    <h4 class="cb grd-silver"><%= post.createdAt.toLocaleString() %></h4>
+    <p class="blog-post"><%= post.body %></p>
+
     <% if (locals.isLoggedIn && locals.user.username === blog.owner.username) { %>
       <a class="mt2 db big btn blue-btn" href="/blogs/<%= blog.id %>/posts/<%= post.id %>/edit">Edit this post</a>
     <% } %>

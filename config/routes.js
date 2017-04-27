@@ -38,12 +38,12 @@ router.route('/blogs/:id/posts')
   .get(postsController.index)
   .post(secureRoute, postsController.create);
 
-router.route('/blogs/:blogID/posts/:id')
+router.route('/blogs/:blogID/posts/:postID')
   .delete(secureRoute, postsController.delete)
   .put(secureRoute, postsController.update)
   .get(postsController.show);
 
-router.route('/blogs/:blogID/posts/:id/edit')
+router.route('/blogs/:blogID/posts/:postID/edit')
   .delete(secureRoute, postsController.delete)
   .get(secureRoute, postsController.edit);
 

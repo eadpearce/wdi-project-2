@@ -1,14 +1,26 @@
 <h1 class="glow">Comment on <a class="glow" href="/blogs/<%= blog.id %>/posts/<%= post.id %>"><%= post.title %></a></h1>
 <% if (comment.parentComment) { %>
-  <h3 class="grd"><a class="grd" href="/blogs/<%= blog.id %>/posts/<%= post.id %>/comments/<%= comment.parentComment %>">Parent comment</a></h2>
+  <h3 class="grd-gold"><a class="grd-gold" href="/blogs/<%= blog.id %>/posts/<%= post.id %>/comments/<%= comment.parentComment %>">Parent comment</a></h2>
 <% } else { %>
-  <h3 class="grd"><a class="grd" href="/blogs/<%= blog.id %>/posts/<%= post.id %>%>">Parent post</a></h2>
+  <h3 class="grd-gold"><a class="grd-gold" href="/blogs/<%= blog.id %>/posts/<%= post.id %>%>">Parent post</a></h2>
   <% } %>
-<h3 class="grd">At <a class="grd" href="/blogs/<%= blog.id %>/posts/<%= post.id %>/comments/<%= comment.id %>">
-<%= comment.createdAt.toLocaleString() %></a>
-<a class="grd" href="/profiles/<%= comment.author.profile %>"><%= comment.author.username %></a> said:</h3>
-<p class="pb3"><%= comment.body %></p>
-<a class="btn big green-btn db" href="/blogs/<%= blog.id %>/posts/<%= post.id %>/comments/<%= comment.id %>/new">Reply to this comment</a>
-<% if (locals.isLoggedIn && locals.user.id === comment.author.id) { %>
-  <a class="btn big red-cancel red-btn fr dib" href="/blogs/<%= blog.id %>/posts/<%= post.id %>/comments/<%= comment.id %>/edit">Edit/delete this comment</a>
+  <h4 class="grd-gold mb0">
+  <span class="grd-silver">At</span>
+  <a class="grd-gold"
+  href="/blogs/<%= post.blog %>/posts/<%= post.id %>/comments/<%= comment.id %>">
+  <%= comment.createdAt.toLocaleString() %>
+  </a></h4>
+  <h3 class="mv0"><a class="grd-gold main-author"
+  href="/profiles/<%= comment.owner.profile %>">
+  <%= comment.author %></a> <span class="grd-silver">said:</span></h3>
+
+<p class="pb3 blog-post"><%= comment.body %></p>
+<a class="btn green-btn db" href="/blogs/<%= blog.id %>/posts/<%= post.id %>/comments/<%= comment.id %>/new">Reply</a>
+<% if (locals.isLoggedIn && locals.user.id === comment.owner.id) { %>
+  <div class="fr red-cancel">
+  <form class="dib" action="/blogs/<%= post.blog %>/posts/<%= post.id %>/comments/<%= comment.id %>/" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <button class="btn db red-btn">Delete</button>
+  </form>
+  </div>
 <% } %>

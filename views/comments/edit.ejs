@@ -1,11 +1,49 @@
 <h1 class="glow">Edit this comment</h1>
-<h3 class="grd">Posting as: <%= locals.user.username %></h3>
+<h3 class="grd">Posting as: <%= comment.owner.username %></h3>
 <form action="/blogs/<%= comment.parentBlog %>/posts/<%= comment.parentPost %>/comments/<%= comment.id %>" method="post">
-  <input type="hidden" name="_method" value="PUT">
+  <!-- <input type="hidden" name="_method" value="PUT"> -->
+
+  <div class="db pb3">
+    <div>
+    <input class="dib" value="<%= comment.owner.username %>"
+    name="author" type="radio" >
+
+    <label class="grd-silver dib" for="author"><%= comment.owner.username %></label>
+  </div>
+  <% if (user.profile.main || user.profile.alts[0]) { %>
+  <h3 class="grd-gold">Posting as character: </h3>
+  <% } %>
+<% if (user.profile.main) { %>
+    <div>
+    <input class="dib"
+    value="<%= user.profile.main.split('character/')[1].split('/')[0] %>"
+    name="author" type="radio" >
+    <label class="grd-silver dib main-author"
+    id="<%= user.profile.main.split('character/')[1].split('/')[0] %>"
+    for="author"><%= user.profile.main.split('character/')[1].split('/')[0] %></label>
+  </div>
+<% } %>
+
+
+  <% if (user.profile.alts[0]) { %>
+    <% for (let i = 0; i < user.profile.alts.length; i++) { %>
+
+    <div>
+    <input
+    class="dib"
+    value="<%= user.profile.alts[i].split('character/')[1].split('/')[0] %>"
+    name="author" type="radio" >
+
+    <label
+    class="grd-silver dib alts alt<%=i%>-name" for="author"
+    id ="<%= user.profile.alts[i].split('character/')[1].split('/')[0] %>"></label>
+    </div>
+
+    <% } %>
+  <% } %>
+  </div>
+
   <textarea name="body" class="w-100" rows="10"><%= comment.body %></textarea>
-  <input type="hidden" name="author" value="<%= comment.author %>">
-  <input type="hidden" name="parentPost" value="<%= comment.parentPost %>">
-  <input type="hidden" name="parentBlog" value="<%= comment.parentBlog %>">
   <input class="edit ba bw1" type="submit" value="Update">
 </form>
   <form class="pt2" action="/blogs/<%= comment.parentBlog %>/posts/<%= comment.parentPost %>/comments/<%= comment.id %>" method="post">

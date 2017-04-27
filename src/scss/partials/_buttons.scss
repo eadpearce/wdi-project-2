@@ -9,6 +9,9 @@ $btn-padding: 10px;
   border: 1px solid #000000;
   @include transition(color, .2s ease);
 }
+.red-cancel {
+  margin-top: -40px;
+}
 .big {
   width: 200px;
 }

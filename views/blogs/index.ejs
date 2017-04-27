@@ -1,8 +1,13 @@
-<h1 class="glow">Users</h1>
+<h1 class="glow">All user blogs</h1>
 <ul>
 <% blogs.forEach(blog => { %>
   <li>
-  <h3 class="grd-gold"><a class="grd-gold" href="blogs/<%= blog.id %>"><%= blog.owner.username %></a></h3>
+  <h3 class="grd-gold"><a class="grd-gold" href="blogs/<%= blog.id %>">
+  <% if (blog.owner) { %>
+    <%= blog.owner.username %>
+  <% } %>
+
+  </a></h3>
   </li>
 <% }) %>
 </ul>

@@ -10,8 +10,21 @@
 <!-- show user dashboard if logged in -->
 <% if (locals.user && locals.isLoggedIn) { %>
   <h1 class="glow">User Dashboard</h1>
-    <h3 class="grd-gold"><a class="grd-gold" href="/blogs/<%= locals.user.blog %>/posts">View my posts</a></h3>
-<h3 class="grd-gold"><a class="grd-gold" href="/profiles/<%= locals.user.profile %>">View my
+  <div class="">
+  <img class="vm" src="https://ffxiv.gamerescape.com/w/images/8/86/Main_Command_26_Icon.png">
+    <h3 class="dib pl2 grd-gold">
+    <a class="grd-gold" href="/blogs/<%= locals.user.blog %>/posts">View my posts</a></h3>
+    </div>
+  <div class="">
+  <img class="vm" src="https://ffxiv.gamerescape.com/w/images/7/71/Main_Command_3_Icon.png">
+<h3 class="dib pl2 grd-gold">
+<a class="grd-gold" href="/profiles/<%= locals.user.profile %>">View my
   profile</a></h3>
-  <a class="big btn green-btn db" href="/blogs/<%= locals.user.blog %>/posts/new">Make a new post</a>
+  </div>
+  <div class="">
+  <img class="vm" src="https://ffxiv.gamerescape.com/w/images/c/cd/Main_Command_8_Icon.png">
+<h3 class="dib pl2 grd-gold">
+<a class="grd-gold" href="/blogs">View all blogs</a></h3>
+  </div>
+  <a class="big btn green-btn db mt4" href="/blogs/<%= locals.user.blog %>/posts/new">Make a new post</a>
 <% } %>

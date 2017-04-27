@@ -1,4 +1,11 @@
 footer {
   background-color: $footer-bg;
-  color: $footer-color;
+  color: $link-color;
+  font-family: $emphasis-font;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: right;
+  position: fixed;
+  height: 2rem;
+  bottom: 0;
 }

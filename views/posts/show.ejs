@@ -1,16 +1,17 @@
 <h1 class="glow"><%= post.title %></h1>
-<h3 class="grd-silver">by <a class="grd-gold main-author" href="/profiles/<%= post.profile %>"><%= post.author %></a>
-  <a class="grd-gold fr" href="/blogs/<%= post.blog %>/posts">Back to posts</a></h3>
-<h3 class="grd-silver">At <%= post.createdAt.toLocaleString() %> <a class="grd-gold" href="<%= post.owner %>"><%= post.ownerName %></a> wrote:</h3>
+<h3 class="grd-silver fl">by <a class="grd-gold main-author" href="/profiles/<%= post.profile %>"><%= post.author %></a></h3>
+  <div class="fr">
+    <h3 class="grd-gold dib pr2"><a class="grd-gold" href="/blogs/<%= post.blog %>/posts">Back</a></h3>
+    <img class="vm" src="https://ffxiv.gamerescape.com/w/images/5/5e/Main_Command_19_Icon.png">
+  </div>
+<h3 class="cb grd-silver">At <%= post.createdAt.toLocaleString() %> <a class="grd-gold" href="<%= post.owner %>"><%= post.ownerName %></a> wrote:</h3>
 <p class="blog-post"><%= post.body %></p>
-<% if (locals.user.username === post.ownerName) { %>
+<% if (locals.isLoggedIn && user.username === post.ownerName) { %>
   <a class="btn green-btn dib mv2" href="/blogs/<%= post.blog %>/posts/<%= post.id %>/comments/new">Comment</a>
   <a class="btn blue-btn db fr mv2" href="/blogs/<%= post.blog %>/posts/<%= post.id %>/edit">Edit</a>
 <% } else { %>
   <a class="big btn green-btn db mv2" href="/blogs/<%= post.blog %>/posts/<%= post.id %>/comments/new">Add a comment</a>
 <% } %>
-<%= post %>
-<%= comments %>
 
 <% if (!comments[0]) { %>
   <p>No comments yet.</p>
@@ -22,9 +23,17 @@
       <% } %>
     <% } %>
 
-    <h3 class="grd-gold"><a class="grd-gold" href="/profiles/<%= comment.author.profile %>"><%= comment.author.username %></a> at
-    <a class="grd-gold" href="/blogs/<%= post.blog %>/posts/<%= post.id %>/comments/<%= comment.id %>"><%= comment.createdAt.toLocaleString() %></a> said:</h3>
-    <p class="body"><%= comment.body %></p>
+    <h4 class="grd-gold mb0">
+    <span class="grd-silver">At</span>
+    <a class="grd-gold"
+    href="/blogs/<%= post.blog %>/posts/<%= post.id %>/comments/<%= comment.id %>">
+    <%= comment.createdAt.toLocaleString() %>
+    </a></h4>
+    <h3 class="mv0"><a class="grd-gold main-author"
+    href="/profiles/<%= comment.owner.profile %>">
+    <%= comment.author %></a> <span class="grd-silver">said:</span></h3>
+
+    <p class="body blog-post"><%= comment.body %></p>
 
     <% if (comment.replyLevel > 0) { %>
       <% for (let i = 1; i <= comment.replyLevel; i++) { %>

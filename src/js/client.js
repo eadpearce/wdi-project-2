@@ -35,6 +35,13 @@ const icons2 = {
 
 function init() {
 
+  // responsive header nav
+  const $header = $('header');
+  $('.menu-btn').click(function(e) {
+    console.log(e);
+    $header.toggleClass('expanded');
+  });
+
   // markdown converter for posts
   const $blogPost = $('.blog-post');
   // if there are blog posts on the page convert them
@@ -69,7 +76,20 @@ function init() {
     // console.log($alts);
     getCharacterInfo(id, type);
   });
-  const $authorID = $('.main-author').text();
+
+  const $authorID = $('.main-author');
+  $authorID.each(function() {
+    const characterID = $(this).text();
+    $
+    .get(`https://api.xivdb.com/character/${characterID}`)
+    .done(char => {
+      if (char.name){
+        $(this).text(char.name);
+      }
+
+    });
+  });
+
   // console.log('AUTHOR ID', $authorID);
 
   let $mainID = $('.main-name').attr('id');

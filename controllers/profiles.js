@@ -36,7 +36,7 @@ function profilesEdit(req, res) {
     });
 }
 function profilesUpdate(req, res) {
-  console.log('PARAMS', req.params);
+  // console.log('PARAMS', req.params);
   Profile
     .findById(req.params.id)
     .exec()
@@ -61,7 +61,7 @@ function profilesUpdate(req, res) {
         }
       }
       req.flash('info', 'Profile updated, kupo!');
-      console.log('UPDATED PROFILE', profile);
+      // console.log('UPDATED PROFILE', profile);
       return profile.save();
     })
     .then(() => {

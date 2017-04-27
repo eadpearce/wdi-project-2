@@ -54,19 +54,19 @@ function postsIndex(req,res) {
 function postsShow(req, res) {
   let foundPost;
   Post
-    .findById(req.params.id)
+    .findById(req.params.postID)
     .then(post => {
       if (!post) return res.status(404).render('error', { error: 'Post not found'});
       foundPost = post;
-      console.log('POST', foundPost);
+      // console.log('POST', foundPost);
       Comment
-        .find({ parentPost: req.params.id })
-        .populate('author')
+        .find({ parentPost: req.params.postID })
+        .populate('owner')
         .exec()
         .then(comments => {
           // console.log('ID', foundPost.id);
           // console.log('POST', foundPost);
-          console.log('COMMENTS', comments);
+          // console.log('COMMENTS', comments);
           res.render('posts/show', { post: foundPost, comments: comments });
         })
         .catch(err => {
@@ -83,7 +83,7 @@ function postsEdit(req, res) {
     .then(user => {
       foundUser = user;
       Post
-        .findById(req.params.id)
+        .findById(req.params.postID)
         .populate('owner profile')
         .then(post => {
           if (!post) return res.status(404).render('error', { error: 'ERROR'});
@@ -98,7 +98,7 @@ function postsEdit(req, res) {
 function postsUpdate(req, res) {
   console.log('BODY', req.body);
   Post
-    .findById(req.params.id)
+    .findById(req.params.postID)
     .exec()
     .then(post => {
       if (!post) return res.status(404).render('error', { error: 'No post found :('});
@@ -122,24 +122,31 @@ function postsUpdate(req, res) {
             else if (!req.body.author) req.flash('red', 'Who are you posting as?');
             res.redirect(`/blogs/${foundUser.blog}/posts/new`);
           });
-      })
-    })
+      });
+    });
 
 }
 function postsDelete(req, res) {
   Post
-    .findById(req.params.id)
+    .findById(req.params.postID)
     .exec()
     .then(post => {
       if (!post) return res.status(404).render('error', { error: 'No post found :('});
       return post.remove();
     })
     .then(() => {
-      res.redirect(`/blogs/${req.params.blogID}/posts`);
-    })
-    .catch(err => {
-      res.status(500).render('error', { error: err });
+      Comment
+        .find({ parentPost: req.params.postID })
+        .exec()
+        .then(comments => {
+          res.redirect(`/blogs/${req.params.blogID}/posts`);
+          return comments.remove();
+        })
+        .catch(err => {
+          res.status(500).render('error', { error: err });
+        });
     });
+
 }
 module.exports = {
   new: postsNew,

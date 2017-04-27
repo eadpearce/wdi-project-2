@@ -4,20 +4,23 @@ const User = require('../models/user');
 const Comment = require('../models/comment');
 
 function commentsCreate(req, res) {
-  console.log('REQ BODY', req.body);
   let foundPost;
   Post
     .findById(req.params.postID)
     .exec()
     .then(post => {
       foundPost = post;
-      Comment
-      .create(req.body)
-      .then(comment => {
-        comment.replyLevel = 0;
-        res.redirect(`/blogs/${foundPost.blog}/posts/${foundPost.id}`);
-        // console.log(comment);
-      });
+      return Comment.create(req.body);
+    })
+    .then(comment => {
+      comment.replyLevel = 0;
+      res.redirect(`/blogs/${foundPost.blog}/posts/${foundPost.id}`);
+    })
+    .catch(err => {
+      if (!req.body.body) req.flash('red', 'Comment cannot be empty, kupo!');
+      else if (!req.body.author) req.flash('red', 'Who are you posting as?');
+      res.redirect(`/blogs/${foundPost.blog}/posts/${foundPost.id}/comments/new`);
+      res.status(500).render('error', { error: err });
     });
 }
 function commentsCreateThread(req, res) {
@@ -101,7 +104,7 @@ function commentsShow(req, res) {
         .then(post => {
           Comment
             .findById(req.params.commentID)
-            .populate('author')
+            .populate('owner')
             .exec()
             .then(comment => {
               res.render('comments/show', { blog: foundBlog, post: post, comment: comment });
@@ -114,16 +117,25 @@ function commentsShow(req, res) {
 }
 
 function commentsEdit(req, res) {
-  Comment
-    .findById(req.params.commentID)
-    .then(comment => {
-      console.log('COMMENT', comment);
-      if (!comment) return res.status(404).render('error', { error: 'ERROR'});
-      res.render('comments/edit', { comment });
-    })
-    .catch(err => {
-      res.status(500).render('error', { error: err });
+  let foundUser;
+  User
+    .findById(req.session.userId)
+    .populate('profile')
+    .then(user => {
+      foundUser = user;
+      Comment
+        .findById(req.params.commentID)
+        .populate('owner')
+        .then(comment => {
+          console.log('COMMENT', comment);
+          if (!comment) return res.status(404).render('error', { error: 'ERROR'});
+          res.render('comments/edit', { comment: comment, user: user });
+        })
+        .catch(err => {
+          res.status(500).render('error', { error: err });
+        });
     });
+
 }
 function commentsUpdate(req, res) {
   console.log('BODY', req.body);

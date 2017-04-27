@@ -1,8 +1,63 @@
 header {
+  position: fixed;
+  nav ul li {
+    display: inline-block;
+    text-align: right;
+    padding-left: .5rem;
+  }
   background-color: $header-bg;
   color: $header-color;
 
   .logo {
     color: $logo-color;
   }
+  .logout {
+    color: red;
+  }
+}
+a {
+  text-decoration: none;
+  color: $link-color;
+}
+a:hover {
+  color: lighten($link-color, 20);
+  @include transition(color, .2s ease);
+}
+// header hidden
+@media all and (max-width: 500px) {
+  header {
+    .menu {
+      display:none;
+    }
+    // position: fixed;
+    bottom: 2rem;
+    .menu-btn:after {
+      color: white;
+      display: block;
+      float: right;
+      content: 'menu'
+    }
+  }
+
+}
+
+// header expanded + moved to bottom
+header.expanded {
+  // position: fixed;
+  display: block;
+  bottom: 2rem;
+  nav ul {
+    display: block;
+
+    li {
+      padding-bottom: 1rem;
+      display: block;
+    }
+  }
+  .menu-btn:after {
+      color: white;
+      float: right;
+      display: block;
+      content: 'menu'
+    }
 }

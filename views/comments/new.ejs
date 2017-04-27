@@ -11,7 +11,7 @@
 
 <h3 class="grd-gold">Posting as character: </h3>
     <div>
-    <input class="dib" value="<%= user.username %>"
+    <input class="dib" value="<%= user.profile.main.split('character/')[1].split('/')[0] %>"
     name="author" type="radio" >
     <label class="grd-silver dib main-author"
     id="<%= user.profile.main.split('character/')[1].split('/')[0] %>"
@@ -35,10 +35,9 @@
     <% } %>
   <% } %>
   </div>
-
 <textarea name="body" class="w-100 mb2" rows="10"></textarea>
 
-<input type="hidden" name="owner" value="<%= locals.user.id %>">
+<input type="hidden" name="owner" value="<%= user.id %>">
 <input type="hidden" name="parentPost" value="<%= post.id %>">
 <input type="hidden" name="parentBlog" value="<%= post.blog %>">
 <input type="hidden" name="replyLevel" value="<%= 0 %>">

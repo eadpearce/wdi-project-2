@@ -5,3 +5,52 @@
   display: inline-block;
   width: 35px;
 }
+input, button, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background-color: inherit;
+}
+.profile-title {
+  height: 32px;
+  img {
+    vertical-align: middle;
+    padding-right: 5px;
+  }
+}
+.main-job img {
+  vertical-align: middle;
+  padding-right: 5px;
+}
+.main-jobs li {
+  float: left;
+  height: 28px;
+  line-height: 28px;
+}
+
+.vm {
+  vertical-align: middle;
+}
+li {
+  list-style: none;
+}
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.circle {
+  border-radius: 50%;
+  border: 3px solid $logo-color;
+}
+.circle:hover {
+  border-radius: 50%;
+  border: 3px solid lighten($logo-color, 30);
+}
+.charlist {
+  // border: 1px solid red;
+    p {
+    padding-left: 5px;
+    vertical-align: top;
+  }
+}

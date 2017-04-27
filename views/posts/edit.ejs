@@ -12,7 +12,7 @@
 
   <h3 class="grd-gold">Posting as character: </h3>
       <div>
-      <input class="dib" value="<%= user.username %>"
+      <input class="dib" value="<%= user.profile.main.split('character/')[1].split('/')[0] %>"
       name="author" type="radio" >
       <label class="grd-silver dib main-author"
       id="<%= user.profile.main.split('character/')[1].split('/')[0] %>"

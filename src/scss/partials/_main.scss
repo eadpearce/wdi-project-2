@@ -10,3 +10,8 @@ main {
   -moz-box-shadow: 0px 0px $blur $spread $glow-color;
   box-shadow: 0px 0px $blur $spread $glow-color;
 }
+@media all and (max-width: 500px) {
+  main {
+    min-height: 800px;
+  }
+}
