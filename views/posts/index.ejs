@@ -1,8 +1,14 @@
 <h1 class="glow"><%= blog.owner.username %>'s blog</h1>
 <% if (!locals.isLoggedIn) { %>
-  <h3 class="fr"><a class="grd-gold" href="/blogs/<%= blog.id %>">Back</a></h3>
+  <div class="fr">
+  <h3 class="dib pr2"><a class="grd-gold" href="/blogs/<%= blog.id %>">Back</h3>
+  <img class="vm" src="https://ffxiv.gamerescape.com/w/images/5/5e/Main_Command_19_Icon.png"></a>
+  </div>
 <% } else { %>
-  <h3 class="fr"><a class="grd-gold" href="/">Back</a></h3>
+  <div class="fr">
+  <h3 class="dib pr2"><a class="grd-gold" href="/">Back</h3>
+  <img class="vm" src="https://ffxiv.gamerescape.com/w/images/5/5e/Main_Command_19_Icon.png"></a>
+  </div>
 <% } %>
 <% if (!posts[0]) { %>
   <p>No posts yet.</p>

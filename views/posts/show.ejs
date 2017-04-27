@@ -1,8 +1,8 @@
 <h1 class="glow"><%= post.title %></h1>
 <h3 class="grd-silver fl">by <a class="grd-gold main-author" href="/profiles/<%= post.profile %>"><%= post.author %></a></h3>
   <div class="fr">
-    <h3 class="grd-gold dib pr2"><a class="grd-gold" href="/blogs/<%= post.blog %>/posts">Back</a></h3>
-    <img class="vm" src="https://ffxiv.gamerescape.com/w/images/5/5e/Main_Command_19_Icon.png">
+    <h3 class="grd-gold dib pr2"><a class="grd-gold" href="/blogs/<%= post.blog %>/posts">Back</h3>
+    <img class="vm" src="https://ffxiv.gamerescape.com/w/images/5/5e/Main_Command_19_Icon.png"></a>
   </div>
 <h3 class="cb grd-silver">At <%= post.createdAt.toLocaleString() %> <a class="grd-gold" href="<%= post.owner %>"><%= post.ownerName %></a> wrote:</h3>
 <p class="blog-post"><%= post.body %></p>

@@ -4,8 +4,9 @@
   <% } %>
   <%= profile.owner.username %>'s profile</h1>
   <div class="fl pb3">
+    <a class="grd-gold" href="/blogs/<%= profile.owner.blog %>/posts">
     <img class="vm" src="https://ffxiv.gamerescape.com/w/images/8/86/Main_Command_26_Icon.png">
-    <h3 class="dib pl2"><a class="grd-gold" href="/blogs/<%= profile.owner.blog %>/posts">View posts</a></h3>
+    <h3 class="dib pl2">View posts</a></h3>
   </div>
 
 <% if (locals.isLoggedIn && locals.user.id === profile.owner.id) { %>
@@ -16,8 +17,8 @@
 
 <% } else { %>
   <div class="fr">
-  <h3 class="dib pr2"><a class="grd-gold" href="/blogs/<%= profile.owner.id %>">Back</a></h3>
-  <img class="vm" src="https://ffxiv.gamerescape.com/w/images/5/5e/Main_Command_19_Icon.png">
+  <h3 class="dib pr2"><a class="grd-gold" href="/blogs/<%= profile.owner.blog %>">Back</h3>
+  <img class="vm" src="https://ffxiv.gamerescape.com/w/images/5/5e/Main_Command_19_Icon.png"></a>
   </div>
 <% } %>
 
@@ -43,7 +44,7 @@
     </div>
 
     <div class="pb2 h4 w-100 w-50-ns fl"> <!-- API shit goes here -->
-      <h3 class="grd-silver mv0">Jobs at 60 on main</h3>
+      <h3 class="grd-silver mv0">Jobs at 60 on main:</h3>
       <ul class="mt1 mb0 main-jobs">
       </ul>
     </div>
