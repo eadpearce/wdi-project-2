@@ -1,13 +1,15 @@
 <h1 class="glow"><%= post.title %></h1>
-<h3 class="grd">by <a class="grd main-author" href="/profiles/<%= post.profile %>"><%= post.author %></a>
-  <a class="grd fr" href="/blogs/<%= post.blog %>/posts">Back to posts</a></h3>
-<h3 class="grd">At <%= post.createdAt.toLocaleString() %>  wrote:</h3>
+<h3 class="grd-silver">by <a class="grd-gold main-author" href="/profiles/<%= post.profile %>"><%= post.author %></a>
+  <a class="grd-gold fr" href="/blogs/<%= post.blog %>/posts">Back to posts</a></h3>
+<h3 class="grd-silver">At <%= post.createdAt.toLocaleString() %> <a class="grd-gold" href="<%= post.owner %>"><%= post.ownerName %></a> wrote:</h3>
 <p class="blog-post"><%= post.body %></p>
-<% if (locals.isLoggedIn && locals.user.username === post.owner.username) { %>
-  <a class="big btn blue-btn db fr" href="/blogs/<%= blog.id %>/posts/<%= post.id %>/edit">Edit this post</a>
+<% if (locals.user.username === post.ownerName) { %>
+  <a class="btn green-btn dib mv2" href="/blogs/<%= post.parentBlog %>/posts/<%= post.id %>/comments/new">Comment</a>
+  <a class="btn blue-btn db fr mv2" href="/blogs/<%= post.blog %>/posts/<%= post.id %>/edit">Edit</a>
+<% } else { %>
+  <a class="big btn green-btn db mv2" href="/blogs/<%= post.parentBlog %>/posts/<%= post.id %>/comments/new">Add a comment</a>
 <% } %>
 
-<a class="big btn green-btn db mv2" href="/blogs/<%= post.parentBlog %>/posts/<%= post.id %>/comments/new">Add a comment</a>
 
 <% if (!comments[0]) { %>
   <p>No comments yet.</p>
@@ -19,8 +21,8 @@
       <% } %>
     <% } %>
 
-    <h3 class="grd"><a class="grd" href="/profiles/<%= comment.author.profile %>"><%= comment.author.username %></a> at
-    <a class="grd" href="/blogs/<%= post.blog %>/posts/<%= post.id %>/comments/<%= comment.id %>"><%= comment.createdAt.toLocaleString() %></a> said:</h3>
+    <h3 class="grd-gold"><a class="grd-gold" href="/profiles/<%= comment.author.profile %>"><%= comment.author.username %></a> at
+    <a class="grd-gold" href="/blogs/<%= post.blog %>/posts/<%= post.id %>/comments/<%= comment.id %>"><%= comment.createdAt.toLocaleString() %></a> said:</h3>
     <p class="body"><%= comment.body %></p>
 
     <% if (comment.replyLevel > 0) { %>

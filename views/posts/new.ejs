@@ -1,19 +1,19 @@
 <h1 class="glow">New Blog Post</h1>
-<h3 class="grd">Posting as player: </h3>
+<h3 class="grd-gold">Posting as player: </h3>
 <form action="/blogs/<%= user.blog %>/posts" method="post">
   <div class="db pb3">
     <div>
     <input class="dib" value="<%= user.username %>"
     name="author" type="radio" >
 
-    <label class="dib" for="author"><%= user.username %></label>
+    <label class="grd-silver dib" for="author"><%= user.username %></label>
   </div>
 
-<h3 class="grd">Posting as character: </h3>
+<h3 class="grd-gold">Posting as character: </h3>
     <div>
     <input class="dib" value="<%= user.username %>"
     name="author" type="radio" >
-    <label class="dib main-author"
+    <label class="grd-silver dib main-author"
     id="<%= user.profile.main.split('character/')[1].split('/')[0] %>"
     for="author"><%= user.profile.main.split('character/')[1].split('/')[0] %></label>
   </div>
@@ -28,7 +28,7 @@
     name="author" type="radio" >
 
     <label
-    class="dib alts alt<%=i%>-name" for="author"
+    class="grd-silver dib alts alt<%=i%>-name" for="author"
     id ="<%= user.profile.alts[i].split('character/')[1].split('/')[0] %>"></label>
     </div>
 
@@ -36,10 +36,12 @@
   <% } %>
   </div>
 <input class="w-100 ba pa1 b--gray mb2" type="text" name="title" placeholder="Title">
-<textarea name="body" class="w-100" rows="10"></textarea>
+<textarea name="body" class="w-100 mb2" rows="10"></textarea>
 <input type="hidden" name="owner" value="<%= user.id %>">
+<input type="hidden" name="ownerName" value="<%= user.username %>">
 <input type="hidden" name="blog" value="<%= user.blog %>">
 <input type="hidden" name="profile" value="<%= user.profile.id %>">
-<input class="mt2 big btn green-btn" type="submit" value="Post">
-<a class="dib btn red-btn" href="/blogs/<%= post.blog %>">Cancel</a>
+<input class="btn green-btn" type="submit" value="Post">
 </form>
+
+<a class="fr db red-cancel btn red-btn" href="/blogs/<%= user.blog %>">Cancel</a>

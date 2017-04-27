@@ -5,9 +5,7 @@ $btn-padding: 10px;
   width: 100px;
   text-align: center;
   padding: $btn-padding;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-  border-radius: 6px;
+  @include border(6px);
   border: 1px solid #000000;
   @include transition(color, .2s ease);
 }

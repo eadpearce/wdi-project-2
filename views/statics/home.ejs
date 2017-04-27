@@ -10,8 +10,8 @@
 <!-- show user dashboard if logged in -->
 <% if (locals.user && locals.isLoggedIn) { %>
   <h1 class="glow">User Dashboard</h1>
-    <h3 class="grd"><a class="grd" href="/blogs/<%= locals.user.blog %>/posts">View my posts</a></h3>
-<h3 class="grd"><a class="grd" href="/profiles/<%= locals.user.profile %>">View my
+    <h3 class="grd-gold"><a class="grd-gold" href="/blogs/<%= locals.user.blog %>/posts">View my posts</a></h3>
+<h3 class="grd-gold"><a class="grd-gold" href="/profiles/<%= locals.user.profile %>">View my
   profile</a></h3>
   <a class="big btn green-btn db" href="/blogs/<%= locals.user.blog %>/posts/new">Make a new post</a>
 <% } %>

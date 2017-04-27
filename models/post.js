@@ -4,6 +4,7 @@ const postSchema = new mongoose.Schema({
   title: { type: String, required: true },
   body: { type: String, required: true },
   owner: { type: mongoose.Schema.ObjectId, ref: 'User' },
+  ownerName: { type: String, required: true },
   profile: { type: mongoose.Schema.ObjectId, ref: 'Profile' },
   blog: { type: mongoose.Schema.ObjectId, ref: 'Blog' },
   author: { type: String, required: true }

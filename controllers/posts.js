@@ -12,8 +12,8 @@ function postsCreate(req, res) {
       foundUser = user;
       Post
       .create(req.body)
-      .then(() => {
-        res.redirect(`/blogs/${foundUser.blog}`);
+      .then(post => {
+        res.redirect(`/blogs/${foundUser.blog}/posts/${post.id}`);
       })
       .catch(err => {
         const msgs = [];
