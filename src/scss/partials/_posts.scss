@@ -1,7 +1,6 @@
 @import 'helpers/variables';
 
 .blog-post {
-  font-family: $body-font;
   background: $post-bg-color;
   color: $post-color;
   padding: 5px 10px;
@@ -9,6 +8,10 @@
   @include border(6px);
   @include inset($bg-main);
   p, h1, h2, h3, h4 {
+    font-family: $body-font;
     margin: 10px 0;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    text-transform: none;
   }
 }

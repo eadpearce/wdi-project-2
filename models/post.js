@@ -5,8 +5,8 @@ const postSchema = new mongoose.Schema({
   body: { type: String, required: true },
   owner: { type: mongoose.Schema.ObjectId, ref: 'User' },
   ownerName: { type: String, required: true },
-  profile: { type: mongoose.Schema.ObjectId, ref: 'Profile' },
-  blog: { type: mongoose.Schema.ObjectId, ref: 'Blog' },
+  profile: { type: mongoose.Schema.ObjectId, ref: 'Profile', required: true },
+  blog: { type: mongoose.Schema.ObjectId, ref: 'Blog', required: true },
   author: { type: String, required: true }
 }, { timestamps: true });
 

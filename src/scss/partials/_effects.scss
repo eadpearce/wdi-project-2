@@ -20,7 +20,7 @@
 $glow: #ffc107;
 .glow {
   color: #fff;
-  text-shadow: 0px 0px 20px $glow;
+  text-shadow: 0px 0px 10px $glow;
 }
 .grd-gold {
   @include grd($logo-color);

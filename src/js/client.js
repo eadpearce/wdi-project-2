@@ -50,7 +50,7 @@ function init() {
   const mainJob = $('.main-job').text();
   // console.log(mainJob);
   const $jobIcon1 = $('.job-icon1');
-  if ($jobIcon1[0] && mainJob) {
+  if ($jobIcon1[0] && mainJob && mainJob.length === 3) {
     $(`<img src="${icons1[mainJob]}" height="32">`).appendTo($jobIcon1);
     const $jobIcon2 = $('.job-icon2');
     $(`<img src="${icons2[mainJob]}">`).appendTo($jobIcon2);

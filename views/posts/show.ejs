@@ -4,12 +4,13 @@
 <h3 class="grd-silver">At <%= post.createdAt.toLocaleString() %> <a class="grd-gold" href="<%= post.owner %>"><%= post.ownerName %></a> wrote:</h3>
 <p class="blog-post"><%= post.body %></p>
 <% if (locals.user.username === post.ownerName) { %>
-  <a class="btn green-btn dib mv2" href="/blogs/<%= post.parentBlog %>/posts/<%= post.id %>/comments/new">Comment</a>
+  <a class="btn green-btn dib mv2" href="/blogs/<%= post.blog %>/posts/<%= post.id %>/comments/new">Comment</a>
   <a class="btn blue-btn db fr mv2" href="/blogs/<%= post.blog %>/posts/<%= post.id %>/edit">Edit</a>
 <% } else { %>
-  <a class="big btn green-btn db mv2" href="/blogs/<%= post.parentBlog %>/posts/<%= post.id %>/comments/new">Add a comment</a>
+  <a class="big btn green-btn db mv2" href="/blogs/<%= post.blog %>/posts/<%= post.id %>/comments/new">Add a comment</a>
 <% } %>
-
+<%= post %>
+<%= comments %>
 
 <% if (!comments[0]) { %>
   <p>No comments yet.</p>

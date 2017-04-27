@@ -3,14 +3,20 @@
     <div class="job-icon1 di"></div>
   <% } %>
   <%= profile.owner.username %>'s profile</h1>
-<h3><a class="grd-gold" href="/blogs/<%= profile.owner.blog %>">View blog</a></h2>
+<h3 class="fl"><a class="grd-gold" href="/blogs/<%= profile.owner.blog %>/posts">View posts</a></h3>
+<% if (locals.isLoggedIn && locals.user.id === profile.owner.id) { %>
+  <h3 class="fr"><a class="grd-gold" href="/">Back to dashboard</a></h3>
+<% } else { %>
 
-  <div class="pb2">
+  <h3 class="fr"><a class="grd-gold" href="/blogs/<%= profile.owner.id %>">Back to user</a></h3>
+<% } %>
+
+  <div class="cb pb2">
     <h3 class="grd-silver mv0" for="about">About: </h3>
-    <p class="w-100"><%= profile.about %></p>
+    <p class="blog-post w-100"><%= profile.about %></p>
   </div>
 
-<div class="w-100 w-50-ns ba fl b--red">
+<div class="w-100 w-50-ns fl">
     <h3 class="grd-silver mt0">Age: &nbsp;
     <% if (!profile.age) { %>
       <%= 'Not specified' %>
@@ -19,14 +25,14 @@
     <% } %></h3>
 
       <h3 class="grd-silver di">Main job: &nbsp;</h3>
-        <% if (!profile.mainJob) { %>
+        <% if (!profile.mainJob || profile.mainJob.length < 3) { %>
           <%= 'Not specified' %>
         <% } else { %>
         <h3 class="di main-job job-icon2"></h3><h3 class="di grd-silver main-job"><%= profile.mainJob %></h3>
         <% } %></h3>
     </div>
 
-    <div class="pb2 h4 w-100 w-50-ns fl ba b--red"> <!-- API shit goes here -->
+    <div class="pb2 h4 w-100 w-50-ns fl"> <!-- API shit goes here -->
       <h3 class="grd-silver mv0">Jobs at 60 on main</h3>
       <ul class="mt1 mb0 main-jobs">
       </ul>

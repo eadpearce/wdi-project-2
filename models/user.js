@@ -5,7 +5,6 @@ const Blog = require('../models/blog');
 
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
-  blah: { type: String },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   profile: { type: mongoose.Schema.ObjectId, ref: 'Profile' },

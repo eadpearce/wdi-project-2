@@ -16,7 +16,7 @@ function commentsCreate(req, res) {
       .then(comment => {
         comment.replyLevel = 0;
         res.redirect(`/blogs/${foundPost.blog}/posts/${foundPost.id}`);
-        console.log(comment);
+        // console.log(comment);
       });
     });
 }

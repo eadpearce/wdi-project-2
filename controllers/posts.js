@@ -16,7 +16,6 @@ function postsCreate(req, res) {
         res.redirect(`/blogs/${foundUser.blog}/posts/${post.id}`);
       })
       .catch(err => {
-        const msgs = [];
         if (!req.body.title) req.flash('red', 'You must have a title, kupo!');
         else if (!req.body.body) req.flash('red', 'Post cannot be empty, kupo!');
         else if (!req.body.author) req.flash('red', 'Who are you posting as?');
@@ -67,7 +66,7 @@ function postsShow(req, res) {
         .then(comments => {
           // console.log('ID', foundPost.id);
           // console.log('POST', foundPost);
-          // console.log('COMMENTS', comments);
+          console.log('COMMENTS', comments);
           res.render('posts/show', { post: foundPost, comments: comments });
         })
         .catch(err => {
@@ -77,15 +76,22 @@ function postsShow(req, res) {
 }
 
 function postsEdit(req, res) {
-  Post
-    .findById(req.params.id)
-    .populate('owner profile')
-    .then(post => {
-      if (!post) return res.status(404).render('error', { error: 'ERROR'});
-      res.render('posts/edit', { post });
-    })
-    .catch(err => {
-      res.status(500).render('error', { error: err });
+  let foundUser;
+  User
+    .findById(req.session.userId)
+    .populate('profile')
+    .then(user => {
+      foundUser = user;
+      Post
+        .findById(req.params.id)
+        .populate('owner profile')
+        .then(post => {
+          if (!post) return res.status(404).render('error', { error: 'ERROR'});
+          res.render('posts/edit', { post: post, user: foundUser });
+        })
+        .catch(err => {
+          res.status(500).render('error', { error: err });
+        });
     });
 }
 
@@ -99,14 +105,26 @@ function postsUpdate(req, res) {
       for(const field in req.body) {
         post[field] = req.body[field];
       }
-      return post.save();
+      return post.save()
+      .then(post => {
+        res.redirect(`/blogs/${req.params.blogID}/posts/${post.id}`); // then redirect back to the page after upodating
+      })
+      .then(() => {
+        let foundUser;
+        User
+          .findById(req.session.userId)
+          .then(user => {
+            foundUser = user;
+          })
+          .catch(err => {
+            if (!req.body.title) req.flash('red', 'You must have a title, kupo!');
+            else if (!req.body.body) req.flash('red', 'Post cannot be empty, kupo!');
+            else if (!req.body.author) req.flash('red', 'Who are you posting as?');
+            res.redirect(`/blogs/${foundUser.blog}/posts/new`);
+          });
+      })
     })
-    .then(post => {
-      res.redirect(`/blogs/${req.params.blogID}/posts/${post.id}`); // then redirect back to the page after upodating
-    })
-    .catch(err => {
-      res.status(500).render('error', { error: err });
-    });
+
 }
 function postsDelete(req, res) {
   Post

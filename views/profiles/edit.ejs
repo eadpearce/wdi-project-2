@@ -5,11 +5,11 @@
 
   <div class="pb2">
     <label class="grd-gold pb2 b f4 db" for="about">About: </label>
-    <textarea class="w-100 ba pa1 b--gray" type="text" name="about"><%= profile.about %></textarea>
+    <textarea class="w-100 ba pa1 b--gray" rows="10" type="text" name="about"><%= profile.about %></textarea>
   </div>
 
   <div class="pb2 w-100 w-50-ns fl pr2-ns">
-    <h3 class="grd-gold">Age: &nbsp;
+    <h3 class="grd-silver">Age: &nbsp;
     <% if (!profile.age) { %>
       <%= 'Not specified' %>
     <% } else { %>
@@ -19,14 +19,14 @@
     <input class="w-100 ba pa1 b--gray" type="number" name="age">
   </div>
   <div class="pb2 w-100 w-50-ns fl">
-    <h3 class="grd-gold">Main job: &nbsp;
+    <h3 class="grd-silver">Main job: &nbsp;
       <% if (!profile.mainJob) { %>
         <%= 'Not specified' %>
       <% } else { %>
       <%= profile.mainJob %>
       <% } %></h3>
-      <label class="grd-gold pb2 b f4 db" for="mainJob">Edit main job: </label>
-      <input class="w-100 ba pa1 b--gray" type="text" name="mainJob">
+      <label class="grd-silver pb2 b f4 db" for="mainJob">Edit main job: </label>
+      <input maxlength="3" class="w-100 ba pa1 b--gray" type="text" name="mainJob">
   </div>
 
     <% let mainID; %>
@@ -34,7 +34,7 @@
       <% mainID = ''; %>
       <% }  %>
     <div class="charlist w-100 w-50-ns dib fl mb2">
-      <h3 class="grd-gold mt0">Main character: </h3>
+      <h3 class="grd-silver mt0">Main character: </h3>
 
       <% if (profile.main) { %>
         <a href="<%= profile.main %>"><img width="50" class="circle main-avatar" src=""></a>
@@ -43,14 +43,14 @@
       <% } else { %>
         <p>Main not yet added.</p>
       <% } %>
+    </div>
     <div class="w-100 w-50-ns fl">
       <label class="grd-gold pb2 b f4 db" for="main">Edit main character: </label>
       <input class="w-100 ba pa1 b--gray" type="text" name="main">
     </div>
-  </div>
 
   <div class="pb2 cb">
-    <h3 class="grd-gold">Alt characters: </h3>
+    <h3 class="grd-silver">Alt characters: </h3>
     <% if (profile.alts.length === 0) { %>
       <p>No alts.</p>
     <% } %>

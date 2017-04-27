@@ -1,11 +1,46 @@
 <h1 class="glow-title f2">Edit this post</h1>
-<p><b>Posting as: </b><%= locals.user.username %></p>
 <form action="/blogs/<%= post.blog %>/posts/<%= post.id %>" method="post">
-  <input type="hidden" name="_method" value="PUT">
+<input type="hidden" name="_method" value="PUT">
+  <h3 class="grd-gold">Posting as player: </h3>
+    <div class="db pb3">
+      <div>
+      <input class="dib" value="<%= user.username %>"
+      name="author" type="radio" >
+
+      <label class="grd-silver dib" for="author"><%= user.username %></label>
+    </div>
+
+  <h3 class="grd-gold">Posting as character: </h3>
+      <div>
+      <input class="dib" value="<%= user.username %>"
+      name="author" type="radio" >
+      <label class="grd-silver dib main-author"
+      id="<%= user.profile.main.split('character/')[1].split('/')[0] %>"
+      for="author"><%= user.profile.main.split('character/')[1].split('/')[0] %></label>
+    </div>
+
+    <% if (user.profile.alts[0]) { %>
+      <% for (let i = 0; i < user.profile.alts.length; i++) { %>
+
+      <div>
+      <input
+      class="dib"
+      value="<%= user.profile.alts[i].split('character/')[1].split('/')[0] %>"
+      name="author" type="radio" >
+
+      <label
+      class="grd-silver dib alts alt<%=i%>-name" for="author"
+      id ="<%= user.profile.alts[i].split('character/')[1].split('/')[0] %>"></label>
+      </div>
+
+      <% } %>
+    <% } %>
+    </div>
+
   <input class="w-100 ba pa1 b--gray mb2" type="text" name="title" value="<%= post.title %>">
   <textarea name="body" class="w-100 mb2" rows="10"><%= post.body %></textarea>
   <input type="hidden" name="owner" value="<%= locals.user.id %>">
-  <input type="hidden" name="profile" value="<%= locals.user.profile %>">
+  <input type="hidden" name="profile" value="<%= locals.user.profile.id %>">
   <input type="hidden" name="blog" value="<%= post.blog %>">
   <input class="db btn blue-btn" type="submit" value="Update">
 </form>

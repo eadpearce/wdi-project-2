@@ -18,19 +18,19 @@
     <nav class="pa2">
       <a class="logo" href="/">XIVB</a>
 
-      <ul class="menu clicked fr mv0">
-        <li class="dib pl1"><a href="/blogs">All Users</a></li>
+      <ul class="menu fr mv0">
         <% if (locals.isLoggedIn) { %>
 
           <% if (!locals.user.profile.main) { %>
             <span class="dib pl1 mt0">Logged in as <%= locals.user.username %></span>
+            <li class="dib pl1"><a href="/">Dashboard</a></li>
             <li class="dib pl1"><a href="/profiles/<%= locals.user.profile %>">My Profile</a></li>
-            <li class="dib pl1"><a href="/blogs/<%= locals.user.blog %>">My Blog</a></li>
             <li class="dib pl1"><a href="/logout">Log Out</a></li>
+
           <% } else { %>
             <span class="dib pl1 mt0">Logged in as <%= locals.user.username %></span>
+            <li class="dib pl1"><a href="/">Dashboard</a></li>
             <li class="dib pl1"><a href="/profiles/<%= locals.user.profile.id %>">My Profile</a></li>
-            <li class="dib pl1"><a href="/blogs/<%= locals.user.blog.id %>">My Blog</a></li>
             <li class="dib pl1"><a href="/logout">Log Out</a></li>
             <% } %>
 
