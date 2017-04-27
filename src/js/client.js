@@ -141,10 +141,13 @@ function init() {
             $(`<li class="w-third"><div><img class="vm"  src="${icons2['WHM']}"></div>WHM</li>`).appendTo(`.${type}-jobs`);
           } else if (classjob.name === 'Thaumaturge' && char.data.classjobs['5'].level >= 15) {
             $(`<li class="w-third"><div><img class="vm"  src="${icons2['BLM']}"></div>BLM</li>`).appendTo(`.${type}-jobs`);
-          } else if (classjob.name === 'Arcanist' && char.data.classjobs['6'].level >= 15) {
-            $(`<li class="w-third"><div><img class="vm"  src="${icons2['SCH']}"></div>SCH</li>`).appendTo(`.${type}-jobs`);
-          } else if (classjob.name === 'Arcanist' && char.data.classjobs['7'].level >= 15) {
-            $(`<li class="w-third"><div><img class="vm"  src="${icons2['SMN']}"></div>SMN</li>`).appendTo(`.${type}-jobs`);
+          } else if (classjob.name === 'Arcanist') {
+            if (char.data.classjobs['6'].level >= 15) {
+              $(`<li class="w-third"><div><img class="vm"  src="${icons2['SCH']}"></div>SCH</li>`).appendTo(`.${type}-jobs`);
+              if (char.data.classjobs['7'].level >= 15) {
+                $(`<li class="w-third"><div><img class="vm"  src="${icons2['SMN']}"></div>SMN</li>`).appendTo(`.${type}-jobs`);
+              }
+            }
           } else if (classjob.name === 'Astrologian' || classjob.name === 'Machinist' || classjob.name === 'Dark Knight') {
             $(`<li class="w-third"><div><img class="vm"  src="${icons2[classjob.data.abbr]}"></div>${classjob.data.abbr}</li>`).appendTo(`.${type}-jobs`);
           }
