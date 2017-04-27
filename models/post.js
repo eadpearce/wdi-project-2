@@ -6,7 +6,7 @@ const postSchema = new mongoose.Schema({
   owner: { type: mongoose.Schema.ObjectId, ref: 'User' },
   profile: { type: mongoose.Schema.ObjectId, ref: 'Profile' },
   blog: { type: mongoose.Schema.ObjectId, ref: 'Blog' },
-  author: { type: String }
+  author: { type: String, required: true }
 }, { timestamps: true });
 
 module.exports = mongoose.model('Post', postSchema);

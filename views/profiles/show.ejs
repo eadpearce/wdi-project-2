@@ -31,7 +31,7 @@
       </ul>
     </div>
 
-    <div class="pb2 cb">
+    <div class="cb">
     <% let mainID; %>
     <% if (!profile.main) { %>
       <% mainID = ''; %>
@@ -65,6 +65,6 @@
 
 <% if (locals.user && locals.user.id === profile.owner.id) { %>
   <form action="/profiles/<%= profile.owner.id %>" method="post">
-    <a class="big btn blue-btn pa2" href="/profiles/<%= profile.id %>/edit">Edit your profile</a>
+    <a class="db big btn blue-btn pa2" href="/profiles/<%= profile.id %>/edit">Edit your profile</a>
   </form>
 <% } %>

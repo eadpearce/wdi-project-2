@@ -34,26 +34,33 @@ const icons2 = {
 // NOTE TO SELF: JQUERY DOESN'T LIKE ARROW FUNCTIONS
 
 function init() {
-  // markdown converter for posts
-  const converter = new showdown.Converter();
-  const $blogPost = $('.blog-post');
-  $.each($blogPost, function() {
-    const converted = converter.makeHtml($(this).text());
-    // console.log(converted);
-    $(this).html(converted);
-  });
 
-  let $mainID = $('.main-name').attr('href');
-  if ($mainID && $mainID.length > 55) {
+  // markdown converter for posts
+  const $blogPost = $('.blog-post');
+  // if there are blog posts on the page convert them
+  if ($blogPost[0]) {
+    const converter = new showdown.Converter();
+    $.each($blogPost, function() {
+      const converted = converter.makeHtml($(this).text());
+      // console.log(converted);
+      $(this).html(converted);
+    });
+  }
+
+  let $mainID = $('.main-name').attr('id');
+  if ($mainID && $mainID && $mainID.length > 55) {
     $mainID = $mainID.split('character/')[1].split('/')[0];
   } else $mainID = '';
 
   const mainJob = $('.main-job').text();
-  console.log(mainJob);
+  // console.log(mainJob);
   const $jobIcon1 = $('.job-icon1');
-  $(`<img src="${icons1[mainJob]}" height="32">`).appendTo($jobIcon1);
-  const $jobIcon2 = $('.job-icon2');
-  $(`<img src="${icons2[mainJob]}">`).appendTo($jobIcon2);
+  if ($jobIcon1[0] && mainJob) {
+    $(`<img src="${icons1[mainJob]}" height="32">`).appendTo($jobIcon1);
+    const $jobIcon2 = $('.job-icon2');
+    $(`<img src="${icons2[mainJob]}">`).appendTo($jobIcon2);
+  }
+
 
   // warning before delete ???
   // $('.warning').click(e => {
@@ -62,14 +69,14 @@ function init() {
 
   const $alts = $('.alts');
   $alts.each(function(i) {
-    const id = $(this).attr('id');
+    const id = $(this).text();
     const type = `alt${i}`;
     getCharacterInfo(id, type);
   });
   // console.log('ALTS ARRAY', alts);
 
   const $authorID = $('.main-author').text();
-  console.log('AUTHOR ID', $authorID);
+  // console.log('AUTHOR ID', $authorID);
 
   getCharacterInfo($mainID, 'main');
   getCharacterInfo($authorID, 'main');

@@ -1,7 +1,4 @@
 <h1 class="pb3 glow">Hello <%= locals.user.username %></h1>
-<% if (profile.mainJob) { %>
-  <div class="job-icon1 di"></div>
-<% } %>
 
 <form action="/profiles/<%= profile.id %>" method="post">
   <input type="hidden" name="_method" value="PUT">

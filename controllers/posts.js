@@ -14,6 +14,14 @@ function postsCreate(req, res) {
       .create(req.body)
       .then(() => {
         res.redirect(`/blogs/${foundUser.blog}`);
+      })
+      .catch(err => {
+        const msgs = [];
+        if (!req.body.title) req.flash('red', 'You must have a title, kupo!');
+        else if (!req.body.body) req.flash('red', 'Post cannot be empty, kupo!');
+        else if (!req.body.author) req.flash('red', 'Who are you posting as?');
+        res.redirect(`/blogs/${foundUser.blog}/posts/new`);
+        // res.status(500).render('error', { error: err });
       });
     });
 }
