@@ -24,7 +24,8 @@ a:hover {
   color: lighten($link-color, 20);
   @include transition(color, .2s ease);
 }
-// header hidden
+
+// header hidden + moved to bottom
 @media all and (max-width: 500px) {
   header {
     .menu {
@@ -42,7 +43,7 @@ a:hover {
 
 }
 
-// header expanded + moved to bottom
+// header expanded 
 header.expanded {
   // position: fixed;
   display: block;
