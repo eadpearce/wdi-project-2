@@ -11,20 +11,20 @@
 <% if (locals.user && locals.isLoggedIn) { %>
   <h1 class="glow">User Dashboard</h1>
   <div class="">
+  <a class="grd-gold" href="/blogs/<%= locals.user.blog %>/posts">
   <img class="vm" src="https://ffxiv.gamerescape.com/w/images/8/86/Main_Command_26_Icon.png">
     <h3 class="dib pl2 grd-gold">
-    <a class="grd-gold" href="/blogs/<%= locals.user.blog %>/posts">View my posts</a></h3>
+    View my posts</a></h3>
     </div>
   <div class="">
+  <a class="grd-gold" href="/profiles/<%= locals.user.profile %>">
   <img class="vm" src="https://ffxiv.gamerescape.com/w/images/7/71/Main_Command_3_Icon.png">
-<h3 class="dib pl2 grd-gold">
-<a class="grd-gold" href="/profiles/<%= locals.user.profile %>">View my
-  profile</a></h3>
+  <h3 class="dib pl2 grd-gold">View my profile</a></h3>
   </div>
   <div class="">
+  <a class="grd-gold" href="/blogs">
   <img class="vm" src="https://ffxiv.gamerescape.com/w/images/c/cd/Main_Command_8_Icon.png">
-<h3 class="dib pl2 grd-gold">
-<a class="grd-gold" href="/blogs">View all blogs</a></h3>
+  <h3 class="dib pl2 grd-gold">View all blogs</a></h3>
   </div>
   <a class="big btn green-btn db mt4" href="/blogs/<%= locals.user.blog %>/posts/new">Make a new post</a>
 <% } %>
