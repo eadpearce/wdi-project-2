@@ -41,8 +41,7 @@ userSchema.pre('save', function hashPassword(next) {
           this.blog = blog.id;
           console.log('BLOG', blog);
           console.log('USER', this);
-          next();
-        });
+        }).then(() => next());
     });
 });
 
