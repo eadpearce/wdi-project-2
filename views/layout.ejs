@@ -25,18 +25,21 @@
             <li>Logged in as <%= locals.user.username %></li>
             <li><a href="/">Dashboard</a></li>
             <li><a href="/profiles/<%= locals.user.profile %>">My Profile</a></li>
+            <li><a href="/blogs">View Blogs</a></li>
             <li><a class="logout" href="/logout">Log Out</a></li>
 
           <% } else { %>
             <li>Logged in as <%= locals.user.username %></li>
             <li><a href="/">Dashboard</a></li>
             <li><a href="/profiles/<%= locals.user.profile.id %>">My Profile</a></li>
+            <li><a href="/blogs">View Blogs</a></li>
             <li><a  class="logout" href="/logout">Log Out</a></li>
             <% } %>
 
         <% } else { %>
-              <li><a href="/login">Log In</a></li>
-              <li><a href="/register">Register</a></li>
+          <li><a href="/blogs">View Blogs</a></li>
+            <li><a href="/login">Log In</a></li>
+            <li><a href="/register">Register</a></li>
         <% } %>
 
           </ul>
