@@ -78,19 +78,19 @@ function init() {
   });
 
   const $authorID = $('.main-author');
-  $authorID.each(function() {
-    const characterID = $(this).text();
-    $
-    .get(`https://api.xivdb.com/character/${characterID}`)
-    .done(char => {
-      if (char.name){
-        $(this).text(char.name);
-      }
+  if ($authorID[0]) {
+    $authorID.each(function() {
+      const characterID = $(this).text();
+      $
+      .get(`https://api.xivdb.com/character/${characterID}`)
+      .done(char => {
+        if (char.name){
+          $(this).text(char.name);
+        }
 
+      });
     });
-  });
-
-  // console.log('AUTHOR ID', $authorID);
+  }
 
   let $mainID = $('.main-name').attr('id');
   if ($mainID && $mainID.length > 55) {
@@ -98,10 +98,6 @@ function init() {
   } else $mainID = '';
 
   getCharacterInfo($mainID, 'main');
-  getCharacterInfo($authorID, 'main');
-
-  // $.get('https://api.xivdb.com/data/classjobs')
-  // .done(jobs => console.log(jobs));
 
   function getCharacterInfo(characterID, type) {
     if (!characterID) {
@@ -110,7 +106,6 @@ function init() {
     $
     .get(`https://api.xivdb.com/character/${characterID}`)
     .done(char => {
-      // console.log(char);
 
       $(`.${type}-author`).html(char.name);
       $(`.${type}-name`).html(char.name);
@@ -118,13 +113,6 @@ function init() {
       $(`.${type}-avatar`).attr({ src: char.avatar });
       $(`.${type}-server`).html(char.server);
 
-      $(`
-        <p><b>Current Class:</b> ${char.data.active_class.role.abbr}</p>
-        <p><b>Hometown:</b> ${char.data.city.name}</p>
-        <p><b>Race:</b> ${char.data.clan} ${char.data.race} </p>
-
-        <p><b>Nameday:</b> ${char.data.nameday} </p>
-        `).appendTo(`.${type}-info`);
       Object.values(char.data.classjobs).forEach(classjob => {
         if (classjob.level === 60) {
           if (classjob.name === 'Gladiator' && char.data.classjobs['6'].level >= 15) {
@@ -153,6 +141,11 @@ function init() {
           }
         }
       });
+    })
+    .fail(() => {
+      $(`.${type}-avatar`).attr({ src: 'https://ffxiv.gamerescape.com/w/images/3/3d/Main_Command_16_Icon.png' });
+      $(`.${type}-server`).html('???');
+      $(`.${type}-name`).html('???');
     });
 
   }
