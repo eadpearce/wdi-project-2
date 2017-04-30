@@ -4,7 +4,7 @@
 ## What is XIV Blogs?
 XIV Blogs (or XIVB) is a blogging platform for people who play the MMORPG Final Fantasy XIV. It features user profiles that pull information from the [XIVDB](http://xivdb.com/) API to get stats on your in-game characters. Once you add characters you can then make blog posts and comments as those characters for roleplay. You can find the live site [here](https://cryptic-waters-59869.herokuapp.com/). 
 
-## User profiles 
+## Profiles 
 ![](https://cloud.githubusercontent.com/assets/25905279/25565244/9ef7e23c-2dbb-11e7-8e4f-ee7aaba75e44.png)
 ![](https://cloud.githubusercontent.com/assets/25905279/25565267/05b6d9c4-2dbc-11e7-90a3-7f53f410785b.png)
 The profile grabs information on FFXIV player characters using the unique character ID that can be found in their [lodestone](http://na.finalfantasyxiv.com/lodestone/) link. For example, Klynthota Drysfalkwyn's lodestone link is http://eu.finalfantasyxiv.com/lodestone/character/9010552/ and her unique character ID is 9010552. This bit of code cuts out the ID from the full link: 
@@ -81,18 +81,72 @@ const icons1 = {
 const icons2 = {
   'PLD': 'https://ffxiv.gamerescape.com/w/images/d/d6/Paladin_Icon_7.png',
   'MNK': 'https://ffxiv.gamerescape.com/w/images/8/84/Monk_Icon_7.png',
-  'WAR': 'https://ffxiv.gamerescape.com/w/images/5/56/Warrior_Icon_7.png',
-  'DRG': 'https://ffxiv.gamerescape.com/w/images/9/91/Dragoon_Icon_7.png',
-  'BRD': 'https://ffxiv.gamerescape.com/w/images/2/21/Bard_Icon_7.png',
-  'WHM': 'https://ffxiv.gamerescape.com/w/images/2/28/White_Mage_Icon_7.png',
-  'BLM': 'https://ffxiv.gamerescape.com/w/images/8/83/Black_Mage_Icon_7.png',
-  'SMN': 'https://ffxiv.gamerescape.com/w/images/1/12/Summoner_Icon_7.png',
-  'SCH': 'https://ffxiv.gamerescape.com/w/images/5/52/Scholar_Icon_7.png',
-  'NIN': 'https://ffxiv.gamerescape.com/w/images/1/14/Ninja_Icon_7.png',
-  'MCH': 'https://ffxiv.gamerescape.com/w/images/4/47/Machinist_Icon_7.png',
-  'DRK': 'https://ffxiv.gamerescape.com/w/images/3/30/Dark_Knight_Icon_7.png',
-  'AST': 'https://ffxiv.gamerescape.com/w/images/5/5f/Astrologian_Icon_7.png'
-};
+  'WAR': ... etc
 ```
-## Blogs 
 
+This is the mongoose schema for user profiles: 
+
+```
+const profileSchema = new mongoose.Schema({
+  owner: { type: mongoose.Schema.ObjectId, ref: 'User' },
+  alts: [{ type: String }],
+  main: { type: String, default: '' },
+  mainJob: { type: String, default: ''},
+  age: { type: Number, default: null },
+  about: { type: String, default: '' }
+});
+```
+
+On creation, each user gets a profile and blog created that has a mongoose reference to their account. This is the user schema: 
+
+```
+const userSchema = new mongoose.Schema({
+  username: { type: String, required: true, unique: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  profile: { type: mongoose.Schema.ObjectId, ref: 'Profile' },
+  blog: { type: mongoose.Schema.ObjectId, ref: 'Blog' }
+}, { timestamps: true });
+```
+The profile and blog for each newly registered user gets created in the user pre-save function shown below. 
+
+```
+userSchema.pre('save', function hashPassword(next) {
+  if(this.isModified('password')) {
+    this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(8));
+  }
+  let newProfile;
+  Profile
+    .create({ owner: this.id })
+    .then(profile => {
+      newProfile = profile;
+      this.profile = profile.id;
+    })
+    .then(() => {
+      Blog
+        .create({ owner: this.id, profile: newProfile.id })
+        .then(blog => {
+          this.blog = blog.id;
+          console.log('NEW USER', this);
+        })
+        .then(() => {
+          next();
+        });
+    });
+});
+```
+
+
+
+## Blogs 
+![](https://cloud.githubusercontent.com/assets/25905279/25566169/0b7562e4-2dcc-11e7-8fa9-62a4a26ca322.png)
+
+Originally user blogs were going to have an owner and an array of posts stored as embedded documents but this meant that searching for specific posts in the array became very difficult without a unique ID to search by. In keeping the models separate it's possible to search for individual blogs, posts and comments all by their unique ID. This also means each model has its own RESTful routes, although some routes are unused e.g. a single user cannot create or edit blogs. 
+
+### Authors 
+![](https://cloud.githubusercontent.com/assets/25905279/25566213/b63d18de-2dcc-11e7-8719-92f4022c90df.png)
+
+Once FFXIV game characters are added to a user's profile it's then possible to write posts with any of these characters listed as an author. A nice feature for people who want to use the site to roleplay as their characters. 
+
+###Markdown support 
+The site uses the node package [showdown](https://www.npmjs.com/package/showdown) so that users can format text using markdown in their profiles, blog posts and comments. 
