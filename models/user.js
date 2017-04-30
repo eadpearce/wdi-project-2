@@ -32,15 +32,15 @@ userSchema.pre('save', function hashPassword(next) {
     .create({ owner: this.id })
     .then(profile => {
       this.profile = profile.id;
-      console.log('PROFILE', profile);
+      // console.log('PROFILE', profile);
     })
     .then(() => {
       Blog
         .create({ owner: this.id, profile: this.profile })
         .then(blog => {
           this.blog = blog.id;
-          console.log('BLOG', blog);
-          console.log('USER', this);
+          // console.log('BLOG', blog);
+          // console.log('USER', this);
         }).then(() => next());
     });
 });
