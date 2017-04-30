@@ -4,7 +4,7 @@
     <h3 class="grd-gold dib pr2"><a class="grd-gold" href="/blogs/<%= post.blog %>/posts">Back</h3>
     <img class="vm" src="https://ffxiv.gamerescape.com/w/images/5/5e/Main_Command_19_Icon.png"></a>
   </div>
-<h3 class="cb grd-silver">At <%= post.createdAt.toLocaleString() %> <a class="grd-gold" href="<%= post.owner %>"><%= post.ownerName %></a> wrote:</h3>
+<h3 class="cb grd-silver">At <%= post.createdAt.toLocaleString() %> <a class="grd-gold" href="/profiles/<%= post.profile %>"><%= post.ownerName %></a> wrote:</h3>
 <p class="blog-post"><%= post.body %></p>
 <% if (locals.isLoggedIn && user.username === post.ownerName) { %>
   <a class="btn green-btn dib mv2" href="/blogs/<%= post.blog %>/posts/<%= post.id %>/comments/new">Comment</a>
