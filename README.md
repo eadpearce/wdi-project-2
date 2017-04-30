@@ -149,6 +149,7 @@ Originally user blogs were going to have an owner and an array of posts stored a
 Once FFXIV game characters are added to a user's profile it's then possible to write posts with any of these characters listed as an author. A nice feature for people who want to use the site to roleplay as their characters. 
 
 ###Markdown Support 
+
 The site uses the node package [showdown](https://www.npmjs.com/package/showdown) so that users can format text using markdown in their profiles, blog posts and comments which is then converted to HTML with this client-side code: 
 
 ```
