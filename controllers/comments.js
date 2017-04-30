@@ -24,7 +24,7 @@ function commentsCreate(req, res) {
     });
 }
 function commentsCreateThread(req, res) {
-  console.log('REQ BODY', req.body);
+  // console.log('REQ BODY', req.body);
   let parentComment, replyLevel;
   Comment
     .findById(req.params.commentID)
@@ -32,14 +32,11 @@ function commentsCreateThread(req, res) {
     .then(comment => {
       parentComment = comment;
       replyLevel = parentComment.replyLevel;
-      Comment
-      .create(req.body, {replyLevel: replyLevel+1})
-      .then(comment => {
-        comment.replyLevel = parentComment.replyLevel+1;
-        res.redirect(`/blogs/${comment.parentBlog}/posts/${comment.parentPost}`);
-        console.log('COMMENT', comment);
-        return comment.save();
-      });
+      return Comment.create(req.body, {replyLevel: replyLevel+1});
+    })
+    .then(comment => {
+      res.redirect(`/blogs/${comment.parentBlog}/posts/${comment.parentPost}`);
+      // console.log('COMMENT', comment);
     });
 }
 function commentsNew(req, res) {

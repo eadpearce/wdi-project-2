@@ -183,6 +183,43 @@ const commentSchema = new mongoose.Schema({
 
 For a new comment created on a blog post, the reply level is assigned as 0. Then when a comment is posted in reply to that comment the createThread function in the comments controller takes the parent comment's replyLevel value and adds 1 to it. 
 
+```
+function commentsCreate(req, res) {
+  let foundPost;
+  Post
+    .findById(req.params.postID)
+    .exec()
+    .then(post => {
+      foundPost = post;
+      return Comment.create(req.body);
+    })
+    .then(comment => {
+      comment.replyLevel = 0;
+      res.redirect(`/blogs/${foundPost.blog}/posts/${foundPost.id}`);
+    })
+    .catch(err => {
+      if (!req.body.body) req.flash('red', 'Comment cannot be empty, kupo!');
+      else if (!req.body.author) req.flash('red', 'Who are you posting as?');
+      res.redirect(`/blogs/${foundPost.blog}/posts/${foundPost.id}/comments/new`);
+      res.status(500).render('error', { error: err });
+    });
+}
+function commentsCreateThread(req, res) {
+  let parentComment, replyLevel;
+  Comment
+    .findById(req.params.commentID)
+    .exec()
+    .then(comment => {
+      parentComment = comment;
+      replyLevel = parentComment.replyLevel;
+      return Comment.create(req.body, {replyLevel: replyLevel+1});
+    })
+    .then(comment => {
+      res.redirect(`/blogs/${comment.parentBlog}/posts/${comment.parentPost}`);
+    });
+}
+```
+
 The replyLevel value is then used to work out the indentation of the comments on the page which is done using blockquotes like so: 
 
 ```
