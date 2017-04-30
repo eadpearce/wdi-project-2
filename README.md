@@ -144,9 +144,85 @@ userSchema.pre('save', function hashPassword(next) {
 Originally user blogs were going to have an owner and an array of posts stored as embedded documents but this meant that searching for specific posts in the array became very difficult without a unique ID to search by. In keeping the models separate it's possible to search for individual blogs, posts and comments all by their unique ID. This also means each model has its own RESTful routes, although some routes are unused e.g. a single user cannot create or edit blogs. 
 
 ### Authors 
-![](https://cloud.githubusercontent.com/assets/25905279/25566213/b63d18de-2dcc-11e7-8719-92f4022c90df.png)
+![](https://cloud.githubusercontent.com/assets/25905279/25568228/1d7b8dc2-2df6-11e7-8d75-ffe2df23c7da.png)
 
 Once FFXIV game characters are added to a user's profile it's then possible to write posts with any of these characters listed as an author. A nice feature for people who want to use the site to roleplay as their characters. 
 
-###Markdown support 
-The site uses the node package [showdown](https://www.npmjs.com/package/showdown) so that users can format text using markdown in their profiles, blog posts and comments. 
+###Markdown Support 
+The site uses the node package [showdown](https://www.npmjs.com/package/showdown) so that users can format text using markdown in their profiles, blog posts and comments which is then converted to HTML with this client-side code: 
+
+```
+const $blogPost = $('.blog-post');
+if ($blogPost[0]) {
+  const converter = new showdown.Converter();
+  $.each($blogPost, function() {
+    const converted = converter.makeHtml($(this).text());
+    // console.log(converted);
+    $(this).html(converted);
+  });
+}
+
+```
+### Threaded Comments 
+
+As shown in the comment schema below, each comment has references to its owner (the user that made it), its parent post, parent blog and, where applicable, its parent comment. 
+
+```
+const commentSchema = new mongoose.Schema({
+  body: { type: String, required: true },
+  owner: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
+  author: { type: String, required: true },
+  parentPost: { type: mongoose.Schema.ObjectId, ref: 'Post', required: true },
+  parentBlog: { type: mongoose.Schema.ObjectId, ref: 'Blog', required: true },
+  parentComment: { type: mongoose.Schema.ObjectId, ref: 'Comment' },
+  replyLevel: { type: Number }
+}, { timestamps: true });
+```
+![](https://cloud.githubusercontent.com/assets/25905279/25567986/e9791a62-2df0-11e7-8748-ad454388a433.png)
+
+For a new comment created on a blog post, the reply level is assigned as 0. Then when a comment is posted in reply to that comment the createThread function in the comments controller takes the parent comment's replyLevel value and adds 1 to it. 
+
+The replyLevel value is then used to work out the indentation of the comments on the page which is done using blockquotes like so: 
+
+```
+<% if (!comments[0]) { %>
+  <p>No comments yet.</p>
+<% } else if (comments[0]) { %>
+  <% comments.forEach(comment => { %>
+    <% if (comment.replyLevel > 0) { %>
+      <% for (let i = 1; i <= comment.replyLevel; i++) { %>
+        <blockquote>
+      <% } %>
+    <% } %>
+
+    <h4 class="grd-gold mb0">
+    <span class="grd-silver">At</span>
+    <a class="grd-gold"
+    href="/blogs/<%= post.blog %>/posts/<%= post.id %>/comments/<%= comment.id %>">
+    <%= comment.createdAt.toLocaleString() %>
+    </a></h4>
+    <h3 class="mv0"><a class="grd-gold main-author"
+    href="/profiles/<%= comment.owner.profile %>">
+    <%= comment.author %></a> <span class="grd-silver">said:</span></h3>
+
+    <p class="body blog-post"><%= comment.body %></p>
+
+    <% if (comment.replyLevel > 0) { %>
+      <% for (let i = 1; i <= comment.replyLevel; i++) { %>
+        </blockquote>
+      <% } %>
+    <% } %>
+  <% }) %>
+<% }%>
+```
+## Styling 
+
+![](https://cloud.githubusercontent.com/assets/25905279/25568190/9b270c0c-2df5-11e7-8fd9-916abb10699b.png)
+![](http://i.imgur.com/ZuHkpB4.png) 
+
+The styling was directly influenced by the look of the in-game UI and some of the official websites. The main colours used are blue, gold and silver. 
+
+The first thing to be styled was the text. The two main typefaces used on the site are [Cinzel](https://fonts.google.com/specimen/Cinzel/) and [Play](https://fonts.google.com/specimen/Play/), both found on Google Fonts. The rest of the page text is the default system sans-serif (Helvetica or Arial). The two main typefaces were chosen for their similarity to typefaces used for the in-game UI: one in an engraved style, the other more modern and blocky. 
+
+
+
