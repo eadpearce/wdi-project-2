@@ -222,7 +222,48 @@ The replyLevel value is then used to work out the indentation of the comments on
 
 The styling was directly influenced by the look of the in-game UI and some of the official websites. The main colours used are blue, gold and silver. 
 
+The [Tachyons](http://tachyons.io/) CSS framework was used for general layout and responsiveness. The rest of the style was then written to work in conjunction with it. 
+
 The first thing to be styled was the text. The two main typefaces used on the site are [Cinzel](https://fonts.google.com/specimen/Cinzel/) and [Play](https://fonts.google.com/specimen/Play/), both found on Google Fonts. The rest of the page text is the default system sans-serif (Helvetica or Arial). The two main typefaces were chosen for their similarity to typefaces used for the in-game UI: one in an engraved style, the other more modern and blocky. 
 
+![](https://cloud.githubusercontent.com/assets/25905279/25568281/26bb8288-2df7-11e7-9a32-f5cfe4a9f956.png)
 
+The buttons were styled with help from this [CSS3 Button Generator](http://css3button.net/). The CSS was then made into an SCSS mixin that could take arguments for the different colours in the gradient: 
 
+```
+@mixin btn($color1, $color2, $color3) {
+  color: #fff;
+  background: -moz-linear-gradient(top, $color1 0%, $color3 25%, $color2);
+  background: -webkit-gradient(linear, left top, left bottom,
+  from($color1),
+  color-stop(0.25, $color3),
+  to($color2));
+}
+```
+SCSS mixins were also made for the gradient text effect and the indented look on the blog posts and comments: 
+
+```
+@mixin grd($grd-color) {
+  background: -webkit-linear-gradient(lighten($grd-color, 30), darken($grd-color, 20));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+@mixin shadow() {
+  -webkit-box-shadow: inset 0px 0px 7px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: inset 0px 0px 7px 0px rgba(0,0,0,0.75);
+  box-shadow: inset 0px 0px 7px 0px rgba(0,0,0,0.75);
+}
+@mixin inset($color) {
+  border-top: 3px inset darken($color, 20);
+  border-right: 3px inset lighten($color, 30);
+  border-bottom: 3px inset lighten($color, 30);
+  border-left: 3px inset darken($color, 20);
+}
+```
+
+## Possible Future Updates 
+* Friend lists so you can follow your favourite blogs and get notified when they update 
+* Like buttons for comments and posts
+* Comments for user profiles
+* User control panel - to change email/password or delete account 
+* More stats on profile pages - minion and mount lists, titles, crafting classes 
