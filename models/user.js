@@ -28,20 +28,25 @@ userSchema.pre('save', function hashPassword(next) {
   if(this.isModified('password')) {
     this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(8));
   }
+  let newProfile;
   Profile
     .create({ owner: this.id })
     .then(profile => {
+      newProfile = profile;
       this.profile = profile.id;
       // console.log('PROFILE', profile);
     })
     .then(() => {
       Blog
-        .create({ owner: this.id, profile: this.profile })
+        .create({ owner: this.id, profile: newProfile.id })
         .then(blog => {
           this.blog = blog.id;
           // console.log('BLOG', blog);
-          // console.log('USER', this);
-        }).then(() => next());
+          console.log('NEW USER', this);
+        })
+        .then(() => {
+          next();
+        });
     });
 });
 
