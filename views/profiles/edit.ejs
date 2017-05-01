@@ -5,6 +5,7 @@
 
   <div class="pb2">
     <label class="grd-gold pb2 b f4 db" for="about">About: </label>
+    <p>Add a bit of info about yourself, the player. The about section supports <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown</a>.</p>
     <textarea class="w-100 ba pa1 b--gray" rows="10" type="text" name="about"><%= profile.about %></textarea>
   </div>
 
@@ -26,6 +27,7 @@
       <%= profile.mainJob %>
       <% } %></h3>
       <label class="grd-silver pb2 b f4 db" for="mainJob">Edit main job: </label>
+      <p class="mv0">Enter the 3 letter abbreviation for your main job.</p>
       <input maxlength="3" class="w-100 ba pa1 b--gray" type="text" name="mainJob">
   </div>
 
@@ -45,12 +47,14 @@
       <% } %>
     </div>
     <div class="w-100 w-50-ns fl pb2">
-      <label class="grd-gold pb2 b f4 db" for="main">Main character lodestone link: </label>
+      <label class="grd-gold pb2 b f4 db" for="main">Edit main character: </label>
+      <p class="mv0">Enter the full lodestone link for your main character.</p>
       <input class="w-100 ba pa1 b--gray" type="text" name="main">
     </div>
 
   <div class="pb2 cb">
     <h3 class="grd-silver">Alt characters: </h3>
+    <p class="mt0">To remove an alt check the delete box then click the update button.</p>
     <% if (profile.alts.length === 0) { %>
       <p>No alts.</p>
     <% } %>
@@ -72,6 +76,7 @@
   </div>
   <div class="pb3">
     <label class="grd-gold b f4 db cb" for="alts">Add an alt link: </label>
+    <p class="mb0">Enter the lodestone link to one of your alt characters.</p>
     <input class=" w-100 ba pa1 b--gray" type="text" name="alts">
   </div>
 

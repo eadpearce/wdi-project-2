@@ -1,5 +1,5 @@
 <h1 class="glow">New Blog Post</h1>
-<h3 class="grd-gold">Posting as player: </h3>
+<h3 class="grd-gold">Post as player: </h3>
 <form action="/blogs/<%= user.blog %>/posts" method="post">
   <div class="db pb3">
     <div>
@@ -9,7 +9,7 @@
     <label class="grd-silver dib" for="author"><%= user.username %></label>
   </div>
 
-<h3 class="grd-gold">Posting as character: </h3>
+<h3 class="grd-gold">Make an RP post as: </h3>
     <div>
     <input class="dib" value="<%= user.profile.main.split('character/')[1].split('/')[0] %>"
     name="author" type="radio" >
@@ -34,6 +34,7 @@
 
     <% } %>
   <% } %>
+  <p class="mb0">The selected character as well as your username will be displayed as the author of this post. Blog posts support <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown</a>.</p>
   </div>
 <input class="w-100 ba pa1 b--gray mb2" type="text" name="title" placeholder="Title">
 <textarea name="body" class="w-100 mb2" rows="10"></textarea>
