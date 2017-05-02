@@ -63,7 +63,6 @@ function init() {
     $(`<img src="${icons2[mainJob]}">`).appendTo($jobIcon2);
   }
 
-
   // warning before delete ???
   // $('.warning').click(e => {
   //   console.log('delete', e);
@@ -98,6 +97,119 @@ function init() {
   } else $mainID = '';
 
   getCharacterInfo($mainID, 'main');
+
+  const $currentJob = $('.current-job');
+  const $currentStats = $('.current-stats');
+  let currentJob;
+  if ($currentJob[0]) {
+    $
+      .get(`https://api.xivdb.com/character/${$mainID}?data=gearsets`)
+      .fail(console.log('fail'))
+      .done(gear => {
+        console.log(gear[0].stats);
+        $currentJob.text(gear[0].role.abbr);
+        currentJob = gear[0].role.abbr;
+        // console.log(currentJob);
+        const currentStats = gear[0].stats;
+        // $currentStats.text(gear[0].stats);
+          // console.log(stat);
+        const listOpen = '<li><h4 class="grd-silver dib mv0">';
+        const listMiddle = ': </h4> <h4 class="grd-gold dib mv0 fr">';
+        const listClose = '</h4></li>';
+        // CORE STATS
+        $.each(currentStats.core, function(key, stat) {
+
+          $(`${listOpen}${key}${listMiddle}${stat}${listClose}`).appendTo('.current-stats1');
+        });
+
+        $.each(currentStats.attributes, function(key, stat) {
+          // console.log(stat);
+          $(`${listOpen}${getAbbr(key)}${listMiddle}${stat}${listClose}`).appendTo('.current-stats1');
+        });
+
+        if (currentStats.offensive) {
+          $.each(currentStats.offensive, function(key, stat) {
+            // console.log(stat);
+            $(`${listOpen}${getAbbr(key)}${listMiddle}${stat}${listClose}`).appendTo('.current-stats2');
+          });
+          $.each(currentStats.defensive, function(key, stat) {
+            // console.log(stat);
+            $(`${listOpen}${getAbbr(key)}${listMiddle}${stat}${listClose}`).appendTo('.current-stats2');
+          });
+            // console.log(stat);
+          $(`${listOpen}SPSP${listMiddle}${currentStats.mental['Spell Speed']}${listClose}`).appendTo('.current-stats2');
+        } else {
+          $.each(currentStats.properties, function(key, stat) {
+            // console.log(stat);
+            $(`${listOpen}${getAbbr(key)}${listMiddle}${stat}${listClose}`).appendTo('.current-stats2');
+          });
+        }
+        const $currentJobIcon = $('.current-job-icon');
+        $currentJobIcon.attr({ src: `${icons2[currentJob]}` });
+
+      });
+
+  }
+
+  function getAbbr(key) {
+    let abbr;
+    switch (key) {
+      case 'Defense':
+        abbr = 'Def';
+        break;
+      case 'Parry':
+        abbr = 'Parry';
+        break;
+      case 'Magic Defense':
+        abbr = 'Mag Def';
+        break;
+      case 'Accuracy':
+        abbr = 'ACC';
+        break;
+      case 'Critical Hit Rate':
+        abbr = 'CRIT';
+        break;
+      case 'Determination':
+        abbr = 'DET';
+        break;
+      case 'Strength':
+        abbr = 'STR';
+        break;
+      case 'Dexterity':
+        abbr = 'DEX';
+        break;
+      case 'Vitality':
+        abbr = 'VIT';
+        break;
+      case 'Intelligence':
+        abbr = 'INT';
+        break;
+      case 'Mind':
+        abbr = 'MND';
+        break;
+      case 'Piety':
+        abbr = 'PIE';
+        break;
+      case 'Healing Magic Potency':
+        abbr = 'HEAL MAG POT';
+        break;
+      case 'Attack Magic Potency':
+        abbr = 'ATK MAG POT';
+        break;
+      case 'Skill Speed':
+        abbr = 'SKSP';
+        break;
+      case 'Spell Speed':
+        abbr = 'SPSP';
+        break;
+      case 'Attack Power':
+        abbr = 'ATK PWR';
+        break;
+      default:
+    }
+    return abbr;
+  }
+
 
   function getCharacterInfo(characterID, type) {
     if (!characterID) {

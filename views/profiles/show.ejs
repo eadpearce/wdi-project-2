@@ -41,6 +41,11 @@
         <% } else { %>
         <h3 class="di main-job job-icon2"></h3><h3 class="di grd-silver main-job"><%= profile.mainJob %></h3>
         <% } %></h3>
+
+      <div class="">
+        <h3 class="grd-silver di">Current job: &nbsp;</h3> <img class="current-job-icon" src="" alt="">
+        <h3 class="di grd-silver current-job"></h3>
+      </div>
     </div>
 
     <div class="pb2 h4 w-100 w-50-ns fl"> <!-- API shit goes here -->
@@ -48,32 +53,50 @@
       <ul class="mt1 mb0 main-jobs">
       </ul>
     </div>
+<div class="w-100">
 
-    <div class="pb2 cb">
-    <% let mainID; %>
-    <% if (!profile.main) { %>
-      <% mainID = ''; %>
-      <% }  %>
-    <h3 class="grd-silver">Main character: </h3>
-      <% if (profile.main) { %>
-        <div class="charlist">
-        <a class="dib" href="<%= profile.main %>"><img width="50" class="circle main-avatar" src=""></a>
-        <p class="dib mv0">
-        <a class="db main-name" href="<%= profile.main %>" id="<%= profile.main %>"></a> on <span class="main-server"></span>
-        </p>
-        </div>
-      <% } else { %>
-        <p>Main not yet added.</p>
-      <% } %>
-    </div>
-      <div class="pb2">
+  <div class="pb2 fl w-50-ns w-100">
+  <% let mainID; %>
+  <% if (!profile.main) { %>
+    <% mainID = ''; %>
+    <% }  %>
+  <h3 class="grd-silver mt0">Main character: </h3>
+    <% if (profile.main) { %>
+      <div class="charlist">
+      <a class="dib" href="<%= profile.main %>"><img width="50" class="circle main-avatar" src=""></a>
+      <p class="dib mv0">
+      <a class="db main-name" href="<%= profile.main %>" id="<%= profile.main %>"></a> on <span class="main-server"></span>
+      </p>
+      </div>
+    <% } else { %>
+      <p>Main not yet added.</p>
+    <% } %>
+
+  </div>
+  <div class="fl w-100 w-50-ns">
+
+  <h3 class="cb grd-silver mv0">Stats</h3>
+  <div class="fl w-50 pr3">
+    <ul class="current-stats1"></ul>
+  </div>
+  <div class="fl w-50">
+    <ul class="current-stats2"></ul>
+  </div>
+</div>
+
+</div>
+
+
+    <div class="pb2 cb h5">
     <h3 class="grd-silver">Alt characters: </h3>
     <% if (profile.alts.length === 0) { %>
       <p class="mb3">No alts.</p>
+    <% } else { %>
+      <ul>
     <% } %>
     <% for (let i = 0; i < profile.alts.length; i++) { %>
       <% if (profile.alts[i]) { %>
-      <div class="charlist pb2 w-100 w-50-m w-third-l dib fl">
+      <li class="charlist pb2 w-100 w-50-m w-third-l dib fl">
       <a href="<%= profile.alts[i] %>">
       <img width="50" class="circle alt<%=i%>-avatar" id="<%= profile.alts[i].split('character/')[1].split('/')[0] %>" src=""></a>
       <p class="dib mv0">
@@ -82,8 +105,11 @@
       href="<%= profile.alts[i] %>">
       </a> on <span class="alt<%=i%>-server"></span>
       </p>
-      </div>
+      </li>
       <% } %>
+    <% } %>
+    <% if (profile.alts.length != 0) { %>
+      </ul>
     <% } %>
   </div>
 
