@@ -13,7 +13,9 @@ const icons1 = {
   'NIN': 'https://ffxiv.gamerescape.com/w/images/b/bb/Ninja_Icon_1.png',
   'MCH': 'https://ffxiv.gamerescape.com/w/images/7/71/Machinist_Icon_1.png',
   'DRK': 'https://ffxiv.gamerescape.com/w/images/a/aa/Dark_Knight_Icon_1.png',
-  'AST': 'https://ffxiv.gamerescape.com/w/images/7/79/Astrologian_Icon_1.png'
+  'AST': 'https://ffxiv.gamerescape.com/w/images/7/79/Astrologian_Icon_1.png',
+  'SAM': 'https://ffxiv.gamerescape.com/w/images/b/bd/Samurai_Icon_1.png',
+  'RDM': 'https://ffxiv.gamerescape.com/w/images/8/8b/Red_Mage_Icon_1.png'
 };
 const icons2 = {
   'PLD': 'https://ffxiv.gamerescape.com/w/images/d/d6/Paladin_Icon_7.png',
@@ -28,7 +30,9 @@ const icons2 = {
   'NIN': 'https://ffxiv.gamerescape.com/w/images/1/14/Ninja_Icon_7.png',
   'MCH': 'https://ffxiv.gamerescape.com/w/images/4/47/Machinist_Icon_7.png',
   'DRK': 'https://ffxiv.gamerescape.com/w/images/3/30/Dark_Knight_Icon_7.png',
-  'AST': 'https://ffxiv.gamerescape.com/w/images/5/5f/Astrologian_Icon_7.png'
+  'AST': 'https://ffxiv.gamerescape.com/w/images/5/5f/Astrologian_Icon_7.png',
+  'SAM': 'https://ffxiv.gamerescape.com/w/images/2/2f/Samurai_Icon_7.png',
+  'RDM': 'https://ffxiv.gamerescape.com/w/images/2/25/Red_Mage_Icon_7.png'
 };
 
 // NOTE TO SELF: JQUERY DOESN'T LIKE ARROW FUNCTIONS
@@ -163,8 +167,8 @@ function init() {
       case 'Magic Defense':
         abbr = 'Mag Def';
         break;
-      case 'Accuracy':
-        abbr = 'ACC';
+      case 'Direct Hit Rate':
+        abbr = 'DIR';
         break;
       case 'Critical Hit Rate':
         abbr = 'CRIT';
@@ -247,9 +251,8 @@ function init() {
             $(`<li class="w-third"><div><img class="vm"  src="${icons2['BLM']}"></div>BLM</li>`).appendTo(`.${type}-jobs`);
           } else if (classjob.name === 'Red Mage') {
             $(`<li class="w-third"><div><img class="vm"  src="${icons2['RDM']}"></div>RDM</li>`).appendTo(`.${type}-jobs`);
-          } else if (classjob.name === 'Scholar') {
-            $(`<li class="w-third"><div><img class="vm"  src="${icons2['SCH']}"></div>SCH</li>`).appendTo(`.${type}-jobs`);
           } else if (classjob.name === 'Summoner') {
+            $(`<li class="w-third"><div><img class="vm"  src="${icons2['SCH']}"></div>SCH</li>`).appendTo(`.${type}-jobs`);
             $(`<li class="w-third"><div><img class="vm"  src="${icons2['SMN']}"></div>SMN</li>`).appendTo(`.${type}-jobs`);
           } else if (classjob.name === 'Astrologian' || classjob.name === 'Machinist' || classjob.name === 'Dark Knight') {
             $(`<li class="w-third"><div><img class="vm"  src="${icons2[classjob.data.abbr]}"></div>${classjob.data.abbr}</li>`).appendTo(`.${type}-jobs`);
